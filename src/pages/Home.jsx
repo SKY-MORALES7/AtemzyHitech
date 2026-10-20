@@ -45,8 +45,8 @@ export const Home = () => {
             alt="Engineering Blueprints and Construction Planning"
             className="w-full h-full object-cover block sm:hidden"
           />
-          {/* Mobile Only: Dark Blue Gradient Overlay for High Contrast & Text Legibility */}
-          <div className="absolute inset-0 bg-slate-950/75 bg-gradient-to-b from-blue-950/85 via-slate-950/75 to-blue-950/85 block sm:hidden" />
+          {/* Mobile Only: Sheer Dark Blue Tint Overlay (Light & Translucent) */}
+          <div className="absolute inset-0 bg-slate-950/35 bg-gradient-to-b from-blue-950/45 via-slate-950/30 to-blue-950/45 block sm:hidden" />
 
           {/* Desktop/Tablet: Direct Scene Video */}
           <video
@@ -81,21 +81,19 @@ export const Home = () => {
 
           {/* Centered Headline - Clean & completely box-free on all devices */}
           <h1 className="text-[1.85rem] leading-[1.18] sm:text-4xl sm:leading-[1.12] md:text-5xl md:leading-[1.08] lg:text-7xl font-black tracking-tight text-center">
-            <span className={`text-blue-400 ${isDark ? 'sm:text-blue-400' : 'sm:text-blue-600'}`}>
+            <span className="text-blue-400 sm:text-blue-600">
               Engineering Solutions.
             </span> <br />
             <span className="text-[#e29b9b] sm:text-[#7d5656] font-extrabold">
               Construction Excellence.
             </span> <br />
-            <span className={`text-white ${isDark ? 'sm:text-white' : 'sm:text-slate-950'}`}>
+            <span className="text-white sm:text-slate-950">
               Reliable Service.
             </span>
           </h1>
 
-          {/* Centered Sub-headline - Crisp light text on mobile, adaptive on desktop */}
-          <p className={`mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg max-w-2xl leading-relaxed font-semibold px-1 text-slate-100 ${
-            isDark ? 'sm:text-slate-200' : 'sm:text-slate-900'
-          }`}>
+          {/* Centered Sub-headline - Pure white on mobile for all modes, dark slate on desktop */}
+          <p className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg max-w-2xl leading-relaxed font-bold px-1 text-white drop-shadow-[0_1.5px_3px_rgba(0,0,0,0.85)] sm:text-slate-900 sm:drop-shadow-none">
             Atemzy Hitech Engineering Services Ltd partners with corporate, industrial, and real estate clients to execute high-specification civil engineering, turnkey construction, technical procurement, and asset management across Nigeria.
           </p>
 
