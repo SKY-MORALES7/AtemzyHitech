@@ -60,51 +60,55 @@ export const Home = () => {
         {/* Centralized Hero Text & Actions */}
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
           {/* Accreditation Badge */}
-          <div className={`inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold mb-5 sm:mb-6 shadow-lg border backdrop-blur-md transition-all ${
+          <div className={`inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full text-[11px] sm:text-xs md:text-sm font-bold mb-4 sm:mb-6 shadow-lg border backdrop-blur-md transition-all max-w-full ${
             isDark
               ? 'bg-slate-900/90 text-blue-400 border-blue-500/30'
               : 'bg-white/95 text-slate-900 border-slate-300 shadow-sm'
           }`}>
-            <HardHat className="w-4 h-4 text-blue-500 shrink-0" />
-            <span className="truncate">Multidisciplinary Engineering & Construction Contractors</span>
+            <HardHat className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-500 shrink-0" />
+            <span className="leading-tight text-center">Multidisciplinary Engineering & Construction Contractors</span>
           </div>
 
-          {/* Centered Headline - Pure, Crisp Typography with ZERO Drop Shadow */}
-          <h1 className={`text-3xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.15] sm:leading-[1.08] ${
-            isDark ? 'text-white' : 'text-slate-950'
+          {/* Centered Headline - Responsively tuned for 375px (iPhone 8) up to 4K */}
+          <h1 className={`text-[1.85rem] leading-[1.18] sm:text-4xl sm:leading-[1.12] md:text-5xl md:leading-[1.08] lg:text-7xl font-black tracking-tight ${
+            isDark ? 'text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.75)]' : 'text-slate-950'
           }`}>
             Engineering Solutions. <br />
-            <span className={isDark ? 'text-blue-400 font-extrabold' : 'text-blue-600 font-extrabold'}>
+            <span className={isDark ? 'text-blue-400 font-extrabold drop-shadow-[0_2px_8px_rgba(0,0,0,0.75)]' : 'text-blue-600 font-extrabold'}>
               Construction Excellence.
             </span> <br />
             Reliable Service.
           </h1>
 
-          {/* Centered Sub-headline - Pure Typography with ZERO Drop Shadow */}
-          <p className={`mt-5 sm:mt-6 text-sm sm:text-base lg:text-lg max-w-2xl leading-relaxed font-medium ${
-            isDark ? 'text-slate-200' : 'text-slate-800'
+          {/* Centered Sub-headline */}
+          <p className={`mt-4 sm:mt-6 text-xs sm:text-base lg:text-lg max-w-2xl leading-relaxed font-medium px-1 ${
+            isDark ? 'text-slate-200 drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]' : 'text-slate-800'
           }`}>
             Atemzy Hitech Engineering Services Ltd partners with corporate, industrial, and real estate clients to execute high-specification civil engineering, turnkey construction, technical procurement, and asset management across Nigeria.
           </p>
 
-          {/* Centered CTA Buttons */}
-          <div className="mt-8 sm:mt-9 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+          {/* Centered CTA Buttons - Thumb-friendly full-width stack on mobile, horizontal row on desktop */}
+          <div className="mt-6 sm:mt-9 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto max-w-xs sm:max-w-none">
             <Link
               to="/quote"
-              className={isDark ? 'btn-3d text-sm py-3 px-6 sm:py-3.5 sm:px-8' : 'btn-3d text-sm py-3 px-6 sm:py-3.5 sm:px-8 shadow-md'}
+              className={`w-full sm:w-auto justify-center ${
+                isDark ? 'btn-3d text-sm py-3 px-6 sm:py-3.5 sm:px-8' : 'btn-3d text-sm py-3 px-6 sm:py-3.5 sm:px-8 shadow-md'
+              }`}
             >
               <span>Request a Quote</span>
               <ArrowRight className="w-4 h-4 text-blue-500" />
             </Link>
             <Link
               to="/services"
-              className={isDark ? 'btn-3d-secondary text-sm py-3 px-5 sm:py-3.5 sm:px-7' : 'inline-flex items-center justify-center text-sm py-3 px-5 sm:py-3.5 sm:px-7 rounded-xl font-extrabold bg-white hover:bg-slate-50 text-slate-900 border-2 border-slate-300 shadow-md transition-all hover:border-slate-400'}
+              className={`w-full sm:w-auto justify-center ${
+                isDark ? 'btn-3d-secondary text-sm py-3 px-5 sm:py-3.5 sm:px-7' : 'inline-flex items-center text-sm py-3 px-5 sm:py-3.5 sm:px-7 rounded-xl font-extrabold bg-white hover:bg-slate-50 text-slate-900 border-2 border-slate-300 shadow-md transition-all hover:border-slate-400'
+              }`}
             >
               <span>Explore Our Services</span>
             </Link>
             <Link
               to="/projects"
-              className={`inline-flex items-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl text-sm font-bold transition-all border shadow-md ${
+              className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl text-sm font-bold transition-all border shadow-md ${
                 isDark
                   ? 'bg-slate-900/90 hover:bg-slate-800 text-white border-slate-700/80 hover:border-blue-400'
                   : 'bg-white hover:bg-slate-50 text-slate-900 border-2 border-slate-300 hover:border-blue-600 shadow-sm'
@@ -116,23 +120,28 @@ export const Home = () => {
           </div>
         </div>
 
-        {/* Stats Strip */}
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 lg:mt-24">
-          <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 p-6 sm:p-8 rounded-2xl backdrop-blur-md shadow-2xl border transition-colors ${
+        {/* Stats Strip - 2x2 grid on mobile with clean dividing borders, 4x1 on desktop */}
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 sm:mt-16 lg:mt-24 w-full">
+          <div className={`grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4 p-4 sm:p-8 rounded-2xl backdrop-blur-md shadow-2xl border transition-colors ${
             isDark 
               ? 'bg-slate-900/90 border-slate-700/60' 
               : 'bg-white/95 border-slate-200 text-slate-900 shadow-xl'
           }`}>
             {companyInfo.stats.map((stat, idx) => (
-              <div key={idx} className={`text-center p-3 border-r last:border-none ${
-                isDark ? 'border-slate-800' : 'border-slate-200'
-              }`}>
-                <span className={`block text-3xl sm:text-4xl font-black ${
+              <div
+                key={idx}
+                className={`text-center p-2.5 sm:p-3 ${
+                  idx % 2 === 0 ? 'border-r' : 'border-r-0 md:border-r'
+                } ${idx === 3 ? 'md:border-r-0' : ''} ${
+                  isDark ? 'border-slate-800' : 'border-slate-200'
+                }`}
+              >
+                <span className={`block text-2xl sm:text-3xl md:text-4xl font-black ${
                   isDark ? 'text-blue-400' : 'text-blue-600'
                 }`}>
                   {stat.value}
                 </span>
-                <span className={`block mt-1 text-xs sm:text-sm font-semibold ${
+                <span className={`block mt-1 text-[11px] sm:text-xs md:text-sm font-semibold leading-tight ${
                   isDark ? 'text-slate-400' : 'text-slate-600'
                 }`}>
                   {stat.label}
