@@ -35,63 +35,78 @@ export const Home = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-slate-900 text-slate-100">
-      {/* 1. HERO SECTION WITH SCENE.WEBM */}
-      <section className="relative overflow-hidden bg-slate-950 -mt-24 sm:-mt-28 pt-32 sm:pt-40 pb-28 lg:pb-36 border-b border-slate-800 flex flex-col justify-center items-center">
-        {/* Full Main Video Background - Crystal Clear with Zero Dark Overlay */}
+      {/* 1. HERO SECTION WITH RICH ARCHITECTURAL FALLBACK & VIDEO */}
+      <section className="relative overflow-hidden bg-slate-950 -mt-24 sm:-mt-28 pt-32 sm:pt-40 pb-24 sm:pb-28 lg:pb-36 border-b border-slate-800 flex flex-col justify-center items-center">
+        {/* Layer 1: Rich Architectural Blueprint & Ambient Radial Glow Fallback (Always visible even if video fails/buffers) */}
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 pointer-events-none select-none">
+          {/* Subtle Deep Cyber Blue Radial Core */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(37,99,235,0.28),rgba(2,6,23,0.95))]" />
+          {/* Engineering Blueprint Grid Pattern */}
+          <div className="absolute inset-0 opacity-[0.06] bg-[linear-gradient(to_right,#38bdf8_1px,transparent_1px),linear-gradient(to_bottom,#38bdf8_1px,transparent_1px)] bg-[size:3.5rem_3.5rem]" />
+          {/* Atmospheric Glow Pill */}
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[600px] h-[240px] sm:h-[350px] bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
+        </div>
+
+        {/* Layer 2: Main Video Layer with Smooth Blend Overlay */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
           <video
             autoPlay
             loop
             muted
             playsInline
-            className="w-full h-full object-cover opacity-100"
+            preload="auto"
+            className="w-full h-full object-cover opacity-40 sm:opacity-50 transition-opacity duration-700"
           >
             <source src="/scene.webm" type="video/webm" />
           </video>
+          {/* Dark Contrast Vignette to ensure 100% crisp text readability across mobile & desktop */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-950/50 to-slate-950/90" />
         </div>
 
         {/* Centralized Hero Text & Actions */}
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
           {/* Accreditation Badge */}
-          <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold mb-6 shadow-md border transition-all ${
+          <div className={`inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold mb-5 sm:mb-6 shadow-lg border backdrop-blur-md transition-all ${
             isDark
-              ? 'bg-slate-950 text-white border-slate-800'
-              : 'bg-white/95 text-slate-900 border-slate-300 shadow-sm backdrop-blur-md'
+              ? 'bg-slate-900/90 text-blue-400 border-blue-500/30'
+              : 'bg-white/95 text-slate-900 border-slate-300 shadow-sm'
           }`}>
-            <HardHat className="w-4 h-4 text-blue-500" />
-            <span>Multidisciplinary Engineering & Construction Contractors</span>
+            <HardHat className="w-4 h-4 text-blue-500 shrink-0" />
+            <span className="truncate">Multidisciplinary Engineering & Construction Contractors</span>
           </div>
 
-          {/* Centered Headline - Deep High-Contrast Slate & Blue */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-slate-950 leading-[1.08] drop-shadow-[0_2px_16px_rgba(255,255,255,0.85)]">
+          {/* Centered Headline - Crisp Modern White & Electric Blue Gradient (No Fuzzy White Halo) */}
+          <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black tracking-tight text-white leading-[1.15] sm:leading-[1.08] drop-shadow-md">
             Engineering Solutions. <br />
-            <span className="text-blue-700">Construction Excellence.</span> <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-cyan-400">
+              Construction Excellence.
+            </span> <br />
             Reliable Service.
           </h1>
 
-          {/* Centered Sub-headline - High Contrast Slate */}
-          <p className="mt-6 text-lg sm:text-xl text-slate-900 max-w-2xl leading-relaxed font-bold drop-shadow-[0_1px_10px_rgba(255,255,255,0.9)]">
+          {/* Centered Sub-headline - Crisp Clean High-Legibility Typography */}
+          <p className="mt-5 sm:mt-6 text-sm sm:text-base lg:text-lg text-slate-300 max-w-2xl leading-relaxed font-normal drop-shadow-sm">
             Atemzy Hitech Engineering Services Ltd partners with corporate, industrial, and real estate clients to execute high-specification civil engineering, turnkey construction, technical procurement, and asset management across Nigeria.
           </p>
 
           {/* Centered CTA Buttons */}
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-8 sm:mt-9 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
             <Link
               to="/quote"
-              className={isDark ? 'btn-3d text-sm py-3.5 px-8' : 'btn-3d text-sm py-3.5 px-8 shadow-md'}
+              className={isDark ? 'btn-3d text-sm py-3 px-6 sm:py-3.5 sm:px-8' : 'btn-3d text-sm py-3 px-6 sm:py-3.5 sm:px-8 shadow-md'}
             >
               <span>Request a Quote</span>
               <ArrowRight className="w-4 h-4 text-blue-500" />
             </Link>
             <Link
               to="/services"
-              className={isDark ? 'btn-3d-secondary text-sm py-3.5 px-7' : 'inline-flex items-center justify-center text-sm py-3.5 px-7 rounded-xl font-extrabold bg-white hover:bg-slate-50 text-slate-900 border-2 border-slate-300 shadow-md transition-all hover:border-slate-400'}
+              className={isDark ? 'btn-3d-secondary text-sm py-3 px-5 sm:py-3.5 sm:px-7' : 'inline-flex items-center justify-center text-sm py-3 px-5 sm:py-3.5 sm:px-7 rounded-xl font-extrabold bg-white hover:bg-slate-50 text-slate-900 border-2 border-slate-300 shadow-md transition-all hover:border-slate-400'}
             >
               <span>Explore Our Services</span>
             </Link>
             <Link
               to="/projects"
-              className={`inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold transition-all border shadow-md ${
+              className={`inline-flex items-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl text-sm font-bold transition-all border shadow-md ${
                 isDark
                   ? 'bg-slate-900/90 hover:bg-slate-800 text-white border-slate-700/80 hover:border-blue-400'
                   : 'bg-white hover:bg-slate-50 text-slate-900 border-2 border-slate-300 hover:border-blue-600 shadow-sm'

@@ -3,19 +3,54 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
+// Module-level singleton cache so the 3D model is loaded ONCE and persists across route navigation
+let cachedEarthModel = null;
+let earthLoadPromise = null;
+
+function getOrLoadEarth(modelPath) {
+  if (cachedEarthModel) {
+    return Promise.resolve(cachedEarthModel);
+  }
+  if (!earthLoadPromise) {
+    earthLoadPromise = new Promise((resolve, reject) => {
+      const loader = new GLTFLoader();
+      loader.load(
+        modelPath,
+        (gltf) => {
+          const model = gltf.scene;
+          model.scale.set(2.5, 2.5, 2.5);
+          model.position.set(0, 0, 0);
+          cachedEarthModel = model;
+          resolve(model);
+        },
+        undefined,
+        (err) => {
+          earthLoadPromise = null;
+          reject(err);
+        }
+      );
+    });
+  }
+  return earthLoadPromise;
+}
+
+// Background pre-load immediately on initial application load
+if (typeof window !== 'undefined') {
+  const initialPath = `${import.meta.env?.BASE_URL || '/'}planet/scene.gltf`;
+  getOrLoadEarth(initialPath).catch(() => {});
+}
+
 /**
  * 3D Stylized Planet Earth with Sculptural Ribbon Clouds
- * Exactly matching the JavaScript Mastery / Sketchfab Stylized Planet:
+ * - Instant persistent display across page navigation (zero re-loading)
  * - Green & Navy stylized Earth globe in the center
  * - Swirling concentric spiral ribbon cloud shells wrapping around the globe
- * - Soft pastel pink/lilac top lighting with rich cyan/blue underside shading
- * - Directly loads the 3D GLTF model (/planet/scene.gltf)
- * - Has high-fidelity procedural fallback matching the exact look if assets are offline
  * - Full 3D OrbitControls (drag to explore, inertia, auto-spin)
  */
 const EarthCanvas = () => {
   const mountRef = useRef(null);
-  const [loading, setLoading] = useState(true);
+  // If already loaded into memory, don't show any loading spinner at all
+  const [loading, setLoading] = useState(!cachedEarthModel);
 
   useEffect(() => {
     const container = mountRef.current;
@@ -64,28 +99,27 @@ const EarthCanvas = () => {
         dirLight.position.set(-5, 6, 5);
         scene.add(dirLight);
 
-        // Load GLTF model
-        const loader = new GLTFLoader();
+        // Load or mount from singleton cache instantly
         const modelPath = `${import.meta.env.BASE_URL}planet/scene.gltf`;
 
-        loader.load(
-          modelPath,
-          (gltf) => {
-            if (isDisposed) return;
-            const model = gltf.scene;
-            model.scale.set(2.5, 2.5, 2.5);
-            model.position.set(0, 0, 0);
-            scene.add(model);
-            setLoading(false);
-          },
-          undefined,
-          (err) => {
-            console.warn('GLTF load failed, falling back to procedural Earth:', err);
-            if (isDisposed) return;
-            buildProceduralRibbonEarth(THREE, scene);
-            setLoading(false);
-          }
-        );
+        if (cachedEarthModel) {
+          // Instant mount in 0ms without network overhead
+          scene.add(cachedEarthModel.clone(true));
+          setLoading(false);
+        } else {
+          getOrLoadEarth(modelPath)
+            .then((model) => {
+              if (isDisposed) return;
+              scene.add(model.clone(true));
+              setLoading(false);
+            })
+            .catch((err) => {
+              console.warn('GLTF load failed, falling back to procedural Earth:', err);
+              if (isDisposed) return;
+              buildProceduralRibbonEarth(THREE, scene);
+              setLoading(false);
+            });
+        }
 
         // Animation Loop
         const animate = () => {
