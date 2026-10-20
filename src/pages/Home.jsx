@@ -37,7 +37,7 @@ export const Home = () => {
     <div className="flex flex-col min-h-screen bg-slate-900 text-slate-100">
       {/* 1. HERO SECTION WITH SCENE.WEBM */}
       <section className="relative overflow-hidden bg-slate-950 -mt-24 sm:-mt-28 pt-32 sm:pt-40 pb-24 sm:pb-28 lg:pb-36 border-b border-slate-800 flex flex-col justify-center items-center">
-        {/* Hero Background: Construction drafting image on mobile, scene.webm directly on desktop */}
+        {/* Hero Background: Construction drafting image with dark blue overlay on mobile, scene.webm directly on desktop */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none bg-slate-950">
           {/* Mobile Only: Construction Blueprint Image */}
           <img
@@ -45,6 +45,9 @@ export const Home = () => {
             alt="Engineering Blueprints and Construction Planning"
             className="w-full h-full object-cover block sm:hidden"
           />
+          {/* Mobile Only: Dark Blue Gradient Overlay for High Contrast & Text Legibility */}
+          <div className="absolute inset-0 bg-slate-950/75 bg-gradient-to-b from-blue-950/85 via-slate-950/75 to-blue-950/85 block sm:hidden" />
+
           {/* Desktop/Tablet: Direct Scene Video */}
           <video
             autoPlay
@@ -76,19 +79,23 @@ export const Home = () => {
             <span className="leading-tight text-center">Multidisciplinary Engineering & Construction Contractors</span>
           </div>
 
-          {/* Brutalist Slate Card for Hero Headline */}
-          <div className="w-full max-w-3xl mb-3 sm:mb-5 p-5 sm:p-8 rounded-2xl bg-slate-900/95 border-2 sm:border-[3px] border-slate-700/80 shadow-[6px_6px_0px_#020617] sm:shadow-[8px_8px_0px_#020617] backdrop-blur-md transition-all">
-            <h1 className="text-[1.85rem] leading-[1.18] sm:text-4xl sm:leading-[1.12] md:text-5xl md:leading-[1.08] lg:text-6xl font-black tracking-tight text-center">
-              <span className="text-blue-500">Engineering Solutions.</span> <br />
-              <span className="text-[#7d5656] font-extrabold">
-                Construction Excellence.
-              </span> <br />
-              <span className="text-white">Reliable Service.</span>
-            </h1>
-          </div>
+          {/* Centered Headline - Clean & completely box-free on all devices */}
+          <h1 className="text-[1.85rem] leading-[1.18] sm:text-4xl sm:leading-[1.12] md:text-5xl md:leading-[1.08] lg:text-7xl font-black tracking-tight text-center">
+            <span className={`text-blue-400 ${isDark ? 'sm:text-blue-400' : 'sm:text-blue-600'}`}>
+              Engineering Solutions.
+            </span> <br />
+            <span className="text-[#e29b9b] sm:text-[#7d5656] font-extrabold">
+              Construction Excellence.
+            </span> <br />
+            <span className={`text-white ${isDark ? 'sm:text-white' : 'sm:text-slate-950'}`}>
+              Reliable Service.
+            </span>
+          </h1>
 
-          {/* Centered Sub-headline - Soft charcoal black (not too black) */}
-          <p className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg max-w-2xl leading-relaxed font-bold px-1 text-slate-900">
+          {/* Centered Sub-headline - Crisp light text on mobile, adaptive on desktop */}
+          <p className={`mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg max-w-2xl leading-relaxed font-semibold px-1 text-slate-100 ${
+            isDark ? 'sm:text-slate-200' : 'sm:text-slate-900'
+          }`}>
             Atemzy Hitech Engineering Services Ltd partners with corporate, industrial, and real estate clients to execute high-specification civil engineering, turnkey construction, technical procurement, and asset management across Nigeria.
           </p>
 
