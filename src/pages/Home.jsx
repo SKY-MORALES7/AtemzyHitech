@@ -71,19 +71,17 @@ export const Home = () => {
 
           {/* Centered Headline - Responsively tuned for 375px (iPhone 8) up to 4K */}
           <h1 className={`text-[1.85rem] leading-[1.18] sm:text-4xl sm:leading-[1.12] md:text-5xl md:leading-[1.08] lg:text-7xl font-black tracking-tight ${
-            isDark ? 'text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.75)]' : 'text-slate-950'
+            isDark ? 'text-white' : 'text-slate-950'
           }`}>
             Engineering Solutions. <br />
-            <span className={isDark ? 'text-blue-400 font-extrabold drop-shadow-[0_2px_8px_rgba(0,0,0,0.75)]' : 'text-blue-600 font-extrabold'}>
+            <span className="text-[#7d5656] font-extrabold">
               Construction Excellence.
             </span> <br />
             Reliable Service.
           </h1>
 
-          {/* Centered Sub-headline */}
-          <p className={`mt-4 sm:mt-6 text-xs sm:text-base lg:text-lg max-w-2xl leading-relaxed font-medium px-1 ${
-            isDark ? 'text-slate-200 drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]' : 'text-slate-800'
-          }`}>
+          {/* Centered Sub-headline - High visibility in #7d5656 */}
+          <p className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg max-w-2xl leading-relaxed font-bold px-1 text-[#7d5656]">
             Atemzy Hitech Engineering Services Ltd partners with corporate, industrial, and real estate clients to execute high-specification civil engineering, turnkey construction, technical procurement, and asset management across Nigeria.
           </p>
 
