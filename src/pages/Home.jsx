@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   ArrowRight, 
@@ -31,35 +31,39 @@ const iconMap = {
 
 export const Home = () => {
   const { isDark } = useTheme();
+  const [videoPlaying, setVideoPlaying] = useState(false);
   const featuredProjects = projects.filter((p) => p.featured).slice(0, 3);
 
   return (
     <div className="flex flex-col min-h-screen bg-slate-900 text-slate-100">
       {/* 1. HERO SECTION WITH SCENE.WEBM */}
       <section className="relative overflow-hidden bg-slate-950 -mt-24 sm:-mt-28 pt-32 sm:pt-40 pb-24 sm:pb-28 lg:pb-36 border-b border-slate-800 flex flex-col justify-center items-center">
-        {/* Hero Background: Construction drafting flat lay on mobile, scene.webm on desktop */}
+        {/* Hero Background: Construction image as universal base + video that fades in only when actively playing */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none bg-slate-950">
-          {/* Mobile Image Fallback - No people, clean blueprints & engineering tools */}
+          {/* Universal High-Res Blueprint Image - Always rendered as reliable foundation on all devices */}
           <img
             src="/hero-construction.jpg"
             alt="Engineering Blueprints and Construction Planning"
-            className="w-full h-full object-cover block sm:hidden"
+            className="w-full h-full object-cover absolute inset-0"
           />
-          {/* Desktop/Tablet Video */}
+          {/* Desktop/Tablet Video - Cross-fades smoothly over the image only if browser can actively play it */}
           <video
             autoPlay
             loop
             muted
             playsInline
             preload="auto"
-            poster="/hero-construction.jpg"
+            onPlaying={() => setVideoPlaying(true)}
+            onError={() => setVideoPlaying(false)}
             ref={(el) => {
               if (el) {
                 el.muted = true;
-                el.play().catch(() => {});
+                el.play().then(() => setVideoPlaying(true)).catch(() => setVideoPlaying(false));
               }
             }}
-            className="w-full h-full object-cover opacity-100 hidden sm:block"
+            className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-700 hidden sm:block ${
+              videoPlaying ? 'opacity-100' : 'opacity-0'
+            }`}
           >
             <source src="/scene.webm" type="video/webm" />
           </video>
@@ -77,10 +81,12 @@ export const Home = () => {
             <span className="leading-tight text-center">Multidisciplinary Engineering & Construction Contractors</span>
           </div>
 
-          {/* Centered Headline - Blue & Black on mobile, Soft black & #7d5656 on desktop */}
-          <h1 className="text-[1.85rem] leading-[1.18] sm:text-4xl sm:leading-[1.12] md:text-5xl md:leading-[1.08] lg:text-7xl font-black tracking-tight text-blue-600 sm:text-slate-900">
+          {/* Centered Headline - Blue & Black on mobile/image view, Soft black & #7d5656 on desktop */}
+          <h1 className={`text-[1.85rem] leading-[1.18] sm:text-4xl sm:leading-[1.12] md:text-5xl md:leading-[1.08] lg:text-7xl font-black tracking-tight ${
+            videoPlaying ? 'text-slate-900' : 'text-blue-600 sm:text-slate-900'
+          }`}>
             Engineering Solutions. <br />
-            <span className="text-slate-900 sm:text-[#7d5656] font-extrabold">
+            <span className={`${videoPlaying ? 'text-[#7d5656]' : 'text-slate-900 sm:text-[#7d5656]'} font-extrabold`}>
               Construction Excellence.
             </span> <br />
             Reliable Service.
