@@ -35,32 +35,26 @@ export const Home = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-slate-900 text-slate-100">
-      {/* 1. HERO SECTION WITH RICH ARCHITECTURAL FALLBACK & VIDEO */}
+      {/* 1. HERO SECTION WITH SCENE.WEBM */}
       <section className="relative overflow-hidden bg-slate-950 -mt-24 sm:-mt-28 pt-32 sm:pt-40 pb-24 sm:pb-28 lg:pb-36 border-b border-slate-800 flex flex-col justify-center items-center">
-        {/* Layer 1: Rich Architectural Blueprint & Ambient Radial Glow Fallback (Always visible even if video fails/buffers) */}
-        <div className="absolute inset-0 z-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 pointer-events-none select-none">
-          {/* Subtle Deep Cyber Blue Radial Core */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(37,99,235,0.28),rgba(2,6,23,0.95))]" />
-          {/* Engineering Blueprint Grid Pattern */}
-          <div className="absolute inset-0 opacity-[0.06] bg-[linear-gradient(to_right,#38bdf8_1px,transparent_1px),linear-gradient(to_bottom,#38bdf8_1px,transparent_1px)] bg-[size:3.5rem_3.5rem]" />
-          {/* Atmospheric Glow Pill */}
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[600px] h-[240px] sm:h-[350px] bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
-        </div>
-
-        {/* Layer 2: Main Video Layer with Smooth Blend Overlay */}
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+        {/* Full Main Video Background - 100% Fully Visible, Crystal Clear with Zero Overlay */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none bg-slate-950">
           <video
             autoPlay
             loop
             muted
             playsInline
             preload="auto"
-            className="w-full h-full object-cover opacity-40 sm:opacity-50 transition-opacity duration-700"
+            ref={(el) => {
+              if (el) {
+                el.muted = true;
+                el.play().catch(() => {});
+              }
+            }}
+            className="w-full h-full object-cover opacity-100"
           >
             <source src="/scene.webm" type="video/webm" />
           </video>
-          {/* Dark Contrast Vignette to ensure 100% crisp text readability across mobile & desktop */}
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-950/50 to-slate-950/90" />
         </div>
 
         {/* Centralized Hero Text & Actions */}
@@ -75,17 +69,17 @@ export const Home = () => {
             <span className="truncate">Multidisciplinary Engineering & Construction Contractors</span>
           </div>
 
-          {/* Centered Headline - Crisp Modern White & Electric Blue Gradient (No Fuzzy White Halo) */}
-          <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black tracking-tight text-white leading-[1.15] sm:leading-[1.08] drop-shadow-md">
+          {/* Centered Headline - Crisp White & Blue, No Fuzzy White Halo */}
+          <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black tracking-tight text-white leading-[1.15] sm:leading-[1.08] drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
             Engineering Solutions. <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-cyan-400">
+            <span className="text-blue-400 font-extrabold drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
               Construction Excellence.
             </span> <br />
             Reliable Service.
           </h1>
 
-          {/* Centered Sub-headline - Crisp Clean High-Legibility Typography */}
-          <p className="mt-5 sm:mt-6 text-sm sm:text-base lg:text-lg text-slate-300 max-w-2xl leading-relaxed font-normal drop-shadow-sm">
+          {/* Centered Sub-headline */}
+          <p className="mt-5 sm:mt-6 text-sm sm:text-base lg:text-lg text-slate-100 max-w-2xl leading-relaxed font-semibold drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
             Atemzy Hitech Engineering Services Ltd partners with corporate, industrial, and real estate clients to execute high-specification civil engineering, turnkey construction, technical procurement, and asset management across Nigeria.
           </p>
 
