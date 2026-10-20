@@ -77,10 +77,8 @@ export const Home = () => {
             <span className="leading-tight text-center">Multidisciplinary Engineering & Construction Contractors</span>
           </div>
 
-          {/* Centered Headline - Soft charcoal black (not too black) */}
-          <h1 className={`text-[1.85rem] leading-[1.18] sm:text-4xl sm:leading-[1.12] md:text-5xl md:leading-[1.08] lg:text-7xl font-black tracking-tight ${
-            isDark ? 'text-slate-900' : 'text-slate-900'
-          }`}>
+          {/* Centered Headline - Lighter blue on mobile, soft charcoal black on desktop */}
+          <h1 className="text-[1.85rem] leading-[1.18] sm:text-4xl sm:leading-[1.12] md:text-5xl md:leading-[1.08] lg:text-7xl font-black tracking-tight text-blue-400 sm:text-slate-900">
             Engineering Solutions. <br />
             <span className="text-[#7d5656] font-extrabold">
               Construction Excellence.
