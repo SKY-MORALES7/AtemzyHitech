@@ -1,0 +1,196 @@
+/* ========================================================
+   ATEMZY HITECH 3D ISOMETRIC POP-OUT CARD STYLES (SLATE, BLUE & WHITE)
+   ======================================================== */
+
+.card-3d-parent {
+  width: 100%;
+  perspective: 1000px;
+}
+
+.card-3d {
+  position: relative;
+  width: 100%;
+  padding-top: 40px;
+  border: 2px solid rgba(56, 189, 248, 0.25);
+  border-radius: 16px;
+  transform-style: preserve-3d;
+  background: 
+    linear-gradient(135deg, #020617 18.75%, #0f172a 0 31.25%, #020617 0),
+    repeating-linear-gradient(45deg, #0f172a -6.25% 6.25%, #1e293b 0 18.75%);
+  background-size: 55px 55px;
+  background-position: 0 0, 0 0;
+  box-shadow: rgba(2, 6, 23, 0.8) 0px 25px 35px -10px, rgba(14, 165, 233, 0.1) 0 0 20px;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: visible;
+}
+
+.card-3d:hover {
+  background-position: -100px 100px, -100px 100px;
+  transform: rotate3d(0.5, 1, 0, 24deg);
+  border-color: #38bdf8;
+  box-shadow: rgba(2, 6, 23, 0.9) -15px 35px 35px -10px, rgba(56, 189, 248, 0.3) 0px 0px 30px;
+}
+
+.card-3d-content {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(2, 6, 23, 0.98) 100%);
+  border-radius: 0px 0px 14px 14px;
+  transition: all 0.5s ease-in-out;
+  padding: 45px 22px 24px 22px;
+  transform-style: preserve-3d;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(56, 189, 248, 0.35);
+}
+
+.card-3d-title {
+  display: inline-block;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  transition: all 0.4s ease-in-out;
+  transform: translate3d(0px, 0px, 45px);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.card-3d-parent:hover .card-3d-title {
+  transform: translate3d(0px, 0px, 60px);
+  color: #ffffff;
+}
+
+.card-3d-text {
+  margin-top: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #94a3b8;
+  transition: all 0.4s ease-in-out;
+  transform: translate3d(0px, 0px, 30px);
+}
+
+.card-3d-parent:hover .card-3d-text {
+  transform: translate3d(0px, 0px, 50px);
+  color: #e2e8f0;
+}
+
+.card-3d-features {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transform: translate3d(0px, 0px, 35px);
+  transition: all 0.4s ease-in-out;
+}
+
+.card-3d-parent:hover .card-3d-features {
+  transform: translate3d(0px, 0px, 52px);
+}
+
+.card-3d-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+.card-3d-feature-icon {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: rgba(14, 165, 233, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38bdf8;
+  flex-shrink: 0;
+}
+
+.card-3d-actions {
+  margin-top: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transform-style: preserve-3d;
+}
+
+/* 3D Pop-Out See More Button */
+.card-3d-see-more {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 900;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgb(7, 185, 255) !important;
+  background: #ffffff;
+  padding: 0.55rem 0.95rem;
+  border-radius: 8px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3), 0 10px 20px rgba(2, 6, 23, 0.8);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  transform: translate3d(0px, 0px, 25px);
+  text-decoration: none;
+}
+
+.card-3d-parent:hover .card-3d-see-more {
+  transform: translate3d(0px, 0px, 58px);
+  background: #ffffff;
+  color: rgb(7, 185, 255) !important;
+  box-shadow: 0 8px 25px rgba(56, 189, 248, 0.5);
+}
+
+.card-3d-see-more:hover {
+  transform: translate3d(0px, 0px, 68px) scale(1.05) !important;
+}
+
+/* Floating 3D Badge Box (Slate, Blue & White) */
+.card-3d-date-box {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  min-height: 58px;
+  min-width: 62px;
+  background: #ffffff;
+  border: 2px solid rgb(7, 185, 255);
+  border-radius: 10px;
+  padding: 6px 10px;
+  transform: translate3d(0px, 0px, 75px);
+  box-shadow: rgba(2, 6, 23, 0.6) 0px 18px 15px -10px, rgba(14, 165, 233, 0.25) 0 0 18px;
+  transition: all 0.4s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.card-3d-parent:hover .card-3d-date-box {
+  transform: translate3d(0px, 0px, 92px);
+  box-shadow: rgba(2, 6, 23, 0.7) 0px 24px 20px -8px, rgba(56, 189, 248, 0.45) 0 0 25px;
+}
+
+.card-3d-date-box .badge-label {
+  display: block;
+  text-align: center;
+  color: #64748b;
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+.card-3d-date-box .badge-value {
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 900;
+  color: rgb(4, 193, 250);
+  line-height: 1.15;
+  margin-top: 2px;
+}

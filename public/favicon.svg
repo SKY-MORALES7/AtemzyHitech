@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
+  <defs>
+    <!-- Slate & Electric Blue Gradients -->
+    <linearGradient id="slate-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <linearGradient id="blue-accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#0ea5e9" />
+      <stop offset="100%" stop-color="#2563eb" />
+    </linearGradient>
+    <linearGradient id="white-sheen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#e2e8f0" />
+    </linearGradient>
+    <filter id="blue-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0ea5e9" flood-opacity="0.45" />
+    </filter>
+  </defs>
+
+  <!-- Deep Slate Squircle Base with Electric Blue Border -->
+  <rect x="6" y="6" width="116" height="116" rx="28" fill="url(#slate-bg)" stroke="url(#blue-accent)" stroke-width="3.5" />
+
+  <!-- Inner High-Tech Blueprint Grid Guide -->
+  <rect x="14" y="14" width="100" height="100" rx="20" fill="none" stroke="#1e293b" stroke-width="1.5" stroke-dasharray="4 4" />
+
+  <!-- Atemzy Hitech Monogram (Fused Engineering 'A' & 'H' + Hard Hat Arch) -->
+  <g filter="url(#blue-glow)">
+    <!-- Main Apex Struts (Engineering Triangle 'A') -->
+    <!-- Left Stanchion in Pure White -->
+    <path d="M64 26 L30 92 L44 92 L54 72 L64 72 Z" fill="url(#white-sheen)" />
+    <!-- Right Stanchion in Vibrant Blue -->
+    <path d="M64 26 L98 92 L84 92 L74 72 L64 72 Z" fill="url(#blue-accent)" />
+    
+    <!-- Central Cross Truss & H-Beam -->
+    <rect x="42" y="64" width="44" height="8" rx="2" fill="#0f172a" stroke="#38bdf8" stroke-width="2" />
+
+    <!-- Engineering Hard Hat Crest Curve Over Crown -->
+    <path d="M46 48 C46 37, 82 37, 82 48" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" />
+    
+    <!-- Precision Center Marker / Engineering Plumb Dot -->
+    <circle cx="64" cy="40" r="4.5" fill="#38bdf8" />
+    
+    <!-- Base Foundation Line -->
+    <rect x="36" y="96" width="56" height="4" rx="2" fill="#ffffff" />
+  </g>
+</svg>
