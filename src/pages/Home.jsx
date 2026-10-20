@@ -69,17 +69,21 @@ export const Home = () => {
             <span className="truncate">Multidisciplinary Engineering & Construction Contractors</span>
           </div>
 
-          {/* Centered Headline - Crisp White & Blue, No Fuzzy White Halo */}
-          <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black tracking-tight text-white leading-[1.15] sm:leading-[1.08] drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+          {/* Centered Headline - Pure, Crisp Typography with ZERO Drop Shadow */}
+          <h1 className={`text-3xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.15] sm:leading-[1.08] ${
+            isDark ? 'text-white' : 'text-slate-950'
+          }`}>
             Engineering Solutions. <br />
-            <span className="text-blue-400 font-extrabold drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+            <span className={isDark ? 'text-blue-400 font-extrabold' : 'text-blue-600 font-extrabold'}>
               Construction Excellence.
             </span> <br />
             Reliable Service.
           </h1>
 
-          {/* Centered Sub-headline */}
-          <p className="mt-5 sm:mt-6 text-sm sm:text-base lg:text-lg text-slate-100 max-w-2xl leading-relaxed font-semibold drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
+          {/* Centered Sub-headline - Pure Typography with ZERO Drop Shadow */}
+          <p className={`mt-5 sm:mt-6 text-sm sm:text-base lg:text-lg max-w-2xl leading-relaxed font-medium ${
+            isDark ? 'text-slate-200' : 'text-slate-800'
+          }`}>
             Atemzy Hitech Engineering Services Ltd partners with corporate, industrial, and real estate clients to execute high-specification civil engineering, turnkey construction, technical procurement, and asset management across Nigeria.
           </p>
 
