@@ -76,14 +76,16 @@ export const Home = () => {
             <span className="leading-tight text-center">Multidisciplinary Engineering & Construction Contractors</span>
           </div>
 
-          {/* Centered Headline - Blue & Black on mobile, Soft black & #7d5656 on desktop */}
-          <h1 className="text-[1.85rem] leading-[1.18] sm:text-4xl sm:leading-[1.12] md:text-5xl md:leading-[1.08] lg:text-7xl font-black tracking-tight text-blue-600 sm:text-slate-900">
-            Engineering Solutions. <br />
-            <span className="text-slate-900 sm:text-[#7d5656] font-extrabold">
-              Construction Excellence.
-            </span> <br />
-            Reliable Service.
-          </h1>
+          {/* Brutalist Slate Card for Hero Headline */}
+          <div className="w-full max-w-3xl mb-3 sm:mb-5 p-5 sm:p-8 rounded-2xl bg-slate-900/95 border-2 sm:border-[3px] border-slate-700/80 shadow-[6px_6px_0px_#020617] sm:shadow-[8px_8px_0px_#020617] backdrop-blur-md transition-all">
+            <h1 className="text-[1.85rem] leading-[1.18] sm:text-4xl sm:leading-[1.12] md:text-5xl md:leading-[1.08] lg:text-6xl font-black tracking-tight text-center">
+              <span className="text-blue-500">Engineering Solutions.</span> <br />
+              <span className="text-[#7d5656] font-extrabold">
+                Construction Excellence.
+              </span> <br />
+              <span className="text-white">Reliable Service.</span>
+            </h1>
+          </div>
 
           {/* Centered Sub-headline - Soft charcoal black (not too black) */}
           <p className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg max-w-2xl leading-relaxed font-bold px-1 text-slate-900">
