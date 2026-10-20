@@ -37,21 +37,29 @@ export const Home = () => {
     <div className="flex flex-col min-h-screen bg-slate-900 text-slate-100">
       {/* 1. HERO SECTION WITH SCENE.WEBM */}
       <section className="relative overflow-hidden bg-slate-950 -mt-24 sm:-mt-28 pt-32 sm:pt-40 pb-24 sm:pb-28 lg:pb-36 border-b border-slate-800 flex flex-col justify-center items-center">
-        {/* Full Main Video Background - 100% Fully Visible, Crystal Clear with Zero Overlay */}
+        {/* Hero Background: Construction drafting flat lay on mobile, scene.webm on desktop */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none bg-slate-950">
+          {/* Mobile Image Fallback - No people, clean blueprints & engineering tools */}
+          <img
+            src="/hero-construction.jpg"
+            alt="Engineering Blueprints and Construction Planning"
+            className="w-full h-full object-cover block sm:hidden"
+          />
+          {/* Desktop/Tablet Video */}
           <video
             autoPlay
             loop
             muted
             playsInline
             preload="auto"
+            poster="/hero-construction.jpg"
             ref={(el) => {
               if (el) {
                 el.muted = true;
                 el.play().catch(() => {});
               }
             }}
-            className="w-full h-full object-cover opacity-100"
+            className="w-full h-full object-cover opacity-100 hidden sm:block"
           >
             <source src="/scene.webm" type="video/webm" />
           </video>
@@ -69,9 +77,9 @@ export const Home = () => {
             <span className="leading-tight text-center">Multidisciplinary Engineering & Construction Contractors</span>
           </div>
 
-          {/* Centered Headline - Blue in dark mode, slate-950 in light mode */}
+          {/* Centered Headline - Soft charcoal black (not too black) */}
           <h1 className={`text-[1.85rem] leading-[1.18] sm:text-4xl sm:leading-[1.12] md:text-5xl md:leading-[1.08] lg:text-7xl font-black tracking-tight ${
-            isDark ? 'text-blue-600' : 'text-slate-950'
+            isDark ? 'text-slate-900' : 'text-slate-900'
           }`}>
             Engineering Solutions. <br />
             <span className="text-[#7d5656] font-extrabold">
@@ -80,8 +88,8 @@ export const Home = () => {
             Reliable Service.
           </h1>
 
-          {/* Centered Sub-headline - Blue for all modes */}
-          <p className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg max-w-2xl leading-relaxed font-bold px-1 text-blue-600">
+          {/* Centered Sub-headline - Soft charcoal black (not too black) */}
+          <p className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg max-w-2xl leading-relaxed font-bold px-1 text-slate-900">
             Atemzy Hitech Engineering Services Ltd partners with corporate, industrial, and real estate clients to execute high-specification civil engineering, turnkey construction, technical procurement, and asset management across Nigeria.
           </p>
 

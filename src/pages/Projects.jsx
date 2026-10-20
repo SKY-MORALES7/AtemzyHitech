@@ -49,31 +49,35 @@ export const Projects = () => {
         </div>
       </div>
 
-      {/* Category Filter Tabs */}
-      <div className={`sticky top-20 z-40 backdrop-blur-md border-b py-4 px-4 sm:px-6 lg:px-8 transition-colors ${
-        isDark ? 'bg-slate-900/95 border-slate-800' : 'bg-white/95 border-slate-200 shadow-sm'
-      }`}>
-        <div className="max-w-7xl mx-auto flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
-          {projectCategories.map((cat) => {
-            const isSelected = selectedCategory === cat;
-            return (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all border ${
-                  isSelected
-                    ? isDark
-                      ? 'bg-blue-600 text-white border-blue-500 shadow-md shadow-blue-500/30'
-                      : 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-600/20'
-                    : isDark
-                      ? 'bg-slate-800/80 text-slate-300 border-slate-700/60 hover:text-white hover:bg-slate-700'
-                      : 'bg-slate-100 text-slate-800 border-slate-300 hover:text-slate-950 hover:bg-slate-200 hover:border-slate-400'
-                }`}
-              >
-                {cat}
-              </button>
-            );
-          })}
+      {/* Category Filter Tabs - Harmonized floating pill sticky bar below main navbar */}
+      <div className="sticky top-[86px] sm:top-[96px] z-40 w-full px-3 sm:px-6 lg:px-8 py-2 pointer-events-auto">
+        <div className={`max-w-7xl mx-auto backdrop-blur-md rounded-xl sm:rounded-2xl border transition-all duration-300 px-2 sm:px-3 py-1.5 shadow-lg ${
+          isDark
+            ? 'bg-slate-900/90 border-slate-700/60 shadow-slate-950/60'
+            : 'bg-white/95 border-slate-300 shadow-slate-300/50'
+        }`}>
+          <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar scroll-smooth py-0.5">
+            {projectCategories.map((cat) => {
+              const isSelected = selectedCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all border shrink-0 ${
+                    isSelected
+                      ? isDark
+                        ? 'bg-blue-600 text-white border-blue-500 shadow-md shadow-blue-500/30'
+                        : 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-600/20'
+                      : isDark
+                        ? 'bg-slate-800/80 text-slate-300 border-slate-700/60 hover:text-white hover:bg-slate-700'
+                        : 'bg-slate-100 text-slate-800 border-slate-300 hover:text-slate-950 hover:bg-slate-200 hover:border-slate-400'
+                  }`}
+                >
+                  {cat}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
 
