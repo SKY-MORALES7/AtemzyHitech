@@ -87,13 +87,13 @@ export const Home = () => {
             <span className="text-[#e29b9b] sm:text-[#7d5656] font-extrabold">
               Construction Excellence.
             </span> <br />
-            <span className="text-white sm:text-slate-950">
+            <span className="hero-mobile-white text-white sm:text-slate-950">
               Reliable Service.
             </span>
           </h1>
 
           {/* Centered Sub-headline - Pure crisp white on mobile without any shadow, dark slate on desktop */}
-          <p className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg max-w-2xl leading-relaxed font-bold px-1 text-white sm:text-slate-900">
+          <p className="hero-mobile-white mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg max-w-2xl leading-relaxed font-bold px-1 text-white sm:text-slate-900">
             Atemzy Hitech Engineering Services Ltd partners with corporate, industrial, and real estate clients to execute high-specification civil engineering, turnkey construction, technical procurement, and asset management across Nigeria.
           </p>
 

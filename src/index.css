@@ -531,6 +531,18 @@ body.light-theme,
   color: #ffffff !important;
 }
 
+/* Ensure mobile hero text remains pure white in all modes (including light mode) */
+@media (max-width: 639px) {
+  .hero-mobile-white,
+  [data-theme="light"] .hero-mobile-white,
+  body.light-theme .hero-mobile-white {
+    color: #ffffff !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    filter: none !important;
+  }
+}
+
 /* Inactive category pills in light mode */
 [data-theme="light"] .bg-slate-800\/80 {
   background-color: #f1f5f9 !important;
