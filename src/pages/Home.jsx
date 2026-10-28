@@ -107,35 +107,38 @@ export const Home = () => {
     }
   };
 
-  // Line-masked scroll transitions across the 3 Hero stages (matching 00:10 -> 00:36 -> 00:41 in recording)
-  // Stage 1 (0.00 -> 0.33): "We engineer power- / igniting networks" + "↓ SCROLL"
-  const stage1Exit = Math.max(0, Math.min(1, (heroScroll - 0.16) / 0.17));
+  // Line-masked scroll transitions across the Hero stages:
+  // Stage 1 (0.00 -> 0.28): "We engineer power- / igniting networks" + "↓ SCROLL"
+  const stage1Exit = Math.max(0, Math.min(1, (heroScroll - 0.14) / 0.14));
   const stage1Opacity = 1 - stage1Exit;
   const stage1LineOffset = stage1Exit * -110;
 
-  // Stage 2 (0.28 -> 0.68): "that fuel digital / infrastructures"
-  const stage2Enter = Math.max(0, Math.min(1, (heroScroll - 0.26) / 0.14));
-  const stage2Exit = Math.max(0, Math.min(1, (heroScroll - 0.54) / 0.15));
+  // Stage 2 (0.24 -> 0.54): "that fuel digital / infrastructures"
+  const stage2Enter = Math.max(0, Math.min(1, (heroScroll - 0.22) / 0.12));
+  const stage2Exit = Math.max(0, Math.min(1, (heroScroll - 0.44) / 0.12));
   const stage2Opacity = Math.min(stage2Enter, 1 - stage2Exit);
   const stage2LineOffset = (1 - stage2Enter) * 105 - stage2Exit * 110;
 
-  // Stage 3 (0.64 -> 1.00): "and deliver / uninterrupted / uptime." + "(→) LEARN MORE"
-  const stage3Enter = Math.max(0, Math.min(1, (heroScroll - 0.63) / 0.18));
-  const stage3Opacity = stage3Enter;
-  const stage3LineOffset = (1 - stage3Enter) * 105;
+  // Stage 3 (0.50 -> 0.82): "and deliver / uninterrupted / uptime." + "(→) LEARN MORE"
+  // Stage 4 (0.82 -> 1.00): All text scrolls out while the ball enters the rotating gear & camera zooms in!
+  const stage3Enter = Math.max(0, Math.min(1, (heroScroll - 0.49) / 0.13));
+  const stage3Exit = Math.max(0, Math.min(1, (heroScroll - 0.77) / 0.11));
+  const stage3Opacity = Math.min(stage3Enter, 1 - stage3Exit);
+  const stage3LineOffset = (1 - stage3Enter) * 105 - stage3Exit * 110;
 
   return (
     <div className="flex flex-col min-h-screen bg-slate-900 text-slate-100">
       {/* =====================================================================
-          1. THREE-STAGE 3D ISOMETRIC SCROLLYTELLING HERO + SIDE LOADING BAR
+          1. THREE-STAGE 3D ISOMETRIC SCROLLYTELLING HERO + END GEAR ZOOM
              - Loader (00:00-00:08): Bottom-right cyan percentage + vertical bar
-             - Stage 1 (Top): "We engineer power- / igniting networks" + "↓ SCROLL"
-             - Stage 2 (Mid): "that fuel digital / infrastructures"
-             - Stage 3 (End): "and deliver / uninterrupted / uptime." + "(→) LEARN MORE"
+             - Stage 1 (0.00-0.28): "We engineer power- / igniting networks" + "↓ SCROLL"
+             - Stage 2 (0.24-0.54): "that fuel digital / infrastructures"
+             - Stage 3 (0.50-0.82): "and deliver / uninterrupted / uptime." + "(→) LEARN MORE"
+             - Stage 4 (0.82-1.00): Text clears, ball enters gear, camera zooms on rotating gear
          ===================================================================== */}
       <section
         ref={heroTrackRef}
-        className="turbulent-hero-stage relative h-[300vh] -mt-24 sm:-mt-28 select-none"
+        className="turbulent-hero-stage relative h-[340vh] -mt-24 sm:-mt-28 select-none"
       >
         <div
           style={{ background: 'radial-gradient(circle at 74% 52%, #0a2246 0%, #02142b 52%, #010d1e 100%)' }}

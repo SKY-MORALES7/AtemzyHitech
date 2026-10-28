@@ -470,7 +470,7 @@ export const TurbulentHero3D = ({ scrollProgress = 0, isLoaded = true, onReady }
       });
 
       // ====================================================
-      // PART B: MID-LEVEL CHAMBER & CURVED DUAL-RAIL PIPE TRACK (STAGE 2)
+      // PART B: MID-LEVEL CHAMBER (STAGE 2 — NO EXTENDING RIGHT WIRE OR RIGHT BALL)
       // ====================================================
       const chamberGroup = new THREE.Group();
       chamberGroup.position.set(3.15, -5.2, 0.65);
@@ -504,39 +504,6 @@ export const TurbulentHero3D = ({ scrollProgress = 0, isLoaded = true, onReady }
       portholeWindow.position.set(0, -0.1, 0.96);
       chamberGroup.add(portholeWindow);
 
-      // Curved Dual-Rail Pipe Track on the right (Stage 2 -> Stage 3)
-      const railCurveCenter = new THREE.CatmullRomCurve3([
-        new THREE.Vector3(3.15, -6.3, 0.65),
-        new THREE.Vector3(3.15, -6.85, 2.25),
-        new THREE.Vector3(5.2, -6.85, 2.25),
-        new THREE.Vector3(6.4, -6.85, 0.65)
-      ]);
-
-      const railCurveLeft = new THREE.CatmullRomCurve3([
-        new THREE.Vector3(2.99, -6.3, 0.65),
-        new THREE.Vector3(2.99, -6.85, 2.38),
-        new THREE.Vector3(5.2, -6.85, 2.38),
-        new THREE.Vector3(6.4, -6.85, 0.78)
-      ]);
-      const railCurveRight = new THREE.CatmullRomCurve3([
-        new THREE.Vector3(3.31, -6.3, 0.65),
-        new THREE.Vector3(3.31, -6.85, 2.12),
-        new THREE.Vector3(5.2, -6.85, 2.12),
-        new THREE.Vector3(6.4, -6.85, 0.52)
-      ]);
-
-      const dualRailPipe1 = new THREE.Mesh(
-        new THREE.TubeGeometry(railCurveLeft, 40, 0.075, 12, false),
-        pipeMat
-      );
-      machineGroup.add(dualRailPipe1);
-
-      const dualRailPipe2 = new THREE.Mesh(
-        new THREE.TubeGeometry(railCurveRight, 40, 0.075, 12, false),
-        pipeMat
-      );
-      machineGroup.add(dualRailPipe2);
-
       // Bent Industrial Pipe well below the side wheel (starts at Y = -1.35 so zero contact with wheel)
       const rightBentPipeCurve = new THREE.CatmullRomCurve3([
         new THREE.Vector3(3.65, -1.35, 2.15),
@@ -549,17 +516,6 @@ export const TurbulentHero3D = ({ scrollProgress = 0, isLoaded = true, onReady }
         softTealMat
       );
       machineGroup.add(rightBentPipe);
-
-      // Relay Golden Ball that travels along the Curved Dual-Rail Pipe Track
-      const relayBallGroup = new THREE.Group();
-      machineGroup.add(relayBallGroup);
-      const relayBallMesh = new THREE.Mesh(
-        new THREE.SphereGeometry(0.35, 28, 28),
-        coreSphereMat
-      );
-      relayBallGroup.add(relayBallMesh);
-      const relayLight = new THREE.PointLight(0xffaa22, 10, 6, 1.4);
-      relayBallGroup.add(relayLight);
 
       // ====================================================
       // PART C: LOWER ISOMETRIC TERRACE & 2-TIER COG SOCKET (STAGE 3)
@@ -701,32 +657,33 @@ export const TurbulentHero3D = ({ scrollProgress = 0, isLoaded = true, onReady }
       ballGroup.add(coreLight);
 
       // ====================================================
-      // SCROLL-DRIVEN BALL PATH (NEVER SINKS INTO CONCRETE)
+      // SCROLL-DRIVEN BALL PATH (ENTERS THE ROTATING GEAR SOCKET AT THE END)
       // ====================================================
       const LOWER_HOVER_Y = LOWER_DECK_Y + 2.15;
+      const SOCKET_INSIDE_Y = LOWER_DECK_Y + 0.48;
 
       const computeBallPosition = (s) => {
         // 0.00 -> 0.03: Resting cleanly on the glowing pad inside the wireframe cube
         if (s <= 0.03) {
           return new THREE.Vector3(CUBE_X, BALL_REST_Y, CUBE_Z);
         }
-        // 0.03 -> 0.28: Rolls flat along Leg 1 of the right conveyor track (Y = 2.54)
-        if (s <= 0.28) {
-          const t = (s - 0.03) / 0.25;
+        // 0.03 -> 0.24: Rolls flat along Leg 1 of the right conveyor track (Y = 2.54)
+        if (s <= 0.24) {
+          const t = (s - 0.03) / 0.21;
           const easeT = t * t * (3 - 2 * t);
           const z = CUBE_Z + easeT * (2.45 - CUBE_Z);
           return new THREE.Vector3(CUBE_X, BALL_REST_Y, z);
         }
-        // 0.28 -> 0.46: Turns 90° and rolls flat along Leg 2 of the front conveyor track (Y = 2.54)
-        if (s <= 0.46) {
-          const t = (s - 0.28) / 0.18;
+        // 0.24 -> 0.40: Turns 90° and rolls flat along Leg 2 of the front conveyor track (Y = 2.54)
+        if (s <= 0.40) {
+          const t = (s - 0.24) / 0.16;
           const easeT = t * t * (3 - 2 * t);
           const x = CUBE_X + easeT * (0.2 - CUBE_X);
           return new THREE.Vector3(x, BALL_REST_Y, 2.45);
         }
-        // 0.46 -> 0.64: Clean parabolic arc over the inner wall lip into the hollow center of the Funnel
-        if (s <= 0.64) {
-          const t = (s - 0.46) / 0.18;
+        // 0.40 -> 0.56: Clean parabolic arc over the inner wall lip into the hollow center of the Funnel
+        if (s <= 0.56) {
+          const t = (s - 0.40) / 0.16;
           const x = 0.2 + t * (FUNNEL_X - 0.2);
           const z = 2.45 + t * (FUNNEL_Z - 2.45);
           const arcLift = Math.sin(t * Math.PI) * 0.78;
@@ -734,18 +691,25 @@ export const TurbulentHero3D = ({ scrollProgress = 0, isLoaded = true, onReady }
           const y = BALL_REST_Y + arcLift - drop;
           return new THREE.Vector3(x, y, z);
         }
-        // 0.64 -> 1.00: Emerges on the unobstructed Lower Terrace & hovers above the 2-Tier Gear Socket
-        const t = (s - 0.64) / 0.36;
-        const easeT = 1 - Math.pow(1 - t, 3);
-        const x = FUNNEL_X + easeT * (GEAR_X - FUNNEL_X);
-        const z = FUNNEL_Z + easeT * (GEAR_Z - FUNNEL_Z);
-        const startY = LOWER_DECK_Y + 3.8;
-        const y = startY + easeT * (LOWER_HOVER_Y - startY);
-        return new THREE.Vector3(x, y, z);
+        // 0.56 -> 0.78: Emerges on the Lower Terrace & hovers above the 2-Tier Gear Socket
+        if (s <= 0.78) {
+          const t = (s - 0.56) / 0.22;
+          const easeT = 1 - Math.pow(1 - t, 3);
+          const x = FUNNEL_X + easeT * (GEAR_X - FUNNEL_X);
+          const z = FUNNEL_Z + easeT * (GEAR_Z - FUNNEL_Z);
+          const startY = LOWER_DECK_Y + 3.8;
+          const y = startY + easeT * (LOWER_HOVER_Y - startY);
+          return new THREE.Vector3(x, y, z);
+        }
+        // 0.78 -> 1.00: Drops straight down INSIDE the glowing cyan 2-Tier Rotating Gear Socket!
+        const enterT = Math.min(1, (s - 0.78) / 0.14);
+        const easeEnter = enterT * enterT * (3 - 2 * enterT);
+        const y = LOWER_HOVER_Y + easeEnter * (SOCKET_INSIDE_Y - LOWER_HOVER_Y);
+        return new THREE.Vector3(GEAR_X, y, GEAR_Z);
       };
 
       // ====================================================
-      // RENDER LOOP & TRUE ISOMETRIC CAMERA PAN
+      // RENDER LOOP, TRUE ISOMETRIC CAMERA PAN & END ZOOM-IN
       // ====================================================
       const clock = new THREE.Clock();
       let smoothedScroll = scrollRef.current;
@@ -774,12 +738,22 @@ export const TurbulentHero3D = ({ scrollProgress = 0, isLoaded = true, onReady }
         pointer.x += (pointer.targetX - pointer.x) * 0.08;
         pointer.y += (pointer.targetY - pointer.y) * 0.08;
 
-        // 1. True Isometric Vertical Camera Pan:
-        // Moving camera.position.y and lookAt.y downward together by 10.4 units keeps the exact
-        // isometric angle constant while scrolling the upper box completely out of the top of the screen!
-        const camDrop = s * 10.4;
+        // Final Stage Zoom Effect (0.78 -> 1.00):
+        // As the ball enters the gear socket and all text clears, zoom in on the rotating gear socket!
+        const zoomRaw = Math.max(0, Math.min(1, (s - 0.78) / 0.22));
+        const zoomEase = zoomRaw * zoomRaw * (3 - 2 * zoomRaw);
+
+        const targetFov = 18.5 - zoomEase * 4.3;
+        if (Math.abs(camera.fov - targetFov) > 0.01) {
+          camera.fov = targetFov;
+          camera.updateProjectionMatrix();
+        }
+
+        // 1. True Isometric Vertical Camera Pan + Final Zoom Framing
+        const panProgress = Math.min(1, s / 0.82);
+        const camDrop = panProgress * 10.4 + zoomEase * 0.55;
         camera.position.set(BASE_CAM_X, BASE_CAM_Y - camDrop, BASE_CAM_Z);
-        camera.lookAt(0.65, 0.55 - camDrop, 0);
+        camera.lookAt(0.65 + zoomEase * 0.85, 0.55 - camDrop, -zoomEase * 0.45);
 
         // Subtle pointer parallax on the machine group
         const targetRotY = -0.02 + pointer.x * 0.025;
@@ -787,12 +761,12 @@ export const TurbulentHero3D = ({ scrollProgress = 0, isLoaded = true, onReady }
         machineGroup.rotation.y += (targetRotY - machineGroup.rotation.y) * 0.1;
         machineGroup.rotation.x += (targetRotX - machineGroup.rotation.x) * 0.1;
 
-        // 2. Update Main Golden Ball Position + Intro Drop + Hover Bob
+        // 2. Update Main Golden Ball Position + Intro Drop + Absorption into Gear Socket
         const pos = computeBallPosition(s);
         const introEase = 1 - Math.pow(1 - introProgress, 3);
         const introDropOffset = (1 - introEase) * 3.8;
         const hoverBob =
-          s < 0.04 || s > 0.82 ? Math.sin(elapsed * 3.0) * 0.07 : 0;
+          s < 0.04 || (s > 0.58 && s < 0.78) ? Math.sin(elapsed * 3.0) * 0.07 : 0;
 
         ballGroup.position.set(
           pos.x,
@@ -800,20 +774,22 @@ export const TurbulentHero3D = ({ scrollProgress = 0, isLoaded = true, onReady }
           pos.z
         );
 
+        // Shrink and hide the golden sphere once it sinks deep inside the glowing cyan gear well
+        const sinkProgress = Math.max(0, Math.min(1, (s - 0.82) / 0.1));
+        const ballScale = Math.max(0.001, 1 - sinkProgress * 0.95);
+        ballGroup.scale.setScalar(ballScale);
+        ballGroup.visible = s < 0.93;
+
         glowingPadMat.opacity = 0.2 + introEase * 0.65 * Math.max(0.15, 1 - s * 3.0);
         coreHalo.scale.setScalar(1 + Math.sin(elapsed * 3.5) * 0.05);
 
-        // 3. Update Relay Ball rolling along the Curved Dual-Rail Pipe Track
-        const relayT = Math.max(0, Math.min(1, (s - 0.34) / 0.55));
-        const railPt = railCurveCenter.getPointAt(relayT);
-        relayBallGroup.position.set(railPt.x, railPt.y + 0.38, railPt.z);
-        relayBallGroup.visible = s > 0.28;
-
-        // 4. Clean Axial Spin for the Side Flange Wheel & Lower 2-Tier Cog Socket
+        // 3. Clean Axial Spin for the Side Flange Wheel & Accelerated End Spin for the 2-Tier Gear Socket
         wheelSpinGroup.rotation.x = -(s * Math.PI * 2.5 + elapsed * 0.35);
-        gearSocketGroup.rotation.y = s * Math.PI * 2.2 + elapsed * 0.45;
+        const endGearSpin = zoomEase * Math.PI * 3.8;
+        gearSocketGroup.rotation.y = s * Math.PI * 2.4 + endGearSpin + elapsed * 0.55;
 
-        wellLight.intensity = s > 0.65 ? 20 + Math.sin(elapsed * 4.5) * 4 : 12;
+        // Cyan well flares up brightly as the golden ball enters the socket (matching screenshot)
+        wellLight.intensity = 12 + zoomEase * 24 + Math.sin(elapsed * 4.5) * 3;
 
         renderer.render(scene, camera);
       };
