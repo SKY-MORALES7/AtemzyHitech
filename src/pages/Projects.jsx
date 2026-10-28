@@ -91,6 +91,10 @@ export const Projects = () => {
                     <div className="relative h-60 overflow-hidden">
                       <img
                         src={p.image}
+                        onError={(e) => {
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src = p.fallbackImage || '/images/electrical-substation.svg';
+                        }}
                         alt={p.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
@@ -177,6 +181,10 @@ export const Projects = () => {
             <div className="relative h-64 sm:h-72 rounded-2xl overflow-hidden mb-6">
               <img
                 src={activeModalProject.image}
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = activeModalProject.fallbackImage || '/images/electrical-substation.svg';
+                }}
                 alt={activeModalProject.title}
                 className="w-full h-full object-cover"
               />

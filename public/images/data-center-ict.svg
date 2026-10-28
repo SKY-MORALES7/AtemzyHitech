@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#020617"/>
+      <stop offset="55%" stop-color="#090e1a"/>
+      <stop offset="100%" stop-color="#0c4a6e"/>
+    </linearGradient>
+    <pattern id="grid2" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg2)"/>
+  <rect width="1200" height="800" fill="url(#grid2)"/>
+  <!-- Fiber Optic Streams -->
+  <g fill="none" stroke="#38bdf8" stroke-width="2.5" opacity="0.75">
+    <path d="M 60 660 C 320 660, 360 180, 600 180 C 840 180, 880 660, 1140 660"/>
+    <path d="M 60 560 C 320 560, 380 280, 600 280 C 820 280, 880 560, 1140 560" stroke="#0284c7"/>
+    <path d="M 60 400 H 1140" stroke="#7dd3fc" stroke-dasharray="10 8"/>
+  </g>
+  <!-- Tier-III Server Racks & Routers -->
+  <g transform="translate(180, 130)">
+    <rect x="0" y="0" width="240" height="540" rx="10" fill="#090e1a" stroke="#38bdf8" stroke-width="3"/>
+    <g transform="translate(20, 28)">
+      <rect x="0" y="0" width="200" height="46" rx="4" fill="#0f172a" stroke="#0284c7" stroke-width="2"/>
+      <circle cx="24" cy="23" r="5" fill="#10b981"/><circle cx="44" cy="23" r="5" fill="#38bdf8"/><circle cx="64" cy="23" r="5" fill="#38bdf8"/>
+      <rect x="0" y="64" width="200" height="46" rx="4" fill="#0f172a" stroke="#0284c7" stroke-width="2"/>
+      <circle cx="24" cy="87" r="5" fill="#10b981"/><circle cx="44" cy="87" r="5" fill="#38bdf8"/><circle cx="64" cy="87" r="5" fill="#10b981"/>
+      <rect x="0" y="128" width="200" height="46" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+      <circle cx="24" cy="151" r="5" fill="#38bdf8"/><circle cx="44" cy="151" r="5" fill="#38bdf8"/><circle cx="64" cy="151" r="5" fill="#10b981"/>
+      <rect x="0" y="192" width="200" height="46" rx="4" fill="#0f172a" stroke="#0284c7" stroke-width="2"/>
+      <rect x="0" y="256" width="200" height="46" rx="4" fill="#0f172a" stroke="#0284c7" stroke-width="2"/>
+      <rect x="0" y="320" width="200" height="46" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+      <rect x="0" y="384" width="200" height="90" rx="4" fill="#020617" stroke="#0284c7" stroke-width="2"/>
+      <text x="100" y="436" fill="#38bdf8" font-family="monospace" font-size="18" font-weight="bold" text-anchor="middle">100GbE CORE</text>
+    </g>
+  </g>
+  <g transform="translate(480, 130)">
+    <rect x="0" y="0" width="240" height="540" rx="10" fill="#090e1a" stroke="#38bdf8" stroke-width="3"/>
+    <g transform="translate(20, 28)">
+      <rect x="0" y="0" width="200" height="46" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+      <rect x="0" y="64" width="200" height="46" rx="4" fill="#0f172a" stroke="#0284c7" stroke-width="2"/>
+      <rect x="0" y="128" width="200" height="110" rx="4" fill="#020617" stroke="#38bdf8" stroke-width="2.5"/>
+      <text x="100" y="176" fill="#7dd3fc" font-family="monospace" font-size="20" font-weight="bold" text-anchor="middle">BGP ROUTER</text>
+      <text x="100" y="204" fill="#10b981" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">48-CORE OS2 FIBER</text>
+      <rect x="0" y="256" width="200" height="46" rx="4" fill="#0f172a" stroke="#0284c7" stroke-width="2"/>
+      <rect x="0" y="320" width="200" height="46" rx="4" fill="#0f172a" stroke="#0284c7" stroke-width="2"/>
+      <rect x="0" y="384" width="200" height="90" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+    </g>
+  </g>
+  <g transform="translate(780, 130)">
+    <rect x="0" y="0" width="240" height="540" rx="10" fill="#090e1a" stroke="#38bdf8" stroke-width="3"/>
+    <g transform="translate(20, 28)">
+      <rect x="0" y="0" width="200" height="46" rx="4" fill="#0f172a" stroke="#0284c7" stroke-width="2"/>
+      <rect x="0" y="64" width="200" height="46" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+      <rect x="0" y="128" width="200" height="46" rx="4" fill="#0f172a" stroke="#0284c7" stroke-width="2"/>
+      <rect x="0" y="192" width="200" height="46" rx="4" fill="#0f172a" stroke="#0284c7" stroke-width="2"/>
+      <rect x="0" y="256" width="200" height="46" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+      <rect x="0" y="320" width="200" height="46" rx="4" fill="#0f172a" stroke="#0284c7" stroke-width="2"/>
+      <rect x="0" y="384" width="200" height="90" rx="4" fill="#020617" stroke="#10b981" stroke-width="2"/>
+      <text x="100" y="436" fill="#10b981" font-family="monospace" font-size="18" font-weight="bold" text-anchor="middle">N+1 MODULAR UPS</text>
+    </g>
+  </g>
+</svg>
+

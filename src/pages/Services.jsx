@@ -7,6 +7,7 @@ import {
   Truck, 
   ShieldCheck, 
   Network,
+  Router as RouterIcon,
   CheckCircle2, 
   ArrowRight
 } from 'lucide-react';
@@ -20,7 +21,8 @@ const iconMap = {
   Cpu: Cpu,
   Truck: Truck,
   ShieldCheck: ShieldCheck,
-  Network: Network
+  Network: Network,
+  Router: RouterIcon
 };
 
 export const Services = () => {
@@ -109,6 +111,10 @@ export const Services = () => {
                       <div className="relative h-64 lg:h-1/2 overflow-hidden">
                         <img
                           src={srv.image}
+                          onError={(e) => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = srv.fallbackImage || '/images/electrical-substation.svg';
+                          }}
                           alt={srv.title}
                           className="w-full h-full object-cover"
                         />

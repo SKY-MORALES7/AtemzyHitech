@@ -19,6 +19,7 @@ export const projects = [
       "NEMSA statutory inspection and full load-bank certification"
     ],
     image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80",
+    fallbackImage: "/images/electrical-substation.svg",
     featured: true
   },
   {
@@ -41,6 +42,7 @@ export const projects = [
       "Enterprise firewall cluster, core routing & Wi-Fi 6E campus coverage"
     ],
     image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80",
+    fallbackImage: "/images/data-center-ict.svg",
     featured: true
   },
   {
@@ -63,6 +65,7 @@ export const projects = [
       "Bonded logistics, customs clearance & site-direct dispatch"
     ],
     image: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1200&q=80",
+    fallbackImage: "/images/circuit-automation.svg",
     featured: true
   },
   {
@@ -85,6 +88,7 @@ export const projects = [
       "Addressable fire detection & clean-agent server room suppression"
     ],
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
+    fallbackImage: "/images/circuit-automation.svg",
     featured: false
   },
   {
@@ -107,6 +111,7 @@ export const projects = [
       "Remote SNMP telemetry for voltage, temperature & fuel monitoring"
     ],
     image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1200&q=80",
+    fallbackImage: "/images/data-center-ict.svg",
     featured: false
   },
   {
@@ -129,6 +134,7 @@ export const projects = [
       "Dedicated on-site electrical & ICT resident engineering team"
     ],
     image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1200&q=80",
+    fallbackImage: "/images/electrical-substation.svg",
     featured: false
   }
 ];
