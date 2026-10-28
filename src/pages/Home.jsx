@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   ArrowRight, 
+  ArrowDown,
   CheckCircle2, 
   ShieldCheck, 
   Zap, 
@@ -9,10 +10,8 @@ import {
   Cpu, 
   Truck, 
   Network, 
-  Wifi, 
   Router as RouterIcon,
   Cable, 
-  BatteryCharging,
   Award,
   ChevronRight,
   PhoneCall,
@@ -22,7 +21,7 @@ import { companyInfo } from '../data/company';
 import { services } from '../data/services';
 import { projects } from '../data/projects';
 import { BrutalistCard } from '../components/cards/BrutalistCard';
-import { CircuitryHeroCanvas } from '../components/canvas/CircuitryHeroCanvas';
+import { TurbulentHero3D } from '../components/canvas/TurbulentHero3D';
 import { ScrollReveal, HairlineScrollFigure } from '../components/ui/ScrollReveal';
 import { useTheme } from '../context/ThemeContext';
 
@@ -37,261 +36,173 @@ const iconMap = {
   Router: RouterIcon
 };
 
-const heroTechBadges = [
-  { icon: Zap, label: 'HV/LV Power Grids', code: '33/11kV' },
-  { icon: RouterIcon, label: 'Enterprise Routing', code: 'BGP / SD-WAN' },
-  { icon: Server, label: 'Tier-III Data Centers', code: '99.99% SLA' },
-  { icon: Network, label: 'Fiber-Optic Backbones', code: '40/100GbE' },
-  { icon: Cpu, label: 'PLC / SCADA & BMS', code: 'IoT Telemetry' },
-  { icon: BatteryCharging, label: 'Hybrid Solar & BESS', code: 'Clean Power' }
+const heroStages = [
+  {
+    tag: '01 / POWER & ENERGY CORE',
+    headline: 'We engineer audience-igniting power & ICT systems',
+    subtext:
+      'High-voltage 33/11kV substation modernization, industrial switchgear, and hybrid solar microgrids engineered for zero unplanned downtime.'
+  },
+  {
+    tag: '02 / INTELLIGENT ROUTING & FIBER',
+    headline: 'High-voltage precision meets intelligent routing',
+    subtext:
+      'Tier-III enterprise data centers, 100GbE fiber-optic backbones, carrier Wi-Fi, and deterministic PLC/SCADA automation.'
+  },
+  {
+    tag: '03 / TURNKEY COMMISSIONING',
+    headline: 'Built for 99.99% enterprise uptime across Nigeria',
+    subtext:
+      'Atemzy Hitech Engineering Services Ltd delivers direct OEM procurement, IEEE/IEC compliance, and 24/7 NOC support.'
+  }
 ];
 
 export const Home = () => {
   const { isDark } = useTheme();
   const featuredProjects = projects.filter((p) => p.featured).slice(0, 3);
+  const heroTrackRef = useRef(null);
+  const afterHeroRef = useRef(null);
   const [heroScroll, setHeroScroll] = useState(0);
-  const [activeHeroSchematic, setActiveHeroSchematic] = useState('Router');
 
-  // Scroll-driven kinetic effect on Hero text & HUD
+  // Compute exact 0 -> 1 scroll progress through the 280vh sticky scrollytelling hero track
   useEffect(() => {
     const handleScroll = () => {
-      const y = window.scrollY || 0;
-      const progress = Math.min(1, Math.max(0, y / 520));
-      setHeroScroll(progress);
+      const track = heroTrackRef.current;
+      if (!track) return;
+      const rect = track.getBoundingClientRect();
+      const scrollableDistance = Math.max(1, track.offsetHeight - window.innerHeight);
+      const scrolled = Math.min(scrollableDistance, Math.max(0, -rect.top));
+      setHeroScroll(scrolled / scrollableDistance);
     };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
   }, []);
+
+  const activeStageIndex = heroScroll < 0.36 ? 0 : heroScroll < 0.72 ? 1 : 2;
+  const currentStage = heroStages[activeStageIndex];
+
+  const scrollToContent = () => {
+    if (afterHeroRef.current) {
+      afterHeroRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <div className="flex flex-col min-h-screen bg-slate-900 text-slate-100">
-      {/* 1. TURBULENT-INSPIRED INTERACTIVE CIRCUITRY HERO SECTION */}
-      <section className="relative overflow-hidden bg-slate-950 -mt-24 sm:-mt-28 pt-32 sm:pt-40 pb-20 sm:pb-28 lg:pb-32 border-b border-slate-800 flex flex-col justify-center items-center">
-        {/* Interactive PCB Circuitry Canvas Background */}
-        <CircuitryHeroCanvas />
-
-        {/* Subtle Radial Vignette for High-Contrast Typography Legibility */}
+      {/* =====================================================================
+          1. TURBULENT.CA-STYLE STICKY 3D SCROLLYTELLING HERO
+             Locks viewport while scrolling 0% -> 100% through the 3D machine,
+             then smoothly reveals the rest of the website content below.
+         ===================================================================== */}
+      <section
+        ref={heroTrackRef}
+        className="turbulent-hero-stage relative h-[280vh] -mt-24 sm:-mt-28 select-none"
+      >
         <div
-          aria-hidden="true"
-          className={`absolute inset-0 z-[1] pointer-events-none ${
-            isDark
-              ? 'bg-[radial-gradient(circle_at_30%_45%,rgba(2,6,23,0.78)_0%,rgba(2,6,23,0.45)_55%,rgba(2,6,23,0.85)_100%)]'
-              : 'bg-[radial-gradient(circle_at_30%_45%,rgba(255,255,255,0.86)_0%,rgba(248,250,252,0.55)_60%,rgba(241,245,249,0.88)_100%)]'
-          }`}
-        />
+          style={{
+            background:
+              'radial-gradient(circle at 68% 52%, #0a2246 0%, #041024 52%, #020813 100%)'
+          }}
+          className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between border-b border-slate-800/80"
+        >
+          {/* 3D Isometric Engineering & Circuitry Machine (Right / Center-Right) */}
+          <TurbulentHero3D scrollProgress={heroScroll} />
 
-        {/* Hero Content Grid: Kinetic Scroll-Reactive Copy + Interactive Router/Rack Schematic */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-            {/* Left Column: Kinetic Scroll-Reactive Hero Text, Router/ICT Matrix & CTAs */}
-            <div
-              style={{
-                transform: `translate3d(0, ${(-heroScroll * 38).toFixed(1)}px, 0) scale(${(1 - heroScroll * 0.04).toFixed(3)})`,
-                opacity: Math.max(0.2, 1 - heroScroll * 0.75),
-                transition: 'transform 0.08s linear, opacity 0.08s linear',
-                willChange: 'transform, opacity'
-              }}
-              className="lg:col-span-7 text-center lg:text-left flex flex-col items-center lg:items-start"
-            >
-              {/* Accreditation & Circuit Status Badge */}
-              <ScrollReveal direction="up" delay={0}>
-                <div className={`inline-flex items-center gap-2.5 px-3.5 sm:px-4 py-1.5 rounded-full text-[11px] sm:text-xs md:text-sm font-bold mb-5 shadow-lg border backdrop-blur-md transition-all max-w-full ${
-                  isDark
-                    ? 'bg-slate-900/95 text-sky-300 border-sky-500/40 shadow-sky-950/50'
-                    : 'bg-white/95 text-slate-900 border-slate-300 shadow-sm'
-                }`}>
-                  <RouterIcon className="w-4 h-4 text-sky-400 shrink-0" />
-                  <span className="leading-tight">Electrical Power Engineering & Enterprise ICT Infrastructure</span>
-                  <span className="hidden sm:inline-block px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                    CIRCUIT LIVE
-                  </span>
-                </div>
-              </ScrollReveal>
+          {/* Subtle Left Gradient Scrim so Editorial White Text stays 100% Crisp */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 z-[2] pointer-events-none bg-gradient-to-r from-[#020813]/90 via-[#020813]/45 to-transparent"
+          />
 
-              {/* Main Kinetic Headline with Scroll Shift */}
-              <ScrollReveal direction="up" delay={80}>
-                <h1 className="text-[2.1rem] leading-[1.12] sm:text-5xl sm:leading-[1.08] lg:text-6xl font-black tracking-tight uppercase">
-                  <span
-                    style={{
-                      transform: `translate3d(${(heroScroll * -18).toFixed(1)}px, 0, 0)`,
-                      display: 'inline-block'
-                    }}
-                    className={isDark ? 'text-sky-400 drop-shadow-[0_0_25px_rgba(56,189,248,0.35)]' : 'text-blue-600'}
-                  >
-                    High-Voltage Power.
-                  </span>{' '}
-                  <br />
-                  <span
-                    style={{
-                      transform: `translate3d(${(heroScroll * 18).toFixed(1)}px, 0, 0)`,
-                      display: 'inline-block'
-                    }}
-                    className={isDark ? 'text-blue-400' : 'text-sky-700'}
-                  >
-                     Intelligent Routing.
-                  </span>{' '}
-                  <br />
-                  <span
-                    style={{
-                      transform: `translate3d(${(heroScroll * -10).toFixed(1)}px, 0, 0)`,
-                      display: 'inline-block'
-                    }}
-                    className={isDark ? 'text-white' : 'text-slate-950'}
-                  >
-                    Uninterrupted Uptime.
-                  </span>
-                </h1>
-              </ScrollReveal>
+          {/* Main Left Editorial Headline & Stage Copy */}
+          <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 w-full flex-1 flex items-center pt-24 sm:pt-28">
+            <div className="max-w-xl lg:max-w-2xl">
+              {/* Stage Step Pill */}
+              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-sky-400/30 backdrop-blur-md mb-6">
+                <RouterIcon className="w-3.5 h-3.5 text-sky-400" />
+                <span className="text-[11px] font-mono font-bold tracking-widest uppercase text-sky-300">
+                  {currentStage.tag}
+                </span>
+              </div>
 
-              {/* Sub-headline */}
-              <ScrollReveal direction="up" delay={150}>
-                <p className={`mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg max-w-2xl leading-relaxed font-medium ${
-                  isDark ? 'text-slate-200' : 'text-slate-700'
-                }`}>
-                  Atemzy Hitech Engineering Services Ltd engineers resilient 33/11kV power distribution, carrier-grade routing & fiber-optic networks, Tier-III data centers, and automated SCADA/BMS telemetry across Nigeria.
-                </p>
-              </ScrollReveal>
+              {/* Turbulent-Style Stark White Editorial Headline */}
+              <h1
+                key={activeStageIndex}
+                style={{
+                  fontFamily: "Georgia, 'Times New Roman', 'Plus Jakarta Sans', serif",
+                  color: '#ffffff'
+                }}
+                className="text-4xl sm:text-6xl lg:text-[4.25rem] font-bold leading-[1.08] tracking-tight text-white transition-all duration-500 animate-[fadeIn_0.45s_ease-out]"
+              >
+                {currentStage.headline}
+              </h1>
 
-              {/* Electrical & ICT Icon Strip on Hero (Bright Cyan/Sky Icons in Dark Mode, Never Black) */}
-              <ScrollReveal direction="up" delay={220} className="w-full max-w-2xl">
-                <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-2.5 w-full">
-                  {heroTechBadges.map((item, index) => {
-                    const BadgeIcon = item.icon;
-                    return (
-                      <div
-                        key={index}
-                        className={`flex items-center gap-2.5 p-2.5 rounded-xl border text-left transition-all backdrop-blur-md ${
-                          isDark
-                            ? 'bg-slate-900/90 border-sky-500/30 hover:border-sky-400 text-white shadow-md shadow-slate-950/60'
-                            : 'bg-white/95 border-slate-200 hover:border-blue-600 text-slate-900 shadow-sm'
-                        }`}
-                      >
-                        <div className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 border ${
-                          isDark
-                            ? 'bg-sky-500/20 border-sky-400/40 text-sky-300'
-                            : 'bg-blue-600/10 border-blue-500/30 text-blue-600'
-                        }`}>
-                          <BadgeIcon className="w-4 h-4 stroke-[2.2]" />
-                        </div>
-                        <div className="min-w-0">
-                          <span className={`block text-[11px] font-bold truncate ${
-                            isDark ? 'text-white' : 'text-slate-900'
-                          }`}>
-                            {item.label}
-                          </span>
-                          <span className={`block text-[10px] font-mono font-semibold ${
-                            isDark ? 'text-sky-400' : 'text-blue-600'
-                          }`}>
-                            {item.code}
-                          </span>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </ScrollReveal>
+              {/* Stage Subheadline */}
+              <p
+                style={{ color: '#cbd5e1' }}
+                className="mt-5 text-sm sm:text-base lg:text-lg max-w-lg leading-relaxed font-normal transition-all duration-500"
+              >
+                {currentStage.subtext}
+              </p>
 
-              {/* CTA Buttons */}
-              <ScrollReveal direction="up" delay={290} className="w-full sm:w-auto">
-                <div className="mt-7 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 sm:gap-4 w-full sm:w-auto">
-                  <Link
-                    to="/quote"
-                    className="btn-3d text-sm py-3 px-6 sm:py-3.5 sm:px-8 justify-center"
-                  >
-                    <span>Request a Quote</span>
-                    <ArrowRight className="w-4 h-4 text-sky-400" />
-                  </Link>
-                  <Link
-                    to="/services"
-                    className="btn-3d-secondary text-sm py-3 px-5 sm:py-3.5 sm:px-7 justify-center"
-                  >
-                    <span>Explore ICT & Power Scope</span>
-                  </Link>
-                  <Link
-                    to="/projects"
-                    className={`inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl text-sm font-bold transition-all border shadow-md ${
-                      isDark
-                        ? 'bg-slate-900/90 hover:bg-slate-800 text-white border-sky-500/40 hover:border-sky-400'
-                        : 'bg-white hover:bg-slate-50 text-slate-900 border-2 border-slate-300 hover:border-blue-600 shadow-sm'
-                    }`}
-                  >
-                    <span>Deployed Systems</span>
-                    <ChevronRight className={`w-4 h-4 ${isDark ? 'text-sky-400' : 'text-blue-600'}`} />
-                  </Link>
-                </div>
-              </ScrollReveal>
+              {/* Action Buttons (Always accessible, highlighted on Stage 3) */}
+              <div className="mt-8 flex flex-wrap items-center gap-3.5">
+                <Link
+                  to="/quote"
+                  className="btn-3d text-xs sm:text-sm py-3 px-6"
+                >
+                  <span>Request a Quote</span>
+                  <ArrowRight className="w-4 h-4 text-sky-400" />
+                </Link>
+                <Link
+                  to="/services"
+                  className="btn-3d-secondary text-xs sm:text-sm py-3 px-6"
+                >
+                  <span>Explore ICT & Power Scope</span>
+                </Link>
+              </div>
             </div>
+          </div>
 
-            {/* Right Column: Interactive @lucasmarkes/hairline Router & Power Schematic Switcher */}
-            <div className="lg:col-span-5">
-              <ScrollReveal direction="scale" delay={140}>
-                {/* Interactive Schematic Mode Tabs */}
-                <div className={`flex items-center gap-1.5 p-1.5 rounded-xl border mb-3 backdrop-blur-md ${
-                  isDark ? 'bg-slate-900/90 border-slate-800' : 'bg-white/95 border-slate-200 shadow-sm'
-                }`}>
-                  {[
-                    { id: 'Router', label: 'ICT Router', icon: RouterIcon },
-                    { id: 'Cabinet', label: 'Server Rack', icon: Server },
-                    { id: 'Plug', label: 'HV Power', icon: Zap }
-                  ].map((tab) => {
-                    const TabIcon = tab.icon;
-                    const isActive = activeHeroSchematic === tab.id;
-                    return (
-                      <button
-                        key={tab.id}
-                        type="button"
-                        onClick={() => setActiveHeroSchematic(tab.id)}
-                        className={`flex-1 flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                          isActive
-                            ? 'bg-blue-600 text-white shadow-md shadow-blue-500/30'
-                            : isDark
-                              ? 'text-slate-300 hover:text-white hover:bg-slate-800'
-                              : 'text-slate-700 hover:text-slate-950 hover:bg-slate-100'
-                        }`}
-                      >
-                        <TabIcon className={`w-3.5 h-3.5 ${isActive ? 'text-white' : isDark ? 'text-sky-400' : 'text-blue-600'}`} />
-                        <span>{tab.label}</span>
-                      </button>
-                    );
-                  })}
-                </div>
+          {/* Bottom Bar: Turbulent-Style "↓ SCROLL" Indicator + 3-Stage Progress Rail */}
+          <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 pb-8 sm:pb-10 w-full flex items-center justify-between">
+            <button
+              type="button"
+              onClick={scrollToContent}
+              className="group inline-flex items-center gap-2.5 text-xs font-extrabold tracking-[0.2em] uppercase text-sky-400 hover:text-sky-300 transition-colors cursor-pointer"
+            >
+              <ArrowDown className="w-4 h-4 text-sky-400 animate-bounce" />
+              <span>SCROLL</span>
+            </button>
 
-                {activeHeroSchematic === 'Router' && (
-                  <HairlineScrollFigure
-                    figure="Router"
-                    badge="Interactive Enterprise Router"
-                    title="Multi-Antenna Carrier Router & RF Array"
-                    subtitle="Move your cursor, touch, or scroll to aim the high-gain router antennas"
-                    label="Interactive enterprise Wi-Fi and carrier router schematic"
-                  />
-                )}
-                {activeHeroSchematic === 'Cabinet' && (
-                  <HairlineScrollFigure
-                    figure="Cabinet"
-                    badge="Interactive Data Center Rack"
-                    title="12-Blade Enterprise Server & UPS Rack"
-                    subtitle="Move your cursor, touch, or scroll to slide server blades on their rails"
-                    label="Interactive 12-blade server rack cabinet figure"
-                  />
-                )}
-                {activeHeroSchematic === 'Plug' && (
-                  <HairlineScrollFigure
-                    figure="Plug"
-                    badge="Interactive HV/LV Power Feed"
-                    title="Industrial Power Terminal & Feeder"
-                    subtitle="Move your cursor, touch, or scroll to energize the power coupler"
-                    label="Interactive industrial electrical plug and socket figure"
-                  />
-                )}
-              </ScrollReveal>
+            {/* Scroll Progress Bar & Stage Readout */}
+            <div className="flex items-center gap-4">
+              <span className="text-[11px] font-mono text-sky-300/80 hidden sm:inline">
+                STAGE 0{activeStageIndex + 1} / 03
+              </span>
+              <div className="w-28 sm:w-40 h-1.5 rounded-full bg-slate-800/90 overflow-hidden border border-slate-700/60">
+                <div
+                  style={{ width: `${Math.max(8, Math.round(heroScroll * 100))}%` }}
+                  className="h-full bg-gradient-to-r from-sky-400 to-amber-400 transition-all duration-100"
+                />
+              </div>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Stats Strip */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 sm:mt-16 w-full">
-          <ScrollReveal direction="up" delay={150}>
+      {/* =====================================================================
+          2. SITE CONTENT REVEALED AFTER 3D HERO SCROLL
+         ===================================================================== */}
+      <div ref={afterHeroRef} className="relative z-10 bg-slate-950 pt-12 pb-8 border-b border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <ScrollReveal direction="up">
             <div className={`grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4 p-4 sm:p-8 rounded-2xl backdrop-blur-md shadow-2xl border transition-colors ${
               isDark 
                 ? 'bg-slate-900/90 border-slate-700/60' 
@@ -321,9 +232,9 @@ export const Home = () => {
             </div>
           </ScrollReveal>
         </div>
-      </section>
+      </div>
 
-      {/* 2. CORPORATE INTRODUCTION & ELECTRICAL/ICT VALUE PROPOSITION */}
+      {/* 3. CORPORATE INTRODUCTION & ELECTRICAL/ICT VALUE PROPOSITION */}
       <section className={`py-20 lg:py-28 border-b transition-colors ${
         isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'
       }`}>
@@ -408,7 +319,7 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* 3. INTERACTIVE HAIRLINE TELEMETRY & SCROLL SHOWCASE */}
+      {/* 4. INTERACTIVE HAIRLINE TELEMETRY & SCROLL SHOWCASE */}
       <section className="py-20 lg:py-24 bg-slate-950 border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center max-w-3xl mx-auto mb-14">
@@ -456,7 +367,7 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* 4. CORE SERVICES OVERVIEW */}
+      {/* 5. CORE SERVICES OVERVIEW */}
       <section className="py-20 lg:py-28 bg-slate-950 border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center max-w-3xl mx-auto mb-16">
@@ -504,7 +415,7 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* 5. FEATURED PROJECTS PREVIEW */}
+      {/* 6. FEATURED PROJECTS PREVIEW */}
       <section className="py-20 lg:py-28 bg-slate-900 border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="flex flex-col md:flex-row md:items-end justify-between mb-12">
@@ -576,7 +487,7 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* 6. WHY CHOOSE ATEMZY HITECH */}
+      {/* 7. WHY CHOOSE ATEMZY HITECH */}
       <section className="py-20 lg:py-28 bg-slate-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center max-w-3xl mx-auto mb-16">

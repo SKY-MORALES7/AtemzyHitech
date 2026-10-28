@@ -543,6 +543,14 @@ body.light-theme,
   }
 }
 
+/* Keep Turbulent 3D Hero text crisp white in both dark and light themes */
+[data-theme="light"] .turbulent-hero-stage h1 {
+  color: #ffffff !important;
+}
+[data-theme="light"] .turbulent-hero-stage p {
+  color: #cbd5e1 !important;
+}
+
 /* Inactive category pills in light mode */
 [data-theme="light"] .bg-slate-800\/80 {
   background-color: #f1f5f9 !important;
