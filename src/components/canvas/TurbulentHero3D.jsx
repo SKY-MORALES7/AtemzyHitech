@@ -177,17 +177,17 @@ export const TurbulentHero3D = ({ scrollProgress = 0, isLoaded = true, onReady }
       const getBaseOffset = (w, h) => {
         const aspect = w / Math.max(1, h);
         if (w >= 1280) {
-          const rightShift = Math.min(3.25, aspect * 1.72);
+          const rightShift = Math.min(4.25, aspect * 2.15);
           return { x: rightShift, y: -1.4, z: -rightShift, scale: 1.2 };
         }
         if (w >= 1024) {
-          const rightShift = Math.min(2.75, aspect * 1.55);
+          const rightShift = Math.min(3.55, aspect * 1.95);
           return { x: rightShift, y: -1.5, z: -rightShift, scale: 1.12 };
         }
         if (w >= 640) {
-          return { x: 1.65, y: -1.65, z: -1.65, scale: 0.95 };
+          return { x: 2.15, y: -1.65, z: -2.15, scale: 0.95 };
         }
-        return { x: 0.85, y: -1.8, z: -0.85, scale: 0.78 };
+        return { x: 1.15, y: -1.8, z: -1.15, scale: 0.78 };
       };
 
       let basePlacement = getBaseOffset(width, height);
@@ -564,7 +564,7 @@ export const TurbulentHero3D = ({ scrollProgress = 0, isLoaded = true, onReady }
       machineGroup.add(lowerTealCornerCube);
 
       // ====================================================
-      // PRECISION 2-TIER COG / GEAR SOCKET (100% OPEN CLEARANCE, NEVER HITS ANY BOX)
+      // PRECISION 2-TIER HOLLOW COG / GEAR SOCKET WITH REAL SHAFT DEPTH
       // ====================================================
       const GEAR_X = 0.15;
       const GEAR_Z = 3.85;
@@ -572,13 +572,21 @@ export const TurbulentHero3D = ({ scrollProgress = 0, isLoaded = true, onReady }
       gearSocketGroup.position.set(GEAR_X, LOWER_DECK_Y, GEAR_Z);
       machineGroup.add(gearSocketGroup);
 
-      // Tier 1: Bottom Wider Gear Ring (Radius 0.94) + 12 Radially Aligned Teeth
+      // Tier 1: Bottom Wider Hollow Gear Wall (Radius 0.94, openEnded = true) + Annular Step Cap
       const tier1Ring = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.92, 0.96, 0.54, 36),
+        new THREE.CylinderGeometry(0.94, 0.96, 0.54, 36, 1, true),
         gearBodyMat
       );
       tier1Ring.position.y = 0.27;
       gearSocketGroup.add(tier1Ring);
+
+      const tier1TopCap = new THREE.Mesh(
+        new THREE.RingGeometry(0.7, 0.94, 36),
+        gearBodyMat
+      );
+      tier1TopCap.rotation.x = -Math.PI / 2;
+      tier1TopCap.position.y = 0.54;
+      gearSocketGroup.add(tier1TopCap);
 
       const toothGeo1 = new THREE.BoxGeometry(0.2, 0.52, 0.2);
       for (let i = 0; i < 12; i++) {
@@ -590,41 +598,78 @@ export const TurbulentHero3D = ({ scrollProgress = 0, isLoaded = true, onReady }
         gearSocketGroup.add(pivot);
       }
 
-      // Tier 2: Upper Narrower Gear Ring (Radius 0.70) + 12 Radially Aligned Teeth
+      // Tier 2: Upper Narrower Hollow Gear Wall (Radius 0.70, openEnded = true) + Top Lip Annular Ring
       const tier2Ring = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.68, 0.72, 0.54, 36),
+        new THREE.CylinderGeometry(0.7, 0.72, 0.58, 36, 1, true),
         gearBodyMat
       );
-      tier2Ring.position.y = 0.81;
+      tier2Ring.position.y = 0.83;
       gearSocketGroup.add(tier2Ring);
 
-      const toothGeo2 = new THREE.BoxGeometry(0.16, 0.5, 0.16);
+      const tier2TopRim = new THREE.Mesh(
+        new THREE.RingGeometry(0.48, 0.7, 36),
+        softIndigoMat
+      );
+      tier2TopRim.rotation.x = -Math.PI / 2;
+      tier2TopRim.position.y = 1.12;
+      gearSocketGroup.add(tier2TopRim);
+
+      const toothGeo2 = new THREE.BoxGeometry(0.16, 0.52, 0.16);
       for (let i = 0; i < 12; i++) {
         const pivot = new THREE.Group();
         pivot.rotation.y = (i / 12) * Math.PI * 2;
         const tooth = new THREE.Mesh(toothGeo2, gearToothMat);
-        tooth.position.set(0.7, 0.81, 0);
+        tooth.position.set(0.7, 0.82, 0);
         pivot.add(tooth);
         gearSocketGroup.add(pivot);
       }
 
-      // Dark Inner Rim & Glowing Bright Cyan Inner Well inside the Top of the Gear Socket
+      // Deep Hollow Interior Bore Shaft (BackSide cylinder so you see the deep inner walls of the hole!)
+      const innerShaftMat = new THREE.MeshStandardMaterial({
+        color: 0x164e8a,
+        roughness: 0.45,
+        metalness: 0.1,
+        side: THREE.BackSide
+      });
       const innerSocketWall = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.54, 0.54, 0.14, 32),
-        deepRecessMat
+        new THREE.CylinderGeometry(0.48, 0.45, 1.1, 36, 1, true),
+        innerShaftMat
       );
-      innerSocketWall.position.y = 1.05;
+      innerSocketWall.position.y = 0.57;
       gearSocketGroup.add(innerSocketWall);
 
+      // Interior Depth Rings inside the hollow shaft to accentuate vertical depth as the ball falls through
+      const depthRingMat = new THREE.MeshStandardMaterial({
+        color: 0x0b224f,
+        roughness: 0.6
+      });
+      const depthRing1 = new THREE.Mesh(
+        new THREE.TorusGeometry(0.47, 0.022, 12, 36),
+        depthRingMat
+      );
+      depthRing1.rotation.x = Math.PI / 2;
+      depthRing1.position.y = 0.84;
+      gearSocketGroup.add(depthRing1);
+
+      const depthRing2 = new THREE.Mesh(
+        new THREE.TorusGeometry(0.46, 0.022, 12, 36),
+        depthRingMat
+      );
+      depthRing2.rotation.x = Math.PI / 2;
+      depthRing2.position.y = 0.48;
+      gearSocketGroup.add(depthRing2);
+
+      // Deep Glowing Cyan Floor at the VERY BOTTOM of the shaft (y = 0.04, not at the top!)
       const innerWellDisc = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.48, 0.48, 0.06, 32),
+        new THREE.CircleGeometry(0.45, 32),
         cyanWellMat
       );
-      innerWellDisc.position.y = 1.1;
+      innerWellDisc.rotation.x = -Math.PI / 2;
+      innerWellDisc.position.y = 0.04;
       gearSocketGroup.add(innerWellDisc);
 
-      const wellLight = new THREE.PointLight(0x38bdf8, 16, 7, 1.4);
-      wellLight.position.set(0, 1.35, 0);
+      const wellLight = new THREE.PointLight(0x38bdf8, 18, 7, 1.3);
+      wellLight.position.set(0, 0.35, 0);
       gearSocketGroup.add(wellLight);
 
       // ====================================================
@@ -657,10 +702,10 @@ export const TurbulentHero3D = ({ scrollProgress = 0, isLoaded = true, onReady }
       ballGroup.add(coreLight);
 
       // ====================================================
-      // SCROLL-DRIVEN BALL PATH (ENTERS THE ROTATING GEAR SOCKET AT THE END)
+      // SCROLL-DRIVEN BALL PATH (FALLS DEEP THROUGH THE HOLLOW GEAR SHAFT)
       // ====================================================
       const LOWER_HOVER_Y = LOWER_DECK_Y + 2.15;
-      const SOCKET_INSIDE_Y = LOWER_DECK_Y + 0.48;
+      const SOCKET_DEEP_BOTTOM_Y = LOWER_DECK_Y - 0.15;
 
       const computeBallPosition = (s) => {
         // 0.00 -> 0.03: Resting cleanly on the glowing pad inside the wireframe cube
@@ -701,10 +746,10 @@ export const TurbulentHero3D = ({ scrollProgress = 0, isLoaded = true, onReady }
           const y = startY + easeT * (LOWER_HOVER_Y - startY);
           return new THREE.Vector3(x, y, z);
         }
-        // 0.78 -> 1.00: Drops straight down INSIDE the glowing cyan 2-Tier Rotating Gear Socket!
-        const enterT = Math.min(1, (s - 0.78) / 0.14);
-        const easeEnter = enterT * enterT * (3 - 2 * enterT);
-        const y = LOWER_HOVER_Y + easeEnter * (SOCKET_INSIDE_Y - LOWER_HOVER_Y);
+        // 0.78 -> 1.00: Falls straight down through the open top rim deep into the hollow gear shaft!
+        const enterT = Math.min(1, (s - 0.78) / 0.15);
+        const easeEnter = enterT * enterT;
+        const y = LOWER_HOVER_Y + easeEnter * (SOCKET_DEEP_BOTTOM_Y - LOWER_HOVER_Y);
         return new THREE.Vector3(GEAR_X, y, GEAR_Z);
       };
 
@@ -739,21 +784,21 @@ export const TurbulentHero3D = ({ scrollProgress = 0, isLoaded = true, onReady }
         pointer.y += (pointer.targetY - pointer.y) * 0.08;
 
         // Final Stage Zoom Effect (0.78 -> 1.00):
-        // As the ball enters the gear socket and all text clears, zoom in on the rotating gear socket!
+        // As the ball falls deep through the gear shaft and text clears, zoom in while keeping right-edge framing
         const zoomRaw = Math.max(0, Math.min(1, (s - 0.78) / 0.22));
         const zoomEase = zoomRaw * zoomRaw * (3 - 2 * zoomRaw);
 
-        const targetFov = 18.5 - zoomEase * 4.3;
+        const targetFov = 18.5 - zoomEase * 4.0;
         if (Math.abs(camera.fov - targetFov) > 0.01) {
           camera.fov = targetFov;
           camera.updateProjectionMatrix();
         }
 
-        // 1. True Isometric Vertical Camera Pan + Final Zoom Framing
+        // 1. True Isometric Vertical Camera Pan (keeps machine anchored on the right side!)
         const panProgress = Math.min(1, s / 0.82);
-        const camDrop = panProgress * 10.4 + zoomEase * 0.55;
+        const camDrop = panProgress * 10.4 + zoomEase * 0.45;
         camera.position.set(BASE_CAM_X, BASE_CAM_Y - camDrop, BASE_CAM_Z);
-        camera.lookAt(0.65 + zoomEase * 0.85, 0.55 - camDrop, -zoomEase * 0.45);
+        camera.lookAt(0.45, 0.55 - camDrop, 0.2);
 
         // Subtle pointer parallax on the machine group
         const targetRotY = -0.02 + pointer.x * 0.025;
@@ -761,7 +806,7 @@ export const TurbulentHero3D = ({ scrollProgress = 0, isLoaded = true, onReady }
         machineGroup.rotation.y += (targetRotY - machineGroup.rotation.y) * 0.1;
         machineGroup.rotation.x += (targetRotX - machineGroup.rotation.x) * 0.1;
 
-        // 2. Update Main Golden Ball Position + Intro Drop + Absorption into Gear Socket
+        // 2. Update Main Golden Ball Position + Intro Drop + Deep Fall Through the Gear Shaft
         const pos = computeBallPosition(s);
         const introEase = 1 - Math.pow(1 - introProgress, 3);
         const introDropOffset = (1 - introEase) * 3.8;
@@ -774,22 +819,22 @@ export const TurbulentHero3D = ({ scrollProgress = 0, isLoaded = true, onReady }
           pos.z
         );
 
-        // Shrink and hide the golden sphere once it sinks deep inside the glowing cyan gear well
-        const sinkProgress = Math.max(0, Math.min(1, (s - 0.82) / 0.1));
-        const ballScale = Math.max(0.001, 1 - sinkProgress * 0.95);
+        // Ball narrows slightly as it enters the 0.48-radius shaft bore and disappears at the bottom
+        const sinkProgress = Math.max(0, Math.min(1, (s - 0.79) / 0.14));
+        const ballScale = s > 0.78 ? Math.max(0.001, 0.88 - sinkProgress * 0.85) : 1;
         ballGroup.scale.setScalar(ballScale);
         ballGroup.visible = s < 0.93;
 
         glowingPadMat.opacity = 0.2 + introEase * 0.65 * Math.max(0.15, 1 - s * 3.0);
         coreHalo.scale.setScalar(1 + Math.sin(elapsed * 3.5) * 0.05);
 
-        // 3. Clean Axial Spin for the Side Flange Wheel & Accelerated End Spin for the 2-Tier Gear Socket
-        wheelSpinGroup.rotation.x = -(s * Math.PI * 2.5 + elapsed * 0.35);
-        const endGearSpin = zoomEase * Math.PI * 3.8;
-        gearSocketGroup.rotation.y = s * Math.PI * 2.4 + endGearSpin + elapsed * 0.55;
+        // 3. 100% SCROLL-DRIVEN ROTATION ONLY (NO AUTO-ROTATE WHEN IDLE!)
+        wheelSpinGroup.rotation.x = -(s * Math.PI * 2.5);
+        const endGearSpin = zoomEase * Math.PI * 3.2;
+        gearSocketGroup.rotation.y = s * Math.PI * 2.4 + endGearSpin;
 
-        // Cyan well flares up brightly as the golden ball enters the socket (matching screenshot)
-        wellLight.intensity = 12 + zoomEase * 24 + Math.sin(elapsed * 4.5) * 3;
+        // Cyan well flares up from the bottom of the deep shaft as the ball falls through
+        wellLight.intensity = 14 + zoomEase * 26;
 
         renderer.render(scene, camera);
       };

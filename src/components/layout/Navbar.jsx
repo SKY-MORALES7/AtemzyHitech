@@ -30,7 +30,7 @@ export const Navbar = () => {
       <div className={`max-w-7xl mx-auto backdrop-blur-md rounded-2xl border transition-all duration-300 ${
         isDark 
           ? 'bg-slate-900/90 border-slate-700/70 shadow-2xl shadow-slate-950 hover:border-blue-500/40' 
-          : 'bg-white/95 border-slate-300 shadow-xl shadow-slate-300/60 hover:border-slate-400'
+          : 'bg-white/95 border-slate-200/90 shadow-md shadow-slate-950/10 hover:border-slate-300'
       }`}>
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
