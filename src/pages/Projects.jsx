@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  Building2, 
+  Zap, 
   MapPin, 
   Calendar, 
   CheckCircle2, 
-  ArrowRight, 
   ExternalLink,
-  X,
-  ShieldCheck,
-  FolderKanban
+  X
 } from 'lucide-react';
 import { projects, projectCategories } from '../data/projects';
+import { ScrollReveal } from '../components/ui/ScrollReveal';
 import { useTheme } from '../context/ThemeContext';
 
 export const Projects = () => {
@@ -31,25 +29,26 @@ export const Projects = () => {
         isDark ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-200'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <span className="inline-block px-3 py-1 rounded-md bg-blue-600/10 border border-blue-500/30 text-blue-500 text-xs font-bold uppercase tracking-wider mb-4">
-              Project Portfolio & Track Record
+          <ScrollReveal className="max-w-3xl">
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-blue-600/10 border border-blue-500/30 text-blue-500 text-xs font-bold uppercase tracking-wider mb-4">
+              <Zap className="w-3.5 h-3.5" />
+              <span>Project Portfolio & Track Record</span>
             </span>
             <h1 className={`text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight ${
               isDark ? 'text-white' : 'text-slate-950'
             }`}>
-              Projects & Engineering Capabilities
+              Electrical Power & ICT Deployments
             </h1>
             <p className={`mt-4 text-base sm:text-lg leading-relaxed ${
               isDark ? 'text-slate-300' : 'text-slate-600'
             }`}>
-              Showcasing verified structural works, civil engineering infrastructure, and heavy procurement logistics delivered to exacting standards.
+              Showcasing verified 33/11kV substation upgrades, Tier-III enterprise data centers, fiber-optic backbones, smart BMS automation, and OEM hardware deliveries.
             </p>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
 
-      {/* Category Filter Tabs - Harmonized floating pill sticky bar below main navbar */}
+      {/* Category Filter Tabs */}
       <div className="sticky top-[86px] sm:top-[96px] z-40 w-full px-3 sm:px-6 lg:px-8 py-2 pointer-events-auto">
         <div className={`max-w-7xl mx-auto backdrop-blur-md rounded-xl sm:rounded-2xl border transition-all duration-300 px-2 sm:px-3 py-1.5 shadow-lg ${
           isDark
@@ -85,77 +84,76 @@ export const Projects = () => {
       <section className="py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((p) => (
-              <div
-                key={p.id}
-                className="group flex flex-col justify-between rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden shadow-xl hover:border-blue-500/50 transition-all duration-300"
-              >
-                <div>
-                  <div className="relative h-60 overflow-hidden">
-                    <img
-                      src={p.image}
-                      alt={p.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-slate-950/40" />
-                    <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 rounded-full text-xs font-bold bg-slate-950/90 text-blue-400 border border-slate-700 shadow-md">
-                        {p.category}
-                      </span>
+            {filteredProjects.map((p, idx) => (
+              <ScrollReveal key={p.id} delay={idx * 90}>
+                <div className="group flex flex-col justify-between h-full rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden shadow-xl hover:border-blue-500/50 transition-all duration-300">
+                  <div>
+                    <div className="relative h-60 overflow-hidden">
+                      <img
+                        src={p.image}
+                        alt={p.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-slate-950/40" />
+                      <div className="absolute top-4 left-4">
+                        <span className="px-3 py-1 rounded-full text-xs font-bold bg-slate-950/90 text-blue-400 border border-slate-700 shadow-md">
+                          {p.category}
+                        </span>
+                      </div>
+                      <div className="absolute bottom-4 right-4">
+                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-950/90 text-emerald-400 border border-emerald-800">
+                          {p.status}
+                        </span>
+                      </div>
                     </div>
-                    <div className="absolute bottom-4 right-4">
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-950/90 text-emerald-400 border border-emerald-800">
-                        {p.status}
-                      </span>
+
+                    <div className="p-6">
+                      <div className="flex items-center gap-4 text-xs text-slate-400 mb-2 font-medium">
+                        <span className="flex items-center gap-1">
+                          <MapPin className="w-3.5 h-3.5 text-blue-400" />
+                          {p.location}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Calendar className="w-3.5 h-3.5 text-blue-400" />
+                          {p.year}
+                        </span>
+                      </div>
+
+                      <h3 className="text-xl font-bold text-white group-hover:text-blue-300 transition-colors">
+                        {p.title}
+                      </h3>
+
+                      <p className="mt-3 text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-3">
+                        {p.summary}
+                      </p>
+
+                      <div className="mt-4 pt-4 border-t border-slate-800/80">
+                        <h4 className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">
+                          Key Deliverables
+                        </h4>
+                        <ul className="space-y-1.5">
+                          {p.deliverables.slice(0, 2).map((deliv, dIdx) => (
+                            <li key={dIdx} className="flex items-start gap-2 text-xs text-slate-400">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0 mt-0.5" />
+                              <span className="line-clamp-1">{deliv}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="p-6">
-                    <div className="flex items-center gap-4 text-xs text-slate-400 mb-2 font-medium">
-                      <span className="flex items-center gap-1">
-                        <MapPin className="w-3.5 h-3.5 text-blue-400" />
-                        {p.location}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Calendar className="w-3.5 h-3.5 text-blue-400" />
-                        {p.year}
-                      </span>
-                    </div>
-
-                    <h3 className="text-xl font-bold text-white group-hover:text-blue-300 transition-colors">
-                      {p.title}
-                    </h3>
-
-                    <p className="mt-3 text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-3">
-                      {p.summary}
-                    </p>
-
-                    <div className="mt-4 pt-4 border-t border-slate-800/80">
-                      <h4 className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">
-                        Key Deliverables
-                      </h4>
-                      <ul className="space-y-1.5">
-                        {p.deliverables.slice(0, 2).map((deliv, idx) => (
-                          <li key={idx} className="flex items-start gap-2 text-xs text-slate-400">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0 mt-0.5" />
-                            <span className="line-clamp-1">{deliv}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                  <div className="p-6 pt-0">
+                    <button
+                      onClick={() => setActiveModalProject(p)}
+                      className="btn-3d-secondary text-xs w-full py-2.5 justify-center"
+                    >
+                      <span>View Case Study & Scope</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </button>
                   </div>
                 </div>
-
-                <div className="p-6 pt-0">
-                  <button
-                    onClick={() => setActiveModalProject(p)}
-                    className="btn-3d-secondary text-xs w-full py-2.5 justify-center"
-                  >
-                    <span>View Case Study & Scope</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -225,7 +223,7 @@ export const Projects = () => {
                 onClick={() => setActiveModalProject(null)}
                 className="btn-3d text-xs sm:text-sm py-2.5 px-5"
               >
-                Inquire About Similar Project
+                Inquire About Similar Deployment
               </Link>
               <button
                 onClick={() => setActiveModalProject(null)}

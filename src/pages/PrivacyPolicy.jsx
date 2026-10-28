@@ -12,7 +12,7 @@ import {
   Phone, 
   MapPin, 
   ArrowLeft,
-  HardHat,
+  Zap,
   Send,
   Building
 } from 'lucide-react';
@@ -33,7 +33,7 @@ export const PrivacyPolicy = () => {
             This Privacy & Data Protection Notice applies to all digital interactions, quotation submissions, and technical correspondence conducted through the official web platform of <strong>{companyInfo.name}</strong> (referred to as &quot;Atemzy Hitech&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;), registered under the Companies and Allied Matters Act of the Federal Republic of Nigeria with registration identifier <strong>{companyInfo.rcNumber}</strong>.
           </p>
           <p className="mt-3">
-            Our principal registered operational office is located at {companyInfo.contact.address}. We operate this corporate website to present our multidisciplinary engineering, civil construction, technical procurement, real estate facilities, and commercial trading capabilities to prospective corporate clients, institutions, and project owners.
+            Our principal registered operational office is located at {companyInfo.contact.address}. We operate this corporate website to present our electrical power engineering, enterprise ICT network infrastructure, industrial automation, OEM technical procurement, and managed support capabilities to prospective corporate clients, institutions, and project owners.
           </p>
         </>
       )
@@ -229,7 +229,7 @@ export const PrivacyPolicy = () => {
             isDark ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'
           }`}>
             <div className="flex items-center gap-2">
-              <HardHat className="w-5 h-5 text-blue-500" />
+              <Zap className="w-5 h-5 text-blue-500" />
               <span className="font-bold text-base text-white">{companyInfo.name}</span>
             </div>
             <p className="text-xs text-slate-400">

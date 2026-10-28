@@ -1,111 +1,116 @@
 export const services = [
   {
-    id: "engineering-services",
-    slug: "engineering-services",
-    category: "Engineering Services",
-    title: "Engineering Consultancy & Technical Services",
+    id: "electrical-engineering",
+    slug: "electrical-engineering",
+    category: "Electrical Engineering",
+    title: "Electrical Power Engineering & Distribution Systems",
     shortDescription:
-      "Comprehensive structural, civil, and mechanical design, technical feasibility studies, and expert engineering project oversight.",
+      "High- and low-voltage power system design, substation installations, industrial switchgear, earthing grids, and hybrid solar-inverter microgrids.",
     fullDescription:
-      "Atemzy Hitech provides end-to-end engineering consultancy tailored for corporate, governmental, and private industrial clients. From preliminary conceptual designs to on-site quality assurance audits, our certified engineers ensure all installations comply with the highest international safety, structural, and environmental standards.",
+      "Atemzy Hitech provides end-to-end electrical engineering solutions tailored for corporate, industrial, and public sector clients. From HV/LV load flow analysis and transformer installations to complete industrial power distribution and renewable energy synchronization, our certified electrical engineers ensure every system complies with IEC, IEEE, and NEMSA safety standards.",
     features: [
-      "Civil, structural & mechanical engineering design",
-      "Structural integrity assessments & forensic audits",
-      "Technical feasibility and project lifecycle planning",
-      "Regulatory compliance & safety auditing",
-      "Engineering supervision & contractor oversight"
+      "HV/LV power distribution & 33/11kV substation engineering",
+      "Industrial switchgear, MCC panels & automatic transfer switches (ATS)",
+      "Commercial hybrid solar PV, battery storage & inverter systems",
+      "Precision earthing, surge & lightning protection networks",
+      "Power quality audits, thermography & load balancing"
     ],
-    iconName: "Wrench",
-    badge: "Core Expertise",
-    image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1200&q=80"
+    iconName: "Zap",
+    badge: "Core Power",
+    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80",
+    hairlineFigure: "Plug"
   },
   {
-    id: "construction",
-    slug: "construction",
-    category: "Construction",
-    title: "Building & Civil Construction Works",
+    id: "ict-network-infrastructure",
+    slug: "ict-network-infrastructure",
+    category: "ICT & Networking",
+    title: "Enterprise ICT & Network Infrastructure",
     shortDescription:
-      "Modern residential, commercial, and industrial construction, structural retrofitting, and foundational earthworks.",
+      "Structured fiber-optic cabling, Tier-III data center buildouts, enterprise campus networking, cloud connectivity, and cybersecurity hardware.",
     fullDescription:
-      "We execute residential, commercial, and industrial building projects with an uncompromising focus on structural longevity, aesthetic appeal, and on-schedule delivery. Our construction division manages complete turnkey lifecycles from groundbreaking to commissioning.",
+      "We architect and deploy resilient ICT backbone infrastructure engineered for high-throughput enterprise operations. Our network engineering division manages complete turnkey deployments from metro fiber splicing and server rack integration to unified wireless access and secure SD-WAN routing.",
     features: [
-      "Commercial multi-story & corporate facility construction",
-      "Residential estates & custom villa developments",
-      "Structural rehabilitation & concrete retrofitting",
-      "Drainage, paving & road infrastructure works",
-      "Rigorous on-site safety and quality management"
+      "Structured Cat6A & fiber-optic backbone cabling (FTTx / Campus)",
+      "Enterprise data center design, server racks & precision cooling",
+      "Routing, switching, enterprise Wi-Fi 6/7 & SD-WAN deployment",
+      "Unified communications, VoIP telephony & conference rooms",
+      "Network security firewalls, VPN appliances & rack telemetry"
     ],
-    iconName: "Building2",
-    badge: "Flagship",
-    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80"
+    iconName: "Server",
+    badge: "Flagship ICT",
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80",
+    hairlineFigure: "Cabinet"
+  },
+  {
+    id: "automation-smart-systems",
+    slug: "automation-smart-systems",
+    category: "Automation & Smart Systems",
+    title: "Industrial Automation, IoT & Smart Building Systems",
+    shortDescription:
+      "PLC/SCADA control engineering, intelligent Building Management Systems (BMS), IP video surveillance, and biometric access automation.",
+    fullDescription:
+      "Modern facilities demand intelligent visibility and automated control. Atemzy Hitech integrates industrial PLC/SCADA telemetry alongside enterprise low-voltage security, smart lighting, fire detection, and centralized building management systems for seamless operational command.",
+    features: [
+      "PLC, HMI & SCADA industrial control panel integration",
+      "Smart Building Management Systems (BMS) & energy metering",
+      "Enterprise IP CCTV surveillance & AI video analytics",
+      "Biometric access control, turnstiles & perimeter intrusion sensors",
+      "Addressable fire alarm, gas suppression & PA/VA systems"
+    ],
+    iconName: "Cpu",
+    badge: "Smart Tech",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
+    hairlineFigure: "Relay"
   },
   {
     id: "procurement-technical-supplies",
     slug: "procurement-technical-supplies",
     category: "Procurement & Technical Supplies",
-    title: "Procurement & Technical Supplies",
+    title: "Electrical & ICT Hardware Procurement",
     shortDescription:
-      "Dependable sourcing, quality testing, and logistical delivery of high-grade technical equipment, industrial machinery, and materials.",
+      "Direct OEM sourcing, factory acceptance testing, and supply of transformers, armored cables, enterprise network hardware, and UPS systems.",
     fullDescription:
-      "Navigating supply chain disruptions requires deep manufacturer partnerships and vetted logistical channels. Atemzy Hitech provides turnkey procurement solutions for engineering contractors, oil & gas operators, and manufacturing facilities, guaranteeing authentic OEM specifications.",
+      "Navigating supply chain bottlenecks requires vetted manufacturer partnerships. Atemzy Hitech provides turnkey technical procurement for telecom operators, enterprises, and power contractors, guaranteeing authentic OEM electrical and ICT hardware with full warranty backing.",
     features: [
-      "OEM industrial machinery & heavy equipment sourcing",
-      "High-grade structural steel, cement & aggregates supply",
-      "Electrical, instrumentation & telemetry hardware",
-      "Quality verification, certification & pre-shipment inspection",
-      "Expedited multi-modal logistics & site delivery"
+      "Distribution transformers, RMUs & armored XLPE power cables",
+      "Enterprise routers, core switches, servers & transceiver modules",
+      "Industrial three-phase UPS banks, rectifiers & lithium batteries",
+      "Digital test instruments, Fluke analyzers & fiber fusion splicers",
+      "Factory acceptance testing (FAT), certification & site delivery"
     ],
     iconName: "Truck",
-    badge: "Supply Chain",
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80"
+    badge: "OEM Supply",
+    image: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1200&q=80",
+    hairlineFigure: "Patch"
   },
   {
-    id: "real-estate-property-management",
-    slug: "real-estate-property-management",
-    category: "Real Estate & Property Management",
-    title: "Real Estate & Property Management",
+    id: "managed-systems-maintenance",
+    slug: "managed-systems-maintenance",
+    category: "Managed Systems & Maintenance",
+    title: "Managed ICT Support & Power Facility Maintenance",
     shortDescription:
-      "Strategic asset management, facility maintenance, leasing brokerage, and value enhancement for prime commercial and residential properties.",
+      "Proactive 24/7 NOC monitoring, preventive HV/LV electrical maintenance, UPS servicing, and SLA-driven enterprise IT lifecycle support.",
     fullDescription:
-      "Maximizing the capital appreciation and rental yield of built assets requires proactive operational management. We deliver comprehensive property lifecycle support, covering tenant relations, preventative MEP maintenance, and facility administration.",
+      "Maximizing the uptime and lifespan of mission-critical electrical and ICT assets requires disciplined preventive care. We deliver comprehensive SLA-backed maintenance covering power rooms, data centers, backup generators/UPS units, and enterprise campus networks.",
     features: [
-      "Commercial & corporate office facility management",
-      "Residential asset maintenance & tenant coordination",
-      "Preventative MEP (mechanical, electrical, plumbing) maintenance",
-      "Leasing advisory, property valuation & acquisition support",
-      "Asset security, sanitation & utility optimization"
+      "24/7 Network Operations Center (NOC) & remote infrastructure monitoring",
+      "Preventive maintenance for transformers, switchgear & UPS units",
+      "Data center environmental, power & precision cooling audits",
+      "Infrared thermographic scanning & electrical fault diagnostics",
+      "Rapid emergency call-out & spare parts replacement SLAs"
     ],
-    iconName: "Home",
-    badge: "Asset Solutions",
-    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80"
-  },
-  {
-    id: "general-trading",
-    slug: "general-trading",
-    category: "General Trading",
-    title: "General Trading & Commercial Distribution",
-    shortDescription:
-      "Cross-sector product sourcing, bulk distribution, and wholesale commercial supply networks connecting international and local markets.",
-    fullDescription:
-      "Our general trading arm facilitates the bulk supply and distribution of essential commercial commodities, technical accessories, and specialized goods. We provide seamless contracting, compliance clearance, and dependable inventory flow.",
-    features: [
-      "Bulk commercial goods sourcing & distribution",
-      "Import & export documentation and customs clearance",
-      "Wholesale contracting for corporate procurement teams",
-      "Warehousing, localized inventory buffer & distribution",
-      "Rigorous supplier vetting and contract compliance"
-    ],
-    iconName: "Boxes",
-    badge: "Commercial",
-    image: "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=1200&q=80"
+    iconName: "ShieldCheck",
+    badge: "24/7 Uptime",
+    image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=1200&q=80",
+    hairlineFigure: "Router"
   }
 ];
 
 export const serviceCategories = [
   "All Services",
-  "Engineering Services",
-  "Construction",
+  "Electrical Engineering",
+  "ICT & Networking",
+  "Automation & Smart Systems",
   "Procurement & Technical Supplies",
-  "Real Estate & Property Management",
-  "General Trading"
+  "Managed Systems & Maintenance"
 ];

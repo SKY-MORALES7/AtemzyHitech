@@ -1,143 +1,143 @@
 export const projects = [
   {
     id: "proj-1",
-    slug: "commercial-tower-structural-reinforcement",
-    title: "Commercial Multi-Story Structural Reinforcement",
-    category: "Engineering Services",
+    slug: "substation-switchgear-modernization",
+    title: "33/11kV Injection Substation & Smart Switchgear Modernization",
+    category: "Electrical Engineering",
     location: "Victoria Island, Lagos",
-    client: "Corporate Financial Institution",
+    client: "Commercial Financial Headquarters",
     status: "Completed",
     year: "2024",
     summary:
-      "Comprehensive structural audit, seismic retrofitting, and high-load foundation stabilization for a 7-story commercial headquarters.",
+      "Full engineering, installation, and commissioning of dual 2.5MVA transformers, vacuum circuit breakers, and automated PLC power synchronization panels.",
     fullDescription:
-      "Atemzy Hitech was contracted to conduct advanced structural integrity assessments and execute retrofitting on a 7-story commercial complex. Works included carbon fiber reinforced polymer (CFRP) bonding, column jacketing, and deep foundation underpinning without interrupting tenant operations.",
+      "Atemzy Hitech was contracted to upgrade the primary electrical power infrastructure for a 7-story commercial banking headquarters. Works included installing 33/11kV ring main units (RMUs), motorized LV switchgear, active harmonic filters, and seamless automatic transfer switching (ATS) with zero unplanned downtime.",
     deliverables: [
-      "Non-destructive ultrasonic concrete testing",
-      "Structural beam enhancement and jacketing",
-      "Dynamic load distribution simulation and reporting",
-      "Statutory building authority safety certification"
+      "2x 2.5MVA distribution transformers & SF6 ring main units",
+      "Automated PLC generator-to-grid synchronization switchgear",
+      "Deep-earth copper rod matrix & lightning surge protection",
+      "NEMSA statutory inspection and full load-bank certification"
     ],
-    image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80",
     featured: true
   },
   {
     id: "proj-2",
-    slug: "residential-estate-civil-infrastructure",
-    title: "Apex Horizon Gated Community Infrastructure",
-    category: "Construction",
-    location: "Lekki Phase 2, Lagos",
-    client: "Horizon Real Estate Developers",
+    slug: "enterprise-data-center-fiber-backbone",
+    title: "Tier-III Enterprise Data Center & Campus Fiber-Optic Grid",
+    category: "ICT & Networking",
+    location: "Lekki Phase 1, Lagos",
+    client: "Horizon Digital Enterprise Hub",
     status: "Completed",
     year: "2024",
     summary:
-      "Turnkey civil construction including 3.2km asphalt internal road network, hydraulic drainage canals, and electrified perimeter works.",
+      "Turnkey ICT deployment featuring 48-core single-mode fiber backbone, 12 high-density server cabinets, dual-bus modular UPS, and precision row cooling.",
     fullDescription:
-      "A major civil works development encompassing primary road construction, box culverts, underground cabling ducting, and flood mitigation channels for a premium 45-hectare residential enclave.",
+      "Designed and commissioned a high-availability enterprise data center and multi-building campus LAN. The architecture incorporates redundant 40GbE core switching, structured Cat6A shielded cabling across 600+ nodes, and real-time SNMP environmental telemetry.",
     deliverables: [
-      "Heavy subgrade compaction and dual-layer asphalt paving",
-      "Reinforced concrete storm drains and runoff retention basin",
-      "Street lighting solar grid and underground telemetry conduits",
-      "Final civil engineering handover within 9 months"
+      "48-core OS2 fiber-optic ring splicing & OTDR certification",
+      "High-density 42U server racks with intelligent PDUs & hot-aisle containment",
+      "Redundant N+1 modular online double-conversion UPS array",
+      "Enterprise firewall cluster, core routing & Wi-Fi 6E campus coverage"
     ],
-    image: "https://images.unsplash.com/photo-1541971875076-8f970d573be6?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80",
     featured: true
   },
   {
     id: "proj-3",
-    slug: "industrial-piping-valve-procurement",
-    title: "Bulk Industrial High-Pressure Valves & Pipe Procurement",
+    slug: "oem-electrical-ict-hardware-procurement",
+    title: "Bulk OEM Armored XLPE Cables & Core Network Switch Procurement",
     category: "Procurement & Technical Supplies",
-    location: "Port Harcourt Logistics Hub",
-    client: "Energy Services Contractor",
+    location: "Port Harcourt Industrial Zone",
+    client: "Energy & Telecom Infrastructure JV",
     status: "Completed",
     year: "2024",
     summary:
-      "Direct OEM procurement, ultrasonic quality inspection, and freight delivery of 450 metric tons of seamless carbon steel piping and API-certified valves.",
+      "Direct OEM procurement, factory testing, and delivery of 45km of armored HV/LV copper cables, industrial UPS banks, and ruggedized L3 network switches.",
     fullDescription:
-      "Facilitated multi-continental procurement of specialized high-pressure valves and seamless steel pipes. Delivered directly to dockside logistics terminals with complete mill test certificates and zero transit discrepancies.",
+      "Facilitated multi-vendor international procurement of specialized electrical power distribution cables and industrial-grade ICT networking hardware. Delivered directly to project terminals with complete factory acceptance test (FAT) dossiers and OEM warranties.",
     deliverables: [
-      "API 6D certified ball and gate valves supply",
-      "Independent metallurgical testing and dimensional verification",
-      "Direct bonded warehouse logistics and door-to-quay dispatch",
-      "Warranty documentation and OEM compliance dossiers"
+      "45km of IEC-certified armored XLPE copper power & fiber cables",
+      "Industrial DIN-rail managed Ethernet switches & optical transceivers",
+      "Independent insulation resistance & continuity verification",
+      "Bonded logistics, customs clearance & site-direct dispatch"
     ],
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1200&q=80",
     featured: true
   },
   {
     id: "proj-4",
-    slug: "corporate-headquarters-facility-management",
-    title: "Sterling Towers Corporate Facility Management",
-    category: "Real Estate & Property Management",
+    slug: "smart-bms-access-surveillance-integration",
+    title: "Sterling Towers Smart BMS, IP CCTV & Biometric Security Matrix",
+    category: "Automation & Smart Systems",
     location: "Ikoyi, Lagos",
-    client: "Sterling Asset Holdings",
+    client: "Sterling Corporate Holdings",
     status: "In Progress",
     year: "Ongoing",
     summary:
-      "Comprehensive 24/7 integrated facility management covering multi-zone HVAC systems, generator power redundancy, and access automation.",
+      "Integrated Building Management System (BMS) uniting smart power sub-metering, 180+ AI IP cameras, biometric turnstiles, and addressable fire panels.",
     fullDescription:
-      "Overseeing day-to-day operations for an 8-story grade-A corporate building. Our facility management team manages all MEP maintenance, health and safety protocols, security logistics, and green energy optimizations.",
+      "Deploying a unified low-voltage automation and physical security command center for an 8-story grade-A corporate facility. All electrical sub-meters, HVAC controllers, access doors, and surveillance feeds converge onto a redundant fiber security LAN.",
     deliverables: [
-      "Scheduled preventive maintenance of 1,500kVA backup generators",
-      "Chilled water HVAC system energy optimization",
-      "24/7 on-site rapid response technical team",
-      "Tenant service desk and automated maintenance ticketing"
+      "Centralized SCADA/BMS dashboard for real-time kW/h energy analytics",
+      "180+ 4K PoE+ IP cameras with NVR RAID storage & video analytics",
+      "Multi-factor biometric speedgates & encrypted RFID access control",
+      "Addressable fire detection & clean-agent server room suppression"
     ],
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
     featured: false
   },
   {
     id: "proj-5",
-    slug: "telecom-tower-foundation-construction",
-    title: "Regional Telecommunications Towers Foundation Grid",
-    category: "Construction",
+    slug: "regional-telecom-power-microwave-grid",
+    title: "Regional Telecom Base Station Hybrid Power & Microwave Telemetry",
+    category: "ICT & Networking",
     location: "Ogun & Oyo Corridors",
-    client: "Network Infrastructure Co.",
+    client: "Broadband Network Infrastructure Co.",
     status: "Completed",
     year: "2023",
     summary:
-      "Engineered reinforced concrete raft foundations and secure shelter compounds for 18 strategic communication repeater towers.",
+      "Engineered DC power rectifiers, LiFePO4 battery banks, lightning earthing matrices, and microwave backhaul links across 18 repeater sites.",
     fullDescription:
-      "Precision foundation engineering designed for high wind load tolerances and varying soil geotechnics across 18 distinct sites in southwestern Nigeria.",
+      "Precision electrical and telecom engineering across 18 strategic transmission hubs in southwestern Nigeria, achieving 99.98% link availability and cutting diesel consumption by 65% via smart solar-hybrid DC rectifiers.",
     deliverables: [
-      "Soil resistivity testing and geotechnical surveys",
-      "High-grade C35/45 concrete pour and curing management",
-      "Perimeter anti-climb fencing and lightning earthing grid",
-      "Turnkey site acceptance testing passed on first review"
+      "48V DC hybrid solar-rectifier power systems & LiFePO4 battery racks",
+      "Carrier-grade point-to-point microwave & optical transport links",
+      "Low-impedance (<2 Ohm) earthing pits & surge arrestor arrays",
+      "Remote SNMP telemetry for voltage, temperature & fuel monitoring"
     ],
-    image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1200&q=80",
     featured: false
   },
   {
     id: "proj-6",
-    slug: "commercial-aggregates-heavy-equipment-supply",
-    title: "Bulk Granite Aggregates & Excavator Machinery Fleet",
-    category: "General Trading",
+    slug: "commercial-hybrid-solar-ups-maintenance",
+    title: "500kWp Commercial Solar Microgrid & 24/7 Power/ICT Maintenance",
+    category: "Managed Systems & Maintenance",
     location: "Ibeju-Lekki Industrial Zone",
-    client: "Consortium Infrastructure JV",
+    client: "Enterprise Logistics & Data Park",
     status: "Completed",
     year: "2023",
     summary:
-      "Continuous supply of 25,000 tons of graded crushed granite and lease supply of heavy tracked hydraulic excavators for industrial land reclamation.",
+      "Deployment and ongoing 24/7 managed maintenance of a 500kWp rooftop solar-inverter array, 1.2MWh BESS storage, and campus ICT network.",
     fullDescription:
-      "Supplied massive aggregate volumes and dependable heavy equipment fleet for ongoing coastal reclamation and port expansion projects.",
+      "Engineered a clean industrial microgrid synchronized with existing backup generators and grid feeders, paired with a multi-year SLA covering preventive thermographic electrical audits and 24/7 NOC support.",
     deliverables: [
-      "Daily haulage logistics with GPS fleet monitoring",
-      "Quarry-direct certified aggregate grading",
-      "On-site plant mechanical support and fuel supply management",
-      "Zero work stoppages throughout the 6-month contract duration"
+      "500kWp Tier-1 monocrystalline solar array & three-phase string inverters",
+      "1.2MWh lithium battery energy storage system (BESS) & EMS controller",
+      "Quarterly infrared thermography of LV panels & breaker torque audits",
+      "Dedicated on-site electrical & ICT resident engineering team"
     ],
-    image: "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1200&q=80",
     featured: false
   }
 ];
 
 export const projectCategories = [
   "All Projects",
-  "Engineering Services",
-  "Construction",
+  "Electrical Engineering",
+  "ICT & Networking",
+  "Automation & Smart Systems",
   "Procurement & Technical Supplies",
-  "Real Estate & Property Management",
-  "General Trading"
+  "Managed Systems & Maintenance"
 ];

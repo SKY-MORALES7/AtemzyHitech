@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { ScrollToTop } from './components/layout/ScrollToTop';
+import { InteractiveTechBackground } from './components/ui/InteractiveTechBackground';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 
 // Pages
@@ -19,13 +20,14 @@ function AppContent() {
   const { isDark } = useTheme();
 
   return (
-    <div className={`flex flex-col min-h-screen font-sans transition-colors duration-300 ${
+    <div className={`relative flex flex-col min-h-screen font-sans transition-colors duration-300 ${
       isDark 
         ? 'bg-slate-950 text-slate-100 selection:bg-blue-600 selection:text-white' 
         : 'bg-white text-slate-900 selection:bg-blue-600 selection:text-white'
     }`}>
+      <InteractiveTechBackground />
       <Navbar />
-      <main id="main-content" className="flex-1">
+      <main id="main-content" className="relative z-10 flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

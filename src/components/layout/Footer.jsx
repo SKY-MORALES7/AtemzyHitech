@@ -68,7 +68,7 @@ export const Footer = () => {
               </span>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed">
-              Atemzy Hitech Engineering Services Ltd delivers end-to-end engineering, civil construction, technical procurement, real estate, and commercial trading solutions across Nigeria.
+              Atemzy Hitech Engineering Services Ltd delivers end-to-end electrical power engineering, enterprise ICT infrastructure, industrial automation, and OEM technical procurement across Nigeria.
             </p>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-slate-900 border border-slate-800 text-xs text-slate-300 font-medium">
               <ShieldCheck className="w-4 h-4 text-blue-400" />
@@ -91,11 +91,11 @@ export const Footer = () => {
             </h4>
             <ul className="space-y-2.5 text-sm">
               {[
-                { title: "Engineering Consultancy & Design", href: "/services" },
-                { title: "Building & Civil Construction", href: "/services" },
-                { title: "Procurement & Technical Supplies", href: "/services" },
-                { title: "Real Estate & Property Management", href: "/services" },
-                { title: "General Commercial Contracting", href: "/services" }
+                { title: "Electrical Power & Substations", href: "/services#electrical-engineering" },
+                { title: "Enterprise ICT & Fiber Networks", href: "/services#ict-network-infrastructure" },
+                { title: "Industrial Automation & Smart BMS", href: "/services#automation-smart-systems" },
+                { title: "Electrical & ICT OEM Procurement", href: "/services#procurement-technical-supplies" },
+                { title: "24/7 Managed Power & IT Support", href: "/services#managed-systems-maintenance" }
               ].map((item, idx) => (
                 <li key={idx}>
                   <Link 

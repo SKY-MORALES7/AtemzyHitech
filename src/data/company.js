@@ -2,11 +2,11 @@ export const companyInfo = {
   name: "Atemzy Hitech Engineering Services Ltd",
   shortName: "Atemzy Hitech",
   rcNumber: "RC-7092143", // Official registration identifier placeholder
-  tagline: "Engineering Solutions. Construction Excellence. Reliable Service.",
+  tagline: "Electrical Engineering. ICT Infrastructure. Reliable Systems.",
   mission:
-    "To deliver world-class engineering, sustainable construction, responsive procurement, and property management solutions that exceed client expectations through technical rigor, safety, and integrity.",
+    "To deliver world-class electrical power engineering, enterprise ICT infrastructure, intelligent automation, and technical procurement solutions that exceed client expectations through technical rigor, safety, and digital innovation.",
   vision:
-    "To be the premier engineering and multi-service partner across Africa, recognized for transformative infrastructure, engineering precision, and dependable commercial delivery.",
+    "To be the premier electrical engineering and ICT infrastructure partner across Africa, recognized for resilient power systems, high-speed connectivity, and dependable technical delivery.",
   coreValues: [
     {
       title: "Integrity & Transparency",
@@ -14,15 +14,15 @@ export const companyInfo = {
     },
     {
       title: "Technical Excellence",
-      description: "Our certified engineering personnel utilize rigorous methodologies and modern technologies."
+      description: "Our COREN and ICT-certified engineering personnel utilize rigorous IEEE/IEC methodologies and modern technologies."
     },
     {
-      title: "Safety & Reliability",
-      description: "Zero-compromise approach to occupational safety, regulatory compliance, and structural longevity."
+      title: "Safety & System Uptime",
+      description: "Zero-compromise approach to electrical safety, regulatory compliance, and 99.99% network and power availability."
     },
     {
       title: "Client-Centric Agility",
-      description: "Tailored execution adapted to corporate deadlines, budgetary parameters, and specific operational needs."
+      description: "Tailored execution adapted to enterprise SLAs, budgetary parameters, and mission-critical operational needs."
     }
   ],
   contact: {

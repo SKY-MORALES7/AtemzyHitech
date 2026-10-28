@@ -92,10 +92,10 @@ export const RequestQuote = () => {
               Commercial & Engineering Proposal
             </span>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
-              Request a Project Quotation
+              Request an Electrical & ICT Quotation
             </h1>
             <p className="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed">
-              Submit your engineering, construction, procurement, or property management specifications. Our quantity surveyors and technical leads will analyze your requirements and follow up promptly.
+              Submit your electrical power engineering, enterprise ICT network, automation, or OEM hardware procurement specifications. Our electrical and network leads will analyze your requirements and follow up promptly.
             </p>
           </div>
         </div>
@@ -291,7 +291,7 @@ export const RequestQuote = () => {
                     rows={4}
                     value={formData.projectDescription}
                     onChange={handleChange}
-                    placeholder="Provide details about structural requirements, square meterage, equipment specifications, site conditions, or milestone targets..."
+                    placeholder="Provide details about kVA/MVA load requirements, fiber/network nodes, switchgear or server hardware specifications, site conditions, or SLA targets..."
                     className={`w-full px-4 py-3 rounded-xl bg-slate-950 border text-white text-sm focus:outline-none focus:ring-2 transition-all ${
                       formErrors.projectDescription
                         ? 'border-rose-500 focus:ring-rose-500/50'
@@ -398,9 +398,9 @@ export const RequestQuote = () => {
                 <h4 className="text-sm font-bold text-white">What Happens Next?</h4>
               </div>
               <ol className="space-y-3 text-xs text-slate-400 leading-relaxed list-decimal list-inside">
-                <li><strong className="text-slate-200">Scope Assessment:</strong> Our engineering leads evaluate structural parameters and feasibility.</li>
-                <li><strong className="text-slate-200">Preliminary BOQ:</strong> A tailored estimate of materials, timelines, and logistics is drafted.</li>
-                <li><strong className="text-slate-200">Formal Proposal:</strong> A technical representative schedules a review call or site inspection.</li>
+                <li><strong className="text-slate-200">Scope Assessment:</strong> Our electrical and ICT leads evaluate load-flow, network topology, and technical feasibility.</li>
+                <li><strong className="text-slate-200">Preliminary BEME/BOQ:</strong> A tailored estimate of OEM hardware, timelines, and deployment logistics is drafted.</li>
+                <li><strong className="text-slate-200">Formal Proposal:</strong> A technical representative schedules a review call or site survey.</li>
               </ol>
             </div>
 
