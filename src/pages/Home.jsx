@@ -1,17 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  ArrowRight, 
+import {
+  ArrowRight,
   ArrowDown,
-  CheckCircle2, 
-  ShieldCheck, 
-  Zap, 
-  Server, 
-  Cpu, 
-  Truck, 
-  Network, 
+  CheckCircle2,
+  ShieldCheck,
+  Zap,
+  Server,
+  Cpu,
+  Truck,
+  Network,
   Router as RouterIcon,
-  Cable, 
+  Cable,
   Award,
   PhoneCall,
   Activity
@@ -138,17 +138,13 @@ export const Home = () => {
         className="turbulent-hero-stage relative h-[300vh] -mt-24 sm:-mt-28 select-none"
       >
         <div
-          style={{
-            background:
-              'radial-gradient(circle at 74% 52%, #0d2b56 0%, #031936 52%, #011126 100%)'
-          }}
+          style={{ background: 'radial-gradient(circle at 74% 52%, #0a2246 0%, #02142b 52%, #010d1e 100%)' }}
           className="sticky top-0 h-screen w-full overflow-hidden border-b border-slate-800/80"
         >
           {/* 3D Isometric Engineering Machine aligned flush to the right edge */}
           <div
-            className={`absolute inset-0 transition-opacity duration-700 ${
-              loaderHidden ? 'opacity-100' : 'opacity-0'
-            }`}
+            className={`absolute inset-0 transition-opacity duration-700 ${loaderHidden ? 'opacity-100' : 'opacity-0'
+              }`}
           >
             <TurbulentHero3D
               scrollProgress={heroScroll}
@@ -160,9 +156,8 @@ export const Home = () => {
           {/* BOTTOM-RIGHT SIDE LOADING OVERLAY (Exact 00:00 -> 00:08 Screen Recording Effect) */}
           <div
             aria-hidden={loaderHidden}
-            className={`absolute inset-0 z-30 flex items-end justify-end p-6 sm:p-10 lg:p-12 bg-[#011836] transition-opacity duration-500 ${
-              loaderHidden ? 'opacity-0 pointer-events-none' : 'opacity-100'
-            }`}
+            className={`absolute inset-0 z-30 flex items-end justify-end p-6 sm:p-10 lg:p-12 bg-[#011836] transition-opacity duration-500 ${loaderHidden ? 'opacity-0 pointer-events-none' : 'opacity-100'
+              }`}
           >
             <div className="flex items-center gap-3.5">
               <span className="text-2xl sm:text-3xl font-extrabold tabular-nums tracking-tight text-[#00d2ff]">
@@ -337,47 +332,12 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* =====================================================================
-          2. SITE CONTENT REVEALED AFTER 3D HERO SCROLL
-         ===================================================================== */}
-      <div ref={afterHeroRef} className="relative z-10 bg-slate-950 pt-12 pb-8 border-b border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <ScrollReveal direction="up">
-            <div className={`grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4 p-4 sm:p-8 rounded-2xl backdrop-blur-md shadow-2xl border transition-colors ${
-              isDark 
-                ? 'bg-slate-900/90 border-slate-700/60' 
-                : 'bg-white/95 border-slate-200 text-slate-900 shadow-xl'
-            }`}>
-              {companyInfo.stats.map((stat, idx) => (
-                <div
-                  key={idx}
-                  className={`text-center p-2.5 sm:p-3 ${
-                    idx % 2 === 0 ? 'border-r' : 'border-r-0 md:border-r'
-                  } ${idx === 3 ? 'md:border-r-0' : ''} ${
-                    isDark ? 'border-slate-800' : 'border-slate-200'
-                  }`}
-                >
-                  <span className={`block text-2xl sm:text-3xl md:text-4xl font-black ${
-                    isDark ? 'text-sky-400' : 'text-blue-600'
-                  }`}>
-                    {stat.value}
-                  </span>
-                  <span className={`block mt-1 text-[11px] sm:text-xs md:text-sm font-semibold leading-tight ${
-                    isDark ? 'text-slate-300' : 'text-slate-600'
-                  }`}>
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
-        </div>
-      </div>
-
-      {/* 3. CORPORATE INTRODUCTION & ELECTRICAL/ICT VALUE PROPOSITION */}
-      <section className={`py-20 lg:py-28 border-b transition-colors ${
-        isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'
-      }`}>
+      {/* 2. CORPORATE INTRODUCTION & ELECTRICAL/ICT VALUE PROPOSITION */}
+      <section
+        ref={afterHeroRef}
+        className={`py-20 lg:py-28 border-b transition-colors ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'
+          }`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <ScrollReveal direction="left" className="lg:col-span-7 space-y-6">
@@ -385,35 +345,30 @@ export const Home = () => {
                 <Cpu className="w-3.5 h-3.5 text-sky-400" />
                 <span>About Atemzy Hitech</span>
               </div>
-              <h2 className={`text-3xl sm:text-4xl font-extrabold tracking-tight ${
-                isDark ? 'text-white' : 'text-slate-950'
-              }`}>
+              <h2 className={`text-3xl sm:text-4xl font-extrabold tracking-tight ${isDark ? 'text-white' : 'text-slate-950'
+                }`}>
                 Powering Critical Infrastructure & Enterprise Digital Transformation
               </h2>
-              <p className={`text-base sm:text-lg leading-relaxed ${
-                isDark ? 'text-slate-300' : 'text-slate-600'
-              }`}>
+              <p className={`text-base sm:text-lg leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-600'
+                }`}>
                 Registered under the Corporate Affairs Commission ({companyInfo.rcNumber}), Atemzy Hitech Engineering Services Ltd was founded to solve mission-critical power and connectivity challenges through IEEE/IEC electrical standards, certified network engineers, and direct OEM hardware supply chains.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                 {companyInfo.coreValues.map((val, idx) => (
-                  <div 
-                    key={idx} 
-                    className={`p-4 rounded-xl border transition-all ${
-                      isDark 
-                        ? 'bg-slate-950/70 border-slate-800 hover:border-sky-500/40' 
-                        : 'bg-slate-50 border-slate-200 hover:border-blue-500 hover:bg-white shadow-sm'
-                    }`}
+                  <div
+                    key={idx}
+                    className={`p-4 rounded-xl border transition-all ${isDark
+                      ? 'bg-slate-950/70 border-slate-800 hover:border-sky-500/40'
+                      : 'bg-slate-50 border-slate-200 hover:border-blue-500 hover:bg-white shadow-sm'
+                      }`}
                   >
-                    <div className={`flex items-center gap-2 font-bold text-sm ${
-                      isDark ? 'text-white' : 'text-slate-950'
-                    }`}>
+                    <div className={`flex items-center gap-2 font-bold text-sm ${isDark ? 'text-white' : 'text-slate-950'
+                      }`}>
                       <CheckCircle2 className="w-4 h-4 shrink-0 text-sky-400" />
                       <span>{val.title}</span>
                     </div>
-                    <p className={`mt-1 text-xs leading-normal ${
-                      isDark ? 'text-slate-400' : 'text-slate-600'
-                    }`}>
+                    <p className={`mt-1 text-xs leading-normal ${isDark ? 'text-slate-400' : 'text-slate-600'
+                      }`}>
                       {val.description}
                     </p>
                   </div>
@@ -442,9 +397,8 @@ export const Home = () => {
                   className="w-full h-[400px] object-cover"
                 />
                 <div className="absolute inset-0 bg-slate-950/30" />
-                <div className={`absolute bottom-6 left-6 right-6 p-4 rounded-xl border backdrop-blur-md transition-colors ${
-                  isDark ? 'bg-slate-900/90 border-slate-700 text-white' : 'bg-white/95 border-slate-200 text-slate-900 shadow-xl'
-                }`}>
+                <div className={`absolute bottom-6 left-6 right-6 p-4 rounded-xl border backdrop-blur-md transition-colors ${isDark ? 'bg-slate-900/90 border-slate-700 text-white' : 'bg-white/95 border-slate-200 text-slate-900 shadow-xl'
+                  }`}>
                   <div className="flex items-center gap-3">
                     <ShieldCheck className="w-8 h-8 text-sky-400 shrink-0" />
                     <div>
