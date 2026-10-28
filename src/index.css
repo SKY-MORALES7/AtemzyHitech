@@ -544,7 +544,8 @@ body.light-theme,
 }
 
 /* Keep Turbulent 3D Hero text crisp white in both dark and light themes */
-[data-theme="light"] .turbulent-hero-stage h1 {
+[data-theme="light"] .turbulent-hero-stage h1,
+[data-theme="light"] .turbulent-hero-stage h2 {
   color: #ffffff !important;
 }
 [data-theme="light"] .turbulent-hero-stage p {

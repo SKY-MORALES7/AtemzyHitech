@@ -13,7 +13,6 @@ import {
   Router as RouterIcon,
   Cable, 
   Award,
-  ChevronRight,
   PhoneCall,
   Activity
 } from 'lucide-react';
@@ -36,35 +35,40 @@ const iconMap = {
   Router: RouterIcon
 };
 
-const heroStages = [
-  {
-    tag: '01 / POWER & ENERGY CORE',
-    headline: 'We engineer audience-igniting power & ICT systems',
-    subtext:
-      'High-voltage 33/11kV substation modernization, industrial switchgear, and hybrid solar microgrids engineered for zero unplanned downtime.'
-  },
-  {
-    tag: '02 / INTELLIGENT ROUTING & FIBER',
-    headline: 'High-voltage precision meets intelligent routing',
-    subtext:
-      'Tier-III enterprise data centers, 100GbE fiber-optic backbones, carrier Wi-Fi, and deterministic PLC/SCADA automation.'
-  },
-  {
-    tag: '03 / TURNKEY COMMISSIONING',
-    headline: 'Built for 99.99% enterprise uptime across Nigeria',
-    subtext:
-      'Atemzy Hitech Engineering Services Ltd delivers direct OEM procurement, IEEE/IEC compliance, and 24/7 NOC support.'
-  }
-];
-
 export const Home = () => {
   const { isDark } = useTheme();
   const featuredProjects = projects.filter((p) => p.featured).slice(0, 3);
   const heroTrackRef = useRef(null);
   const afterHeroRef = useRef(null);
   const [heroScroll, setHeroScroll] = useState(0);
+  const [sceneReady, setSceneReady] = useState(false);
+  const [loadProgress, setLoadProgress] = useState(5);
+  const [loaderHidden, setLoaderHidden] = useState(false);
 
-  // Compute exact 0 -> 1 scroll progress through the 280vh sticky scrollytelling hero track
+  // Smooth bottom-right side loading effect (5 -> 95 -> 100) matching the turbulent.ca recording
+  useEffect(() => {
+    let timerId;
+    const stepLoader = () => {
+      setLoadProgress((prev) => {
+        if (prev >= 100) return 100;
+        if (!sceneReady && prev >= 95) return 95;
+        const step = prev < 60 ? 18 : prev < 90 ? 12 : 5;
+        return Math.min(sceneReady ? 100 : 95, prev + step);
+      });
+    };
+
+    timerId = setInterval(stepLoader, 90);
+    return () => clearInterval(timerId);
+  }, [sceneReady]);
+
+  useEffect(() => {
+    if (loadProgress >= 100) {
+      const timeout = setTimeout(() => setLoaderHidden(true), 320);
+      return () => clearTimeout(timeout);
+    }
+  }, [loadProgress]);
+
+  // Compute 0 -> 1 scroll progress through the sticky scrollytelling hero track
   useEffect(() => {
     const handleScroll = () => {
       const track = heroTrackRef.current;
@@ -84,113 +88,255 @@ export const Home = () => {
     };
   }, []);
 
-  const activeStageIndex = heroScroll < 0.36 ? 0 : heroScroll < 0.72 ? 1 : 2;
-  const currentStage = heroStages[activeStageIndex];
-
-  const scrollToContent = () => {
-    if (afterHeroRef.current) {
+  const scrollToNextStageOrContent = () => {
+    const track = heroTrackRef.current;
+    if (!track) return;
+    const scrollableDistance = Math.max(1, track.offsetHeight - window.innerHeight);
+    if (heroScroll < 0.35) {
+      window.scrollTo({
+        top: track.offsetTop + scrollableDistance * 0.5,
+        behavior: 'smooth'
+      });
+    } else if (heroScroll < 0.75) {
+      window.scrollTo({
+        top: track.offsetTop + scrollableDistance * 0.96,
+        behavior: 'smooth'
+      });
+    } else if (afterHeroRef.current) {
       afterHeroRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
+  // Line-masked scroll transitions across the 3 Hero stages (matching 00:10 -> 00:36 -> 00:41 in recording)
+  // Stage 1 (0.00 -> 0.33): "We engineer power- / igniting networks" + "↓ SCROLL"
+  const stage1Exit = Math.max(0, Math.min(1, (heroScroll - 0.16) / 0.17));
+  const stage1Opacity = 1 - stage1Exit;
+  const stage1LineOffset = stage1Exit * -110;
+
+  // Stage 2 (0.28 -> 0.68): "that fuel digital / infrastructures"
+  const stage2Enter = Math.max(0, Math.min(1, (heroScroll - 0.26) / 0.14));
+  const stage2Exit = Math.max(0, Math.min(1, (heroScroll - 0.54) / 0.15));
+  const stage2Opacity = Math.min(stage2Enter, 1 - stage2Exit);
+  const stage2LineOffset = (1 - stage2Enter) * 105 - stage2Exit * 110;
+
+  // Stage 3 (0.64 -> 1.00): "and deliver / uninterrupted / uptime." + "(→) LEARN MORE"
+  const stage3Enter = Math.max(0, Math.min(1, (heroScroll - 0.63) / 0.18));
+  const stage3Opacity = stage3Enter;
+  const stage3LineOffset = (1 - stage3Enter) * 105;
+
   return (
     <div className="flex flex-col min-h-screen bg-slate-900 text-slate-100">
       {/* =====================================================================
-          1. TURBULENT.CA-STYLE STICKY 3D SCROLLYTELLING HERO
-             Locks viewport while scrolling 0% -> 100% through the 3D machine,
-             then smoothly reveals the rest of the website content below.
+          1. THREE-STAGE 3D ISOMETRIC SCROLLYTELLING HERO + SIDE LOADING BAR
+             - Loader (00:00-00:08): Bottom-right cyan percentage + vertical bar
+             - Stage 1 (Top): "We engineer power- / igniting networks" + "↓ SCROLL"
+             - Stage 2 (Mid): "that fuel digital / infrastructures"
+             - Stage 3 (End): "and deliver / uninterrupted / uptime." + "(→) LEARN MORE"
          ===================================================================== */}
       <section
         ref={heroTrackRef}
-        className="turbulent-hero-stage relative h-[280vh] -mt-24 sm:-mt-28 select-none"
+        className="turbulent-hero-stage relative h-[300vh] -mt-24 sm:-mt-28 select-none"
       >
         <div
           style={{
             background:
-              'radial-gradient(circle at 68% 52%, #0a2246 0%, #041024 52%, #020813 100%)'
+              'radial-gradient(circle at 75% 50%, #092042 0%, #021129 55%, #010814 100%)'
           }}
-          className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between border-b border-slate-800/80"
+          className="sticky top-0 h-screen w-full overflow-hidden border-b border-slate-800/80"
         >
-          {/* 3D Isometric Engineering & Circuitry Machine (Right / Center-Right) */}
-          <TurbulentHero3D scrollProgress={heroScroll} />
-
-          {/* Subtle Left Gradient Scrim so Editorial White Text stays 100% Crisp */}
+          {/* 3D Isometric Engineering Machine aligned flush to the right edge */}
           <div
-            aria-hidden="true"
-            className="absolute inset-0 z-[2] pointer-events-none bg-gradient-to-r from-[#020813]/90 via-[#020813]/45 to-transparent"
-          />
+            className={`absolute inset-0 transition-opacity duration-700 ${
+              loaderHidden ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <TurbulentHero3D
+              scrollProgress={heroScroll}
+              isLoaded={loaderHidden}
+              onReady={() => setSceneReady(true)}
+            />
+          </div>
 
-          {/* Main Left Editorial Headline & Stage Copy */}
-          <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 w-full flex-1 flex items-center pt-24 sm:pt-28">
-            <div className="max-w-xl lg:max-w-2xl">
-              {/* Stage Step Pill */}
-              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-sky-400/30 backdrop-blur-md mb-6">
-                <RouterIcon className="w-3.5 h-3.5 text-sky-400" />
-                <span className="text-[11px] font-mono font-bold tracking-widest uppercase text-sky-300">
-                  {currentStage.tag}
-                </span>
-              </div>
-
-              {/* Turbulent-Style Stark White Editorial Headline */}
-              <h1
-                key={activeStageIndex}
-                style={{
-                  fontFamily: "Georgia, 'Times New Roman', 'Plus Jakarta Sans', serif",
-                  color: '#ffffff'
-                }}
-                className="text-4xl sm:text-6xl lg:text-[4.25rem] font-bold leading-[1.08] tracking-tight text-white transition-all duration-500 animate-[fadeIn_0.45s_ease-out]"
-              >
-                {currentStage.headline}
-              </h1>
-
-              {/* Stage Subheadline */}
-              <p
-                style={{ color: '#cbd5e1' }}
-                className="mt-5 text-sm sm:text-base lg:text-lg max-w-lg leading-relaxed font-normal transition-all duration-500"
-              >
-                {currentStage.subtext}
-              </p>
-
-              {/* Action Buttons (Always accessible, highlighted on Stage 3) */}
-              <div className="mt-8 flex flex-wrap items-center gap-3.5">
-                <Link
-                  to="/quote"
-                  className="btn-3d text-xs sm:text-sm py-3 px-6"
-                >
-                  <span>Request a Quote</span>
-                  <ArrowRight className="w-4 h-4 text-sky-400" />
-                </Link>
-                <Link
-                  to="/services"
-                  className="btn-3d-secondary text-xs sm:text-sm py-3 px-6"
-                >
-                  <span>Explore ICT & Power Scope</span>
-                </Link>
+          {/* BOTTOM-RIGHT SIDE LOADING OVERLAY (Exact 00:00 -> 00:08 Screen Recording Effect) */}
+          <div
+            aria-hidden={loaderHidden}
+            className={`absolute inset-0 z-30 flex items-end justify-end p-6 sm:p-10 lg:p-12 bg-[#011836] transition-opacity duration-500 ${
+              loaderHidden ? 'opacity-0 pointer-events-none' : 'opacity-100'
+            }`}
+          >
+            <div className="flex items-center gap-3.5">
+              <span className="text-2xl sm:text-3xl font-extrabold tabular-nums tracking-tight text-[#00d2ff]">
+                {loadProgress}
+              </span>
+              <div className="relative h-20 sm:h-24 w-[2px] bg-slate-700/60 overflow-hidden rounded-full">
+                <div
+                  style={{ height: `${loadProgress}%` }}
+                  className="absolute bottom-0 left-0 right-0 bg-[#00d2ff] transition-all duration-150"
+                />
               </div>
             </div>
           </div>
 
-          {/* Bottom Bar: Turbulent-Style "↓ SCROLL" Indicator + 3-Stage Progress Rail */}
-          <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 pb-8 sm:pb-10 w-full flex items-center justify-between">
-            <button
-              type="button"
-              onClick={scrollToContent}
-              className="group inline-flex items-center gap-2.5 text-xs font-extrabold tracking-[0.2em] uppercase text-sky-400 hover:text-sky-300 transition-colors cursor-pointer"
-            >
-              <ArrowDown className="w-4 h-4 text-sky-400 animate-bounce" />
-              <span>SCROLL</span>
-            </button>
+          {/* Subtle Left Scrim for Crisp White Editorial Typography */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 z-[2] pointer-events-none bg-gradient-to-r from-[#010814]/85 via-[#010814]/35 to-transparent"
+          />
 
-            {/* Scroll Progress Bar & Stage Readout */}
-            <div className="flex items-center gap-4">
-              <span className="text-[11px] font-mono text-sky-300/80 hidden sm:inline">
-                STAGE 0{activeStageIndex + 1} / 03
-              </span>
-              <div className="w-28 sm:w-40 h-1.5 rounded-full bg-slate-800/90 overflow-hidden border border-slate-700/60">
-                <div
-                  style={{ width: `${Math.max(8, Math.round(heroScroll * 100))}%` }}
-                  className="h-full bg-gradient-to-r from-sky-400 to-amber-400 transition-all duration-100"
-                />
+          {/* STAGE 1 LEFT TEXT + BOTTOM-LEFT "↓ SCROLL" (00:10 -> 00:34) */}
+          <div
+            style={{
+              opacity: loaderHidden ? stage1Opacity : 0,
+              pointerEvents: loaderHidden && stage1Opacity > 0.15 ? 'auto' : 'none'
+            }}
+            className="absolute inset-0 z-10 flex flex-col justify-between px-6 sm:px-12 lg:px-20 pt-36 sm:pt-44 pb-12 sm:pb-16 transition-opacity duration-300"
+          >
+            <div className="my-auto">
+              <h1
+                style={{
+                  fontFamily: "Georgia, 'Times New Roman', serif",
+                  color: '#ffffff'
+                }}
+                className="text-[2.5rem] sm:text-[4.1rem] lg:text-[4.85rem] font-bold leading-[1.08] tracking-[-0.02em] text-white"
+              >
+                <span className="block overflow-hidden py-1">
+                  <span
+                    style={{
+                      transform: `translate3d(0, ${stage1LineOffset.toFixed(1)}%, 0)`
+                    }}
+                    className="block will-change-transform"
+                  >
+                    We engineer power-
+                  </span>
+                </span>
+                <span className="block overflow-hidden py-1">
+                  <span
+                    style={{
+                      transform: `translate3d(0, ${(stage1LineOffset * 1.12).toFixed(1)}%, 0)`
+                    }}
+                    className="block will-change-transform"
+                  >
+                    igniting networks
+                  </span>
+                </span>
+              </h1>
+            </div>
+
+            <div>
+              <button
+                type="button"
+                onClick={scrollToNextStageOrContent}
+                className="group inline-flex items-center gap-3 text-[11px] sm:text-xs font-extrabold tracking-[0.18em] uppercase text-[#00d2ff] hover:text-sky-300 transition-colors cursor-pointer"
+              >
+                <ArrowDown className="w-4 h-4 text-[#00d2ff] transition-transform group-hover:translate-y-1" />
+                <span>SCROLL</span>
+              </button>
+            </div>
+          </div>
+
+          {/* STAGE 2 MIDDLE SCROLL TEXT (00:36 -> 00:39: "that fuel digital / infrastructures") */}
+          <div
+            style={{
+              opacity: stage2Opacity,
+              pointerEvents: stage2Opacity > 0.2 ? 'auto' : 'none'
+            }}
+            className="absolute inset-0 z-10 flex flex-col justify-center px-6 sm:px-12 lg:px-20 pt-16"
+          >
+            <div>
+              <h2
+                style={{
+                  fontFamily: "Georgia, 'Times New Roman', serif",
+                  color: '#ffffff'
+                }}
+                className="text-[2.5rem] sm:text-[4.1rem] lg:text-[4.85rem] font-bold leading-[1.08] tracking-[-0.02em] text-white"
+              >
+                <span className="block overflow-hidden py-1">
+                  <span
+                    style={{
+                      transform: `translate3d(0, ${stage2LineOffset.toFixed(1)}%, 0)`
+                    }}
+                    className="block will-change-transform"
+                  >
+                    that fuel digital
+                  </span>
+                </span>
+                <span className="block overflow-hidden py-1">
+                  <span
+                    style={{
+                      transform: `translate3d(0, ${(stage2LineOffset * 1.15).toFixed(1)}%, 0)`
+                    }}
+                    className="block will-change-transform"
+                  >
+                    infrastructures
+                  </span>
+                </span>
+              </h2>
+            </div>
+          </div>
+
+          {/* STAGE 3 FINAL SCROLL TEXT + "(→) LEARN MORE" (00:41 -> 00:43) */}
+          <div
+            style={{
+              opacity: stage3Opacity,
+              pointerEvents: stage3Opacity > 0.15 ? 'auto' : 'none'
+            }}
+            className="absolute inset-0 z-10 flex flex-col justify-center px-6 sm:px-12 lg:px-20 pt-16"
+          >
+            <div>
+              <h2
+                style={{
+                  fontFamily: "Georgia, 'Times New Roman', serif",
+                  color: '#ffffff'
+                }}
+                className="text-[2.5rem] sm:text-[4.1rem] lg:text-[4.85rem] font-bold leading-[1.08] tracking-[-0.02em] text-white"
+              >
+                <span className="block overflow-hidden py-1">
+                  <span
+                    style={{
+                      transform: `translate3d(0, ${stage3LineOffset.toFixed(1)}%, 0)`
+                    }}
+                    className="block will-change-transform"
+                  >
+                    and deliver
+                  </span>
+                </span>
+                <span className="block overflow-hidden py-1">
+                  <span
+                    style={{
+                      transform: `translate3d(0, ${(stage3LineOffset * 1.12).toFixed(1)}%, 0)`
+                    }}
+                    className="block will-change-transform"
+                  >
+                    uninterrupted
+                  </span>
+                </span>
+                <span className="block overflow-hidden py-1">
+                  <span
+                    style={{
+                      transform: `translate3d(0, ${(stage3LineOffset * 1.24).toFixed(1)}%, 0)`
+                    }}
+                    className="block will-change-transform"
+                  >
+                    uptime.
+                  </span>
+                </span>
+              </h2>
+
+              <div
+                style={{
+                  transform: `translate3d(0, ${(stage3LineOffset * 0.6).toFixed(1)}px, 0)`
+                }}
+                className="mt-10 sm:mt-12"
+              >
+                <Link
+                  to="/services"
+                  className="group inline-flex items-center gap-3.5 text-xs sm:text-[13px] font-extrabold tracking-[0.16em] uppercase text-[#00d2ff] hover:text-white transition-colors"
+                >
+                  <span className="w-7 h-7 rounded-full bg-[#00d2ff] text-[#010712] flex items-center justify-center transition-transform group-hover:translate-x-1">
+                    <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+                  </span>
+                  <span>LEARN MORE</span>
+                </Link>
               </div>
             </div>
           </div>
@@ -473,7 +619,7 @@ export const Home = () => {
 
                   <div className="p-6 pt-0">
                     <Link
-                      to="/projects"
+                      to={`/projects/${p.slug}`}
                       className="brutalist-card__button brutalist-card__button--mark w-full text-xs py-2.5"
                     >
                       <span>View Technical Case Study</span>
