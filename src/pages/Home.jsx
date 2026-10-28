@@ -140,7 +140,7 @@ export const Home = () => {
         <div
           style={{
             background:
-              'radial-gradient(circle at 75% 50%, #092042 0%, #021129 55%, #010814 100%)'
+              'radial-gradient(circle at 74% 52%, #0d2b56 0%, #031936 52%, #011126 100%)'
           }}
           className="sticky top-0 h-screen w-full overflow-hidden border-b border-slate-800/80"
         >
@@ -176,12 +176,6 @@ export const Home = () => {
               </div>
             </div>
           </div>
-
-          {/* Subtle Left Scrim for Crisp White Editorial Typography */}
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 z-[2] pointer-events-none bg-gradient-to-r from-[#010814]/85 via-[#010814]/35 to-transparent"
-          />
 
           {/* STAGE 1 LEFT TEXT + BOTTOM-LEFT "↓ SCROLL" (00:10 -> 00:34) */}
           <div
