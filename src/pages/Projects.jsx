@@ -104,11 +104,6 @@ export const Projects = () => {
                           {p.category}
                         </span>
                       </div>
-                      <div className="absolute bottom-4 right-4">
-                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-950/90 text-emerald-400 border border-emerald-800">
-                          {p.status}
-                        </span>
-                      </div>
                     </div>
 
                     <div className="p-6">
@@ -199,8 +194,6 @@ export const Projects = () => {
               <span>{activeModalProject.location}</span>
               <span>•</span>
               <span>Client: {activeModalProject.client}</span>
-              <span>•</span>
-              <span className="text-emerald-400 font-bold">{activeModalProject.status}</span>
             </div>
 
             <h3 className="text-2xl font-black text-white">

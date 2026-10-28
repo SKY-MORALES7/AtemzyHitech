@@ -17,7 +17,7 @@ export const services = [
     ],
     iconName: "Zap",
     badge: "Core Power",
-    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/electrical-substation.svg",
     fallbackImage: "/images/electrical-substation.svg",
     hairlineFigure: "Plug"
   },
@@ -83,8 +83,8 @@ export const services = [
     ],
     iconName: "Truck",
     badge: "OEM Supply",
-    image: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1200&q=80",
-    fallbackImage: "/images/electrical-substation.svg",
+    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1200&q=80",
+    fallbackImage: "/images/circuit-automation.svg",
     hairlineFigure: "Patch"
   },
   {
@@ -105,7 +105,7 @@ export const services = [
     ],
     iconName: "ShieldCheck",
     badge: "24/7 Uptime",
-    image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1200&q=80",
     fallbackImage: "/images/data-center-ict.svg",
     hairlineFigure: "Cabinet"
   }

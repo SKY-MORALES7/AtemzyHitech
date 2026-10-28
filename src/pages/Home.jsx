@@ -545,11 +545,6 @@ export const Home = () => {
                           {p.category}
                         </span>
                       </div>
-                      <div className="absolute bottom-3 right-3">
-                        <span className="px-2.5 py-1 text-[10px] font-black uppercase bg-blue-600 text-white border-2 border-blue-900 shadow-[2px_2px_0px_#020617]">
-                          {p.status}
-                        </span>
-                      </div>
                     </div>
 
                     <div className="p-6">

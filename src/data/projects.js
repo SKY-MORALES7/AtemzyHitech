@@ -18,7 +18,7 @@ export const projects = [
       "Deep-earth copper rod matrix & lightning surge protection",
       "NEMSA statutory inspection and full load-bank certification"
     ],
-    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
     fallbackImage: "/images/electrical-substation.svg",
     featured: true
   },
@@ -64,7 +64,7 @@ export const projects = [
       "Independent insulation resistance & continuity verification",
       "Bonded logistics, customs clearance & site-direct dispatch"
     ],
-    image: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1200&q=80",
     fallbackImage: "/images/circuit-automation.svg",
     featured: true
   },
