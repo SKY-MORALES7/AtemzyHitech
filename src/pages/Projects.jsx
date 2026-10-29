@@ -18,9 +18,8 @@ export const Projects = () => {
     <div className="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
       {/* Header Banner */}
       <div
-        className={`relative py-16 lg:py-24 border-b transition-colors ${
-          isDark ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-200'
-        }`}
+        className={`relative py-16 lg:py-24 border-b transition-colors ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-200'
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="max-w-3xl">
@@ -29,16 +28,14 @@ export const Projects = () => {
               <span>Project Portfolio & Dossiers</span>
             </span>
             <h1
-              className={`text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight ${
-                isDark ? 'text-white' : 'text-slate-950'
-              }`}
+              className={`text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-950'
+                }`}
             >
               Electrical Power & ICT Deployments
             </h1>
             <p
-              className={`mt-4 text-base sm:text-lg leading-relaxed ${
-                isDark ? 'text-slate-300' : 'text-slate-600'
-              }`}
+              className={`mt-4 text-base sm:text-lg leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-600'
+                }`}
             >
               Our engineering portfolio of 33/11kV substation installations, enterprise data centers, fiber-optic backbones, and smart automation deployments.
             </p>
@@ -53,11 +50,10 @@ export const Projects = () => {
             {/* Left Column: Coming Soon Announcement Card */}
             <ScrollReveal direction="left" className="lg:col-span-7">
               <div
-                className={`rounded-3xl border p-8 sm:p-12 shadow-2xl transition-colors ${
-                  isDark
+                className={`rounded-3xl border p-8 sm:p-12 shadow-2xl transition-colors ${isDark
                     ? 'bg-slate-900/90 border-slate-800 shadow-slate-950/60'
                     : 'bg-white border-slate-200 shadow-slate-200/80'
-                }`}
+                  }`}
               >
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-400 text-xs font-extrabold uppercase tracking-widest mb-6">
                   <Clock className="w-3.5 h-3.5 animate-pulse" />
@@ -65,17 +61,15 @@ export const Projects = () => {
                 </div>
 
                 <h2
-                  className={`text-2xl sm:text-4xl font-black tracking-tight leading-tight ${
-                    isDark ? 'text-white' : 'text-slate-950'
-                  }`}
+                  className={`text-2xl sm:text-4xl font-black tracking-tight leading-tight ${isDark ? 'text-white' : 'text-slate-950'
+                    }`}
                 >
                   Verified Project Case Studies Are Currently Being Compiled
                 </h2>
 
                 <p
-                  className={`mt-4 text-sm sm:text-base leading-relaxed ${
-                    isDark ? 'text-slate-300' : 'text-slate-600'
-                  }`}
+                  className={`mt-4 text-sm sm:text-base leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-600'
+                    }`}
                 >
                   We are preparing detailed technical case studies, engineering schematics, and commissioning dossiers for our upcoming Electrical Power, Enterprise ICT, and Industrial Automation projects. Check back soon as we publish our verified deployment showcase.
                 </p>

@@ -174,20 +174,25 @@ export const TurbulentHero3D = ({ scrollProgress = 0, isLoaded = true, onReady }
       const machineGroup = new THREE.Group();
 
       // From camera (26, 21.5, 26), the screen-right direction is (+1, 0, -1).
+      // Lowering y (-2.75) ensures the entire top of the monolith & wireframe cube is visible below the navbar!
+      // On mobile (< 640px), shifting slightly left (-x, +z) ensures the upper-right wireframe cube is always 100% visible!
       const getBaseOffset = (w, h) => {
         const aspect = w / Math.max(1, h);
         if (w >= 1280) {
-          const rightShift = Math.min(4.25, aspect * 2.15);
-          return { x: rightShift, y: -1.4, z: -rightShift, scale: 1.2 };
+          const rightShift = Math.min(3.95, aspect * 2.05);
+          return { x: rightShift, y: -2.75, z: -rightShift, scale: 1.16 };
         }
         if (w >= 1024) {
-          const rightShift = Math.min(3.55, aspect * 1.95);
-          return { x: rightShift, y: -1.5, z: -rightShift, scale: 1.12 };
+          const rightShift = Math.min(3.35, aspect * 1.85);
+          return { x: rightShift, y: -2.7, z: -rightShift, scale: 1.08 };
         }
         if (w >= 640) {
-          return { x: 2.15, y: -1.65, z: -2.15, scale: 0.95 };
+          return { x: 1.45, y: -2.6, z: -1.45, scale: 0.9 };
         }
-        return { x: 1.15, y: -1.8, z: -1.15, scale: 0.78 };
+        if (w >= 480) {
+          return { x: -0.3, y: -2.55, z: 0.3, scale: 0.76 };
+        }
+        return { x: -0.65, y: -2.55, z: 0.65, scale: 0.66 };
       };
 
       let basePlacement = getBaseOffset(width, height);
@@ -235,15 +240,24 @@ export const TurbulentHero3D = ({ scrollProgress = 0, isLoaded = true, onReady }
       leftWall.receiveShadow = true;
       machineGroup.add(leftWall);
 
-      // Right-Edge Architectural Pillar (placed behind the wheel at Z = -1.2 so zero overlap with wheel)
+      // Right-Edge Architectural Pillar & Extended Upper-Right Wing (fills the right viewport edge)
       const rightEdgePillar = new THREE.Mesh(
-        new THREE.BoxGeometry(2.1, 4.4, 2.2),
+        new THREE.BoxGeometry(2.4, 4.4, 2.4),
         softIndigoMat
       );
-      rightEdgePillar.position.set(4.65, 0.3, -1.2);
+      rightEdgePillar.position.set(4.75, 0.2, -1.25);
       rightEdgePillar.castShadow = true;
       rightEdgePillar.receiveShadow = true;
       machineGroup.add(rightEdgePillar);
+
+      const upperRightExtensionWing = new THREE.Mesh(
+        new THREE.BoxGeometry(3.4, 5.2, 3.6),
+        cobaltMat
+      );
+      upperRightExtensionWing.position.set(5.6, -1.8, -1.6);
+      upperRightExtensionWing.castShadow = true;
+      upperRightExtensionWing.receiveShadow = true;
+      machineGroup.add(upperRightExtensionWing);
 
       // Central Pit Floor & Conical Intake Funnel
       const pitFloor = new THREE.Mesh(new THREE.BoxGeometry(3.0, 0.1, 3.0), deepRecessMat);
@@ -563,6 +577,59 @@ export const TurbulentHero3D = ({ scrollProgress = 0, isLoaded = true, onReady }
       lowerTealCornerCube.castShadow = true;
       machineGroup.add(lowerTealCornerCube);
 
+      // Extended Right-Side Isometric Foundation & Stepped Terrace Wing
+      // (Fills the empty right-hand space beneath the porthole chamber and extends off the right edge!)
+      const chamberSupportColumn = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.62, 0.72, 2.8, 32),
+        deepRecessMat
+      );
+      chamberSupportColumn.position.set(3.15, -7.2, 0.65);
+      chamberSupportColumn.castShadow = true;
+      machineGroup.add(chamberSupportColumn);
+
+      const lowerRightPlatform = new THREE.Mesh(
+        new THREE.BoxGeometry(4.8, 3.6, 4.8),
+        softTealMat
+      );
+      lowerRightPlatform.position.set(4.6, LOWER_DECK_Y - 0.8, 0.95);
+      lowerRightPlatform.castShadow = true;
+      lowerRightPlatform.receiveShadow = true;
+      machineGroup.add(lowerRightPlatform);
+
+      const lowerRightFarBlock = new THREE.Mesh(
+        new THREE.BoxGeometry(3.6, 4.6, 3.8),
+        seafoamTealMat
+      );
+      lowerRightFarBlock.position.set(6.1, LOWER_DECK_Y + 0.4, -0.85);
+      lowerRightFarBlock.castShadow = true;
+      lowerRightFarBlock.receiveShadow = true;
+      machineGroup.add(lowerRightFarBlock);
+
+      // Connected Industrial Conduit Pipes running along the Right Platform into the Right Wing
+      const rightPlatformPipeCurve1 = new THREE.CatmullRomCurve3([
+        new THREE.Vector3(2.25, -4.6, 1.35),
+        new THREE.Vector3(2.25, -6.75, 1.35),
+        new THREE.Vector3(4.65, -6.75, 2.55),
+        new THREE.Vector3(6.8, -6.75, 0.45)
+      ]);
+      const rightPlatformPipe1 = new THREE.Mesh(
+        new THREE.TubeGeometry(rightPlatformPipeCurve1, 36, 0.14, 16, false),
+        pipeMat
+      );
+      machineGroup.add(rightPlatformPipe1);
+
+      const rightPlatformPipeCurve2 = new THREE.CatmullRomCurve3([
+        new THREE.Vector3(2.55, -4.6, 1.1),
+        new THREE.Vector3(2.55, -6.5, 1.1),
+        new THREE.Vector3(4.65, -6.5, 2.25),
+        new THREE.Vector3(6.8, -6.5, 0.15)
+      ]);
+      const rightPlatformPipe2 = new THREE.Mesh(
+        new THREE.TubeGeometry(rightPlatformPipeCurve2, 36, 0.11, 16, false),
+        softIndigoMat
+      );
+      machineGroup.add(rightPlatformPipe2);
+
       // ====================================================
       // PRECISION 2-TIER HOLLOW COG / GEAR SOCKET WITH REAL SHAFT DEPTH
       // ====================================================
@@ -796,7 +863,7 @@ export const TurbulentHero3D = ({ scrollProgress = 0, isLoaded = true, onReady }
 
         // 1. True Isometric Vertical Camera Pan (keeps machine anchored on the right side!)
         const panProgress = Math.min(1, s / 0.82);
-        const camDrop = panProgress * 10.4 + zoomEase * 0.45;
+        const camDrop = panProgress * 9.15 + zoomEase * 0.45;
         camera.position.set(BASE_CAM_X, BASE_CAM_Y - camDrop, BASE_CAM_Z);
         camera.lookAt(0.45, 0.55 - camDrop, 0.2);
 
