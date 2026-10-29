@@ -1,161 +1,145 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  Zap, 
-  MapPin, 
-  Calendar, 
-  CheckCircle2, 
-  ExternalLink,
-  X
+import {
+  Zap,
+  Clock,
+  ArrowRight,
+  Cpu,
+  ShieldCheck,
+  FileText
 } from 'lucide-react';
-import { projects, projectCategories } from '../data/projects';
-import { ScrollReveal } from '../components/ui/ScrollReveal';
+import { ScrollReveal, HairlineScrollFigure } from '../components/ui/ScrollReveal';
 import { useTheme } from '../context/ThemeContext';
 
 export const Projects = () => {
   const { isDark } = useTheme();
-  const [selectedCategory, setSelectedCategory] = useState('All Projects');
-  const [activeModalProject, setActiveModalProject] = useState(null);
-
-  const filteredProjects =
-    selectedCategory === 'All Projects'
-      ? projects
-      : projects.filter((p) => p.category === selectedCategory);
 
   return (
-    <div className="bg-slate-950 text-slate-100 min-h-screen">
+    <div className="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
       {/* Header Banner */}
-      <div className={`relative py-16 lg:py-24 border-b transition-colors ${
-        isDark ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-200'
-      }`}>
+      <div
+        className={`relative py-16 lg:py-24 border-b transition-colors ${
+          isDark ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-200'
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="max-w-3xl">
             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-blue-600/10 border border-blue-500/30 text-blue-500 text-xs font-bold uppercase tracking-wider mb-4">
               <Zap className="w-3.5 h-3.5" />
-              <span>Project Portfolio & Track Record</span>
+              <span>Project Portfolio & Dossiers</span>
             </span>
-            <h1 className={`text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight ${
-              isDark ? 'text-white' : 'text-slate-950'
-            }`}>
+            <h1
+              className={`text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight ${
+                isDark ? 'text-white' : 'text-slate-950'
+              }`}
+            >
               Electrical Power & ICT Deployments
             </h1>
-            <p className={`mt-4 text-base sm:text-lg leading-relaxed ${
-              isDark ? 'text-slate-300' : 'text-slate-600'
-            }`}>
-              Showcasing verified 33/11kV substation upgrades, Tier-III enterprise data centers, fiber-optic backbones, smart BMS automation, and OEM hardware deliveries.
+            <p
+              className={`mt-4 text-base sm:text-lg leading-relaxed ${
+                isDark ? 'text-slate-300' : 'text-slate-600'
+              }`}
+            >
+              Our engineering portfolio of 33/11kV substation installations, enterprise data centers, fiber-optic backbones, and smart automation deployments.
             </p>
           </ScrollReveal>
         </div>
       </div>
 
-      {/* Category Filter Tabs */}
-      <div className="sticky top-[86px] sm:top-[96px] z-40 w-full px-3 sm:px-6 lg:px-8 py-2 pointer-events-auto">
-        <div className={`max-w-7xl mx-auto backdrop-blur-md rounded-xl sm:rounded-2xl border transition-all duration-300 px-2 sm:px-3 py-1.5 shadow-lg ${
-          isDark
-            ? 'bg-slate-900/90 border-slate-700/60 shadow-slate-950/60'
-            : 'bg-white/95 border-slate-300 shadow-slate-300/50'
-        }`}>
-          <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar scroll-smooth py-0.5">
-            {projectCategories.map((cat) => {
-              const isSelected = selectedCategory === cat;
-              return (
-                <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all border shrink-0 ${
-                    isSelected
-                      ? isDark
-                        ? 'bg-blue-600 text-white border-blue-500 shadow-md shadow-blue-500/30'
-                        : 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-600/20'
-                      : isDark
-                        ? 'bg-slate-800/80 text-slate-300 border-slate-700/60 hover:text-white hover:bg-slate-700'
-                        : 'bg-slate-100 text-slate-800 border-slate-300 hover:text-slate-950 hover:bg-slate-200 hover:border-slate-400'
+      {/* Coming Soon Main Showcase */}
+      <section className="flex-1 py-16 lg:py-24 flex items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            {/* Left Column: Coming Soon Announcement Card */}
+            <ScrollReveal direction="left" className="lg:col-span-7">
+              <div
+                className={`rounded-3xl border p-8 sm:p-12 shadow-2xl transition-colors ${
+                  isDark
+                    ? 'bg-slate-900/90 border-slate-800 shadow-slate-950/60'
+                    : 'bg-white border-slate-200 shadow-slate-200/80'
+                }`}
+              >
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-400 text-xs font-extrabold uppercase tracking-widest mb-6">
+                  <Clock className="w-3.5 h-3.5 animate-pulse" />
+                  <span>Coming Soon</span>
+                </div>
+
+                <h2
+                  className={`text-2xl sm:text-4xl font-black tracking-tight leading-tight ${
+                    isDark ? 'text-white' : 'text-slate-950'
                   }`}
                 >
-                  {cat}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </div>
+                  Verified Project Case Studies Are Currently Being Compiled
+                </h2>
 
-      {/* Projects Grid */}
-      <section className="py-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((p, idx) => (
-              <ScrollReveal key={p.id} delay={idx * 90}>
-                <div className="group flex flex-col justify-between h-full rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden shadow-xl hover:border-blue-500/50 transition-all duration-300">
-                  <div>
-                    <Link to={`/projects/${p.slug}`} className="block relative h-60 overflow-hidden">
-                      <img
-                        src={p.image}
-                        onError={(e) => {
-                          e.currentTarget.onerror = null;
-                          e.currentTarget.src = p.fallbackImage || '/images/electrical-substation.svg';
-                        }}
-                        alt={p.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-slate-950/40" />
-                      <div className="absolute top-4 left-4">
-                        <span className="px-3 py-1 rounded-full text-xs font-bold bg-slate-950/90 text-blue-400 border border-slate-700 shadow-md">
-                          {p.category}
-                        </span>
-                      </div>
-                    </Link>
+                <p
+                  className={`mt-4 text-sm sm:text-base leading-relaxed ${
+                    isDark ? 'text-slate-300' : 'text-slate-600'
+                  }`}
+                >
+                  We are preparing detailed technical case studies, engineering schematics, and commissioning dossiers for our upcoming Electrical Power, Enterprise ICT, and Industrial Automation projects. Check back soon as we publish our verified deployment showcase.
+                </p>
 
-                    <div className="p-6">
-                      <div className="flex items-center gap-4 text-xs text-slate-400 mb-2 font-medium">
-                        <span className="flex items-center gap-1">
-                          <MapPin className="w-3.5 h-3.5 text-blue-400" />
-                          {p.location}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Calendar className="w-3.5 h-3.5 text-blue-400" />
-                          {p.year}
-                        </span>
-                      </div>
-
-                      <Link to={`/projects/${p.slug}`}>
-                        <h3 className="text-xl font-bold text-white group-hover:text-blue-300 transition-colors">
-                          {p.title}
-                        </h3>
-                      </Link>
-
-                      <p className="mt-3 text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-3">
-                        {p.summary}
+                <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-slate-800/80">
+                  <div className="flex items-start gap-3">
+                    <div className="w-9 h-9 rounded-xl bg-blue-600/15 border border-blue-500/30 flex items-center justify-center shrink-0 mt-0.5">
+                      <Cpu className="w-4 h-4 text-blue-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-bold text-white">
+                        Full Technical Scopes
+                      </h3>
+                      <p className="mt-1 text-xs text-slate-400 leading-relaxed">
+                        HV/LV load-flow profiles, fiber topologies, and OEM hardware bills of materials.
                       </p>
-
-                      <div className="mt-4 pt-4 border-t border-slate-800/80">
-                        <h4 className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">
-                          Key Deliverables
-                        </h4>
-                        <ul className="space-y-1.5">
-                          {p.deliverables.slice(0, 2).map((deliv, dIdx) => (
-                            <li key={dIdx} className="flex items-start gap-2 text-xs text-slate-400">
-                              <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0 mt-0.5" />
-                              <span className="line-clamp-1">{deliv}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
                     </div>
                   </div>
 
-                  <div className="p-6 pt-0">
-                    <Link
-                      to={`/projects/${p.slug}`}
-                      className="btn-3d-secondary text-xs w-full py-2.5 justify-center"
-                    >
-                      <span>View Case Study & Scope</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
+                  <div className="flex items-start gap-3">
+                    <div className="w-9 h-9 rounded-xl bg-blue-600/15 border border-blue-500/30 flex items-center justify-center shrink-0 mt-0.5">
+                      <ShieldCheck className="w-4 h-4 text-blue-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-bold text-white">
+                        Ready for New Commissions
+                      </h3>
+                      <p className="mt-1 text-xs text-slate-400 leading-relaxed">
+                        Our engineering team is actively accepting new electrical & ICT project briefs.
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </ScrollReveal>
-            ))}
+
+                <div className="mt-10 flex flex-wrap items-center gap-4">
+                  <Link
+                    to="/quote"
+                    className="btn-3d text-xs sm:text-sm py-3 px-6 inline-flex items-center gap-2"
+                  >
+                    <span>Initiate a Project With Us</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+
+                  <Link
+                    to="/services"
+                    className="btn-3d-secondary text-xs sm:text-sm py-3 px-6 inline-flex items-center gap-2"
+                  >
+                    <FileText className="w-4 h-4 text-sky-400" />
+                    <span>Explore Our Capabilities</span>
+                  </Link>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Right Column: Interactive Hairline Schematic Preview */}
+            <ScrollReveal direction="right" delay={120} className="lg:col-span-5">
+              <HairlineScrollFigure
+                figure="Cabinet"
+                badge="Portfolio Dossier • Coming Soon"
+                title="Power & Rack Infrastructure"
+                subtitle="Upcoming case studies covering 33/11kV substations, Tier-III server racks & fiber networks"
+                label="Interactive engineering cabinet schematic"
+              />
+            </ScrollReveal>
           </div>
         </div>
       </section>

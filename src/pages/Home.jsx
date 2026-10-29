@@ -512,75 +512,39 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* 6. FEATURED PROJECTS PREVIEW */}
+      {/* 6. FEATURED PROJECTS PREVIEW (COMING SOON) */}
       <section className="py-20 lg:py-28 bg-slate-900 border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal className="flex flex-col md:flex-row md:items-end justify-between mb-12">
-            <div>
-              <span className="inline-block px-3 py-1 rounded-md bg-blue-600/10 border border-blue-500/20 text-sky-400 text-xs font-bold uppercase tracking-wider mb-3">
-                Experience & Track Record
+          <ScrollReveal className="rounded-3xl bg-slate-950 border border-slate-800 p-8 sm:p-12 lg:p-14 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 shadow-2xl">
+            <div className="max-w-2xl">
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-400 text-xs font-extrabold uppercase tracking-widest mb-4">
+                <span>Project Portfolio • Coming Soon</span>
               </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                Featured Power & ICT Deployments
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+                Featured Power &amp; ICT Deployment Dossiers Coming Soon
               </h2>
+              <p className="mt-4 text-slate-400 text-sm sm:text-base leading-relaxed">
+                We are currently compiling technical case studies and verified commissioning reports for our Electrical Power, Enterprise ICT, and Automation deployments. Ready to start your own project? Our engineering team is available for immediate consultation.
+              </p>
             </div>
-            <Link
-              to="/projects"
-              className="mt-4 md:mt-0 inline-flex items-center gap-2 text-sm font-bold text-sky-400 hover:text-sky-300 transition-colors"
-            >
-              <span>Explore All Verified Commissions</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+
+            <div className="flex flex-wrap items-center gap-4 shrink-0">
+              <Link
+                to="/quote"
+                className="btn-3d text-xs sm:text-sm py-3 px-6 inline-flex items-center gap-2"
+              >
+                <span>Request a Quote</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                to="/projects"
+                className="btn-3d-secondary text-xs sm:text-sm py-3 px-6 inline-flex items-center gap-2"
+              >
+                <span>View Portfolio Status</span>
+                <ArrowRight className="w-4 h-4 text-sky-400" />
+              </Link>
+            </div>
           </ScrollReveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredProjects.map((p, idx) => (
-              <ScrollReveal key={p.id} delay={idx * 100}>
-                <div className="brutalist-card p-0 overflow-hidden flex flex-col justify-between h-full">
-                  <div>
-                    <div className="relative h-56 overflow-hidden border-b-2 border-slate-800">
-                      <img
-                        src={p.image}
-                        onError={(e) => {
-                          e.currentTarget.onerror = null;
-                          e.currentTarget.src = p.fallbackImage || '/images/electrical-substation.svg';
-                        }}
-                        alt={p.title}
-                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                      />
-                      <div className="absolute top-3 left-3">
-                        <span className="px-3 py-1 text-xs font-black uppercase bg-slate-950 text-white border-2 border-slate-900 shadow-[3px_3px_0px_#020617]">
-                          {p.category}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="p-6">
-                      <span className="text-xs font-bold uppercase tracking-wider text-sky-400">
-                        {p.location} • {p.year}
-                      </span>
-                      <h3 className="mt-2 text-lg font-black uppercase text-white leading-tight">
-                        {p.title}
-                      </h3>
-                      <p className="mt-3 text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-3">
-                        {p.summary}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="p-6 pt-0">
-                    <Link
-                      to={`/projects/${p.slug}`}
-                      className="brutalist-card__button brutalist-card__button--mark w-full text-xs py-2.5"
-                    >
-                      <span>View Technical Case Study</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
         </div>
       </section>
 
