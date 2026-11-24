@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Clock, 
-  HardHat, 
-  ChevronRight, 
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
+  HardHat,
+  ChevronRight,
   ShieldCheck,
-  ExternalLink 
+  ExternalLink
 } from 'lucide-react';
 import { companyInfo } from '../../data/company';
 import { SocialChaosTerminal } from './SocialChaosTerminal';
@@ -19,11 +19,10 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className={`border-t transition-colors ${
-      isDark 
-        ? 'bg-slate-950 text-slate-300 border-slate-800' 
+    <footer className={`border-t transition-colors ${isDark
+        ? 'bg-slate-950 text-slate-300 border-slate-800'
         : 'bg-slate-100/90 text-slate-700 border-slate-200'
-    }`}>
+      }`}>
       {/* Top CTA Banner - Dark Slate Blue & White */}
       <div className="bg-slate-900 text-white py-12 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
@@ -84,9 +83,8 @@ export const Footer = () => {
 
           {/* Col 2: Core Capabilities */}
           <div>
-            <h4 className={`text-sm font-bold uppercase tracking-wider mb-4 ${
-              isDark ? 'text-white' : 'text-slate-900'
-            }`}>
+            <h4 className={`text-sm font-bold uppercase tracking-wider mb-4 ${isDark ? 'text-white' : 'text-slate-900'
+              }`}>
               Core Capabilities
             </h4>
             <ul className="space-y-2.5 text-sm">
@@ -99,11 +97,10 @@ export const Footer = () => {
                 { title: "24/7 Managed Power & IT Support", href: "/services#managed-systems-maintenance" }
               ].map((item, idx) => (
                 <li key={idx}>
-                  <Link 
-                    to={item.href} 
-                    className={`flex items-center gap-1.5 transition-colors ${
-                      isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-blue-600 font-medium'
-                    }`}
+                  <Link
+                    to={item.href}
+                    className={`flex items-center gap-1.5 transition-colors ${isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-blue-600 font-medium'
+                      }`}
                   >
                     <ChevronRight className="w-3.5 h-3.5 text-blue-500" />
                     <span>{item.title}</span>
@@ -115,9 +112,8 @@ export const Footer = () => {
 
           {/* Col 3: Quick Navigation */}
           <div>
-            <h4 className={`text-sm font-bold uppercase tracking-wider mb-4 ${
-              isDark ? 'text-white' : 'text-slate-900'
-            }`}>
+            <h4 className={`text-sm font-bold uppercase tracking-wider mb-4 ${isDark ? 'text-white' : 'text-slate-900'
+              }`}>
               Corporate Directory
             </h4>
             <ul className="space-y-2.5 text-sm">
@@ -129,11 +125,10 @@ export const Footer = () => {
                 { title: "Privacy & Data Handling Notice", href: "/privacy" }
               ].map((item, idx) => (
                 <li key={idx}>
-                  <Link 
-                    to={item.href} 
-                    className={`transition-colors block ${
-                      isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-blue-600 font-medium'
-                    }`}
+                  <Link
+                    to={item.href}
+                    className={`transition-colors block ${isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-blue-600 font-medium'
+                      }`}
                   >
                     {item.title}
                   </Link>
@@ -144,9 +139,8 @@ export const Footer = () => {
 
           {/* Col 4: Contact & Operations */}
           <div>
-            <h4 className={`text-sm font-bold uppercase tracking-wider mb-4 ${
-              isDark ? 'text-white' : 'text-slate-900'
-            }`}>
+            <h4 className={`text-sm font-bold uppercase tracking-wider mb-4 ${isDark ? 'text-white' : 'text-slate-900'
+              }`}>
               Corporate Office
             </h4>
             <ul className="space-y-3.5 text-sm">
@@ -156,22 +150,20 @@ export const Footer = () => {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-blue-500 shrink-0" />
-                <a 
-                  href={`tel:${companyInfo.contact.phone.replace(/\s+/g, '')}`} 
-                  className={`transition-colors ${
-                    isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-blue-600 font-medium'
-                  }`}
+                <a
+                  href={`tel:${companyInfo.contact.phone.replace(/\s+/g, '')}`}
+                  className={`transition-colors ${isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-blue-600 font-medium'
+                    }`}
                 >
                   {companyInfo.contact.phone}
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-blue-500 shrink-0" />
-                <a 
-                  href={`mailto:${companyInfo.contact.email}`} 
-                  className={`transition-colors ${
-                    isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-blue-600 font-medium'
-                  }`}
+                <a
+                  href={`mailto:${companyInfo.contact.email}`}
+                  className={`transition-colors ${isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-blue-600 font-medium'
+                    }`}
                 >
                   {companyInfo.contact.email}
                 </a>
@@ -198,9 +190,8 @@ export const Footer = () => {
         </div>
 
         {/* Legal & Disclaimer */}
-        <div className={`mt-12 pt-8 border-t flex flex-col md:flex-row items-center justify-between gap-4 text-xs ${
-          isDark ? 'border-slate-800 text-slate-500' : 'border-slate-300 text-slate-600'
-        }`}>
+        <div className={`mt-12 pt-8 border-t flex flex-col md:flex-row items-center justify-between gap-4 text-xs ${isDark ? 'border-slate-800 text-slate-500' : 'border-slate-300 text-slate-600'
+          }`}>
           <p>
             © {currentYear} {companyInfo.name}. All rights reserved.
           </p>

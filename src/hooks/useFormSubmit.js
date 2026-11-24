@@ -21,11 +21,9 @@ export const useFormSubmit = (formName = 'Website Enquiry') => {
       return true;
     }
 
-    // 2. Retrieve Web3Forms Access Key
-    // Falls back to a public test key or prompts the user if not configured
-    const accessKey =
-      import.meta.env.VITE_WEB3FORMS_ACCESS_KEY ||
-      '42a1bce8-8f24-4037-b434-5f62aef996c6';
+    // 2. Use the verified Atemzy Hitech Web3Forms Access Key directly
+    // (Prevents an older VITE_WEB3FORMS_ACCESS_KEY in Vercel dashboard from overriding it)
+    const accessKey = '42a1bce8-8f24-4037-b434-5f62aef996c6';
 
     // 3. Prepare payload for Web3Forms API
     const submissionData = {
