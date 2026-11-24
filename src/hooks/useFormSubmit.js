@@ -25,7 +25,7 @@ export const useFormSubmit = (formName = 'Website Enquiry') => {
     // Falls back to a public test key or prompts the user if not configured
     const accessKey =
       import.meta.env.VITE_WEB3FORMS_ACCESS_KEY ||
-      'fafa27d4-e5e6-46ee-92b0-3d1ec6834d67';
+      '42a1bce8-8f24-4037-b434-5f62aef996c6';
 
     // 3. Prepare payload for Web3Forms API
     const submissionData = {
