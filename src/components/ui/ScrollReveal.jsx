@@ -15,6 +15,7 @@ import {
   Terminal,
   Vault
 } from '@lucasmarkes/hairline/react';
+import { WalkieTalkie, CctvCamera } from './CustomHairlineFigures';
 import { useTheme } from '../../context/ThemeContext';
 
 const figureMap = {
@@ -31,7 +32,9 @@ const figureMap = {
   Relay,
   Hub,
   Terminal,
-  Vault
+  Vault,
+  WalkieTalkie,
+  CctvCamera
 };
 
 /**

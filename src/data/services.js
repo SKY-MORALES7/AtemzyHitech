@@ -44,70 +44,70 @@ export const services = [
     hairlineFigure: "Router"
   },
   {
-    id: "cctv-walkie-talkie-mast-installation",
-    slug: "cctv-walkie-talkie-mast-installation",
-    category: "CCTV, Walkie-Talkies & Mast Installation",
-    title: "CCTV Camera Installation & Sales, Walkie-Talkies & Mast / Mass Installation",
+    id: "mass-installations",
+    slug: "mass-installations",
+    category: "Mass Installations",
+    title: "Mass Installations & Telecom Mast Infrastructure",
     shortDescription:
-      "Direct sales and turnkey installation of HD/4K IP CCTV cameras, industrial walkie-talkie two-way radios, and communication mast / mass site deployments.",
+      "Turnkey communication mast erection, antenna tower rigging, guy-wire tensioning, lightning earthing, and multi-site mass infrastructure rollouts.",
     fullDescription:
-      "Atemzy Hitech supplies, installs, and maintains complete visual surveillance and long-range radio communication infrastructure. Whether you require CCTV camera sales and multi-site mass installation, rugged UHF/VHF/IP walkie-talkies with repeater base stations, or structural communication mast erection and earthing, our field engineers deliver dependable coverage.",
+      "Atemzy Hitech executes structural communication mast installations and enterprise-wide mass site rollouts across Nigeria. From monopole and lattice telecom mast erection, microwave dish alignment, and aviation obstruction lighting to deep-earth lightning protection and multi-branch hardware deployment, our field engineers deliver dependable wide-area coverage.",
     features: [
-      "CCTV camera sales & installation (4K IP, PTZ, solar, wireless & night-vision cameras)",
-      "Walkie-talkie sales, programming & long-range two-way radio repeater networks",
-      "Telecom mast erection, antenna tower rigging & multi-site mass installation",
-      "DVR/NVR storage servers, control room video walls & remote mobile viewing setup",
-      "Tower aviation obstruction lighting, guy-wire tensioning & lightning earthing"
+      "Telecom lattice & monopole mast erection, rigging & foundation civil works",
+      "Multi-site enterprise mass installations & nationwide branch rollouts",
+      "Directional microwave dish alignment, sector antennas & RF feeder cabling",
+      "Tower aviation obstruction beacons, guy-wire tensioning & structural audits",
+      "Low-impedance (<2 Ohm) copper earthing grids & lightning surge arrestors"
     ],
     iconName: "Network",
-    badge: "CCTV & Radio Comms",
-    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1200&q=80",
-    fallbackImage: "/images/data-center-ict.svg",
-    hairlineFigure: "Relay"
+    badge: "Mass & Mast Rollout",
+    image: "/images/mass-mast-installation.svg",
+    fallbackImage: "/images/mass-mast-installation.svg",
+    hairlineFigure: "Dish"
   },
   {
     id: "automation-smart-systems",
     slug: "automation-smart-systems",
     category: "Automation & Smart Systems",
-    title: "Industrial Automation, IoT & Smart Building Systems",
+    title: "CCTV Camera Installation & Sales, Smart BMS & Automation",
     shortDescription:
-      "PLC/SCADA control engineering, intelligent Building Management Systems (BMS), IP video surveillance, and biometric access automation.",
+      "HD/4K IP CCTV camera sales & installation, PTZ & solar surveillance, PLC/SCADA control engineering, and biometric access automation.",
     fullDescription:
-      "Modern facilities demand intelligent visibility and automated control. Atemzy Hitech integrates industrial PLC/SCADA telemetry alongside enterprise low-voltage security, smart CCTV surveillance, fire detection, and centralized building management systems for seamless operational command.",
+      "Modern facilities demand intelligent visibility and automated security. Atemzy Hitech supplies and installs complete IP/PTZ CCTV camera surveillance networks, NVR control rooms, biometric access control, smart building management systems (BMS), and industrial PLC/SCADA telemetry for seamless operational command.",
     features: [
-      "PLC, HMI & SCADA industrial control panel integration",
-      "Smart Building Management Systems (BMS) & energy metering",
-      "Enterprise IP CCTV camera installation, sales & AI video analytics",
+      "CCTV camera installation & sales (4K IP, PTZ dome, solar & night-vision cameras)",
+      "DVR/NVR RAID storage servers, video walls & remote mobile viewing setup",
+      "PLC, HMI & SCADA industrial control panel & smart BMS integration",
       "Biometric access control, turnstiles & perimeter intrusion sensors",
       "Addressable fire alarm, gas suppression & PA/VA systems"
     ],
     iconName: "Cpu",
-    badge: "Smart Tech",
+    badge: "CCTV & Smart Tech",
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
     fallbackImage: "/images/circuit-automation.svg",
-    hairlineFigure: "Relay"
+    hairlineFigure: "CctvCamera"
   },
   {
     id: "procurement-technical-supplies",
     slug: "procurement-technical-supplies",
     category: "Procurement & Technical Supplies",
-    title: "Electrical, CCTV, Walkie-Talkie & ICT Hardware Sales",
+    title: "Walkie-Talkie Radios, Electrical & ICT Hardware Procurement",
     shortDescription:
-      "Direct OEM sales and supply of CCTV cameras, walkie-talkies, transformers, armored cables, enterprise network hardware, and UPS systems.",
+      "Direct sales and OEM supply of industrial walkie-talkie two-way radios, CCTV hardware, transformers, armored cables, and enterprise network switches.",
     fullDescription:
-      "Navigating supply chain bottlenecks requires vetted manufacturer partnerships. Atemzy Hitech provides direct sales and turnkey technical procurement for enterprises, security operations, and contractors—supplying genuine OEM CCTV cameras, walkie-talkie radios, mast accessories, and electrical/ICT hardware with full warranty backing.",
+      "Navigating supply chain bottlenecks requires vetted manufacturer partnerships. Atemzy Hitech provides direct sales and turnkey technical procurement—supplying long-range UHF/VHF/IP walkie-talkie two-way radios with repeater base stations, CCTV surveillance kits, distribution transformers, armored cables, and enterprise ICT hardware with full warranty backing.",
     features: [
-      "CCTV cameras, NVR/DVR recorders, PoE switches & surveillance accessories sales",
-      "Industrial walkie-talkies, two-way radios, base repeaters & mast hardware sales",
+      "Walkie-talkie sales, programming & long-range two-way radio repeater base stations",
+      "CCTV camera kits, NVR/DVR recorders, PoE switches & surveillance accessories",
       "Distribution transformers, RMUs & armored XLPE power cables",
-      "Enterprise routers, core switches, servers & transceiver modules",
-      "Industrial three-phase UPS banks, rectifiers & lithium batteries"
+      "Enterprise routers, core switches, servers & optical transceiver modules",
+      "Industrial three-phase UPS banks, rectifiers & lithium battery storage"
     ],
     iconName: "Truck",
-    badge: "OEM Sales & Supply",
+    badge: "Walkie-Talkie & OEM Supply",
     image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1200&q=80",
     fallbackImage: "/images/circuit-automation.svg",
-    hairlineFigure: "Patch"
+    hairlineFigure: "WalkieTalkie"
   },
   {
     id: "managed-systems-maintenance",
@@ -137,7 +137,7 @@ export const serviceCategories = [
   "All Services",
   "Electrical Engineering",
   "ICT & Networking",
-  "CCTV, Walkie-Talkies & Mast Installation",
+  "Mass Installations",
   "Automation & Smart Systems",
   "Procurement & Technical Supplies",
   "Managed Systems & Maintenance"

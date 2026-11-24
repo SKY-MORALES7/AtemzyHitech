@@ -93,9 +93,9 @@ export const Footer = () => {
               {[
                 { title: "Electrical Power & Substations", href: "/services#electrical-engineering" },
                 { title: "Enterprise ICT & Fiber Networks", href: "/services#ict-network-infrastructure" },
-                { title: "CCTV Sales, Walkie-Talkies & Mast Installation", href: "/services#cctv-walkie-talkie-mast-installation" },
-                { title: "Industrial Automation & Smart BMS", href: "/services#automation-smart-systems" },
-                { title: "Electrical & ICT OEM Procurement", href: "/services#procurement-technical-supplies" },
+                { title: "Mass & Telecom Mast Installations", href: "/services#mass-installations" },
+                { title: "CCTV Installation & Smart Automation", href: "/services#automation-smart-systems" },
+                { title: "Walkie-Talkies & OEM Hardware Supply", href: "/services#procurement-technical-supplies" },
                 { title: "24/7 Managed Power & IT Support", href: "/services#managed-systems-maintenance" }
               ].map((item, idx) => (
                 <li key={idx}>
