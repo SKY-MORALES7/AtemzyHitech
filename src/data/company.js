@@ -26,16 +26,16 @@ export const companyInfo = {
     }
   ],
   contact: {
-    phone: "+234 803 000 0000",
-    altPhone: "+234 812 000 0000",
-    email: "info@atemzyhitech.com",
-    supportEmail: "projects@atemzyhitech.com",
+    phone: "08058660518",
+    altPhone: "+234 805 866 0518",
+    email: "atemzyhightech@gmail.com",
+    supportEmail: "atemzyhightech@gmail.com",
     address: "Plot 12, Commercial Central Hub, Victoria Island, Lagos, Nigeria",
     hours: "Monday – Friday: 8:00 AM – 5:30 PM",
     emergency: "24/7 Rapid Emergency Response for Contracted Infrastructure"
   },
   socials: {
-    whatsapp: "https://wa.me/2348030000000?text=Hello%20Atemzy%20Hitech,%20I%20would%20like%20to%20enquire%20about%20your%20services",
+    whatsapp: "https://wa.me/2348058660518?text=Hello%20Atemzy%20Hitech,%20I%20would%20like%20to%20enquire%20about%20your%20services",
     linkedin: "https://www.linkedin.com/company/atemzy-hitech-engineering",
     facebook: "https://www.facebook.com/atemzyhitech",
     twitter: "https://twitter.com/atemzyhitech"

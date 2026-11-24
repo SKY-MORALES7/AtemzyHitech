@@ -49,12 +49,12 @@ export const Services = () => {
             <h1 className={`text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight ${
               isDark ? 'text-white' : 'text-slate-950'
             }`}>
-              Electrical Power Engineering, Enterprise ICT & Smart Automation
+              Electrical Power, Enterprise ICT, CCTV, Walkie-Talkies & Mast Installation
             </h1>
             <p className={`mt-4 text-base sm:text-lg leading-relaxed ${
               isDark ? 'text-slate-300' : 'text-slate-600'
             }`}>
-              Tailored capabilities delivering end-to-end execution across HV/LV power substations, structured fiber-optic networks, data centers, industrial automation, and OEM technical procurement.
+              Tailored capabilities delivering end-to-end execution across HV/LV power substations, structured fiber-optic networks, CCTV camera sales & installation, walkie-talkie radio systems, telecom mast / mass installations, and OEM hardware procurement.
             </p>
           </ScrollReveal>
         </div>

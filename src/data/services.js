@@ -44,6 +44,28 @@ export const services = [
     hairlineFigure: "Router"
   },
   {
+    id: "cctv-walkie-talkie-mast-installation",
+    slug: "cctv-walkie-talkie-mast-installation",
+    category: "CCTV, Walkie-Talkies & Mast Installation",
+    title: "CCTV Camera Installation & Sales, Walkie-Talkies & Mast / Mass Installation",
+    shortDescription:
+      "Direct sales and turnkey installation of HD/4K IP CCTV cameras, industrial walkie-talkie two-way radios, and communication mast / mass site deployments.",
+    fullDescription:
+      "Atemzy Hitech supplies, installs, and maintains complete visual surveillance and long-range radio communication infrastructure. Whether you require CCTV camera sales and multi-site mass installation, rugged UHF/VHF/IP walkie-talkies with repeater base stations, or structural communication mast erection and earthing, our field engineers deliver dependable coverage.",
+    features: [
+      "CCTV camera sales & installation (4K IP, PTZ, solar, wireless & night-vision cameras)",
+      "Walkie-talkie sales, programming & long-range two-way radio repeater networks",
+      "Telecom mast erection, antenna tower rigging & multi-site mass installation",
+      "DVR/NVR storage servers, control room video walls & remote mobile viewing setup",
+      "Tower aviation obstruction lighting, guy-wire tensioning & lightning earthing"
+    ],
+    iconName: "Network",
+    badge: "CCTV & Radio Comms",
+    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1200&q=80",
+    fallbackImage: "/images/data-center-ict.svg",
+    hairlineFigure: "Relay"
+  },
+  {
     id: "automation-smart-systems",
     slug: "automation-smart-systems",
     category: "Automation & Smart Systems",
@@ -51,11 +73,11 @@ export const services = [
     shortDescription:
       "PLC/SCADA control engineering, intelligent Building Management Systems (BMS), IP video surveillance, and biometric access automation.",
     fullDescription:
-      "Modern facilities demand intelligent visibility and automated control. Atemzy Hitech integrates industrial PLC/SCADA telemetry alongside enterprise low-voltage security, smart lighting, fire detection, and centralized building management systems for seamless operational command.",
+      "Modern facilities demand intelligent visibility and automated control. Atemzy Hitech integrates industrial PLC/SCADA telemetry alongside enterprise low-voltage security, smart CCTV surveillance, fire detection, and centralized building management systems for seamless operational command.",
     features: [
       "PLC, HMI & SCADA industrial control panel integration",
       "Smart Building Management Systems (BMS) & energy metering",
-      "Enterprise IP CCTV surveillance & AI video analytics",
+      "Enterprise IP CCTV camera installation, sales & AI video analytics",
       "Biometric access control, turnstiles & perimeter intrusion sensors",
       "Addressable fire alarm, gas suppression & PA/VA systems"
     ],
@@ -69,20 +91,20 @@ export const services = [
     id: "procurement-technical-supplies",
     slug: "procurement-technical-supplies",
     category: "Procurement & Technical Supplies",
-    title: "Electrical & ICT Hardware Procurement",
+    title: "Electrical, CCTV, Walkie-Talkie & ICT Hardware Sales",
     shortDescription:
-      "Direct OEM sourcing, factory acceptance testing, and supply of transformers, armored cables, enterprise network hardware, and UPS systems.",
+      "Direct OEM sales and supply of CCTV cameras, walkie-talkies, transformers, armored cables, enterprise network hardware, and UPS systems.",
     fullDescription:
-      "Navigating supply chain bottlenecks requires vetted manufacturer partnerships. Atemzy Hitech provides turnkey technical procurement for telecom operators, enterprises, and power contractors, guaranteeing authentic OEM electrical and ICT hardware with full warranty backing.",
+      "Navigating supply chain bottlenecks requires vetted manufacturer partnerships. Atemzy Hitech provides direct sales and turnkey technical procurement for enterprises, security operations, and contractors—supplying genuine OEM CCTV cameras, walkie-talkie radios, mast accessories, and electrical/ICT hardware with full warranty backing.",
     features: [
+      "CCTV cameras, NVR/DVR recorders, PoE switches & surveillance accessories sales",
+      "Industrial walkie-talkies, two-way radios, base repeaters & mast hardware sales",
       "Distribution transformers, RMUs & armored XLPE power cables",
       "Enterprise routers, core switches, servers & transceiver modules",
-      "Industrial three-phase UPS banks, rectifiers & lithium batteries",
-      "Digital test instruments, Fluke analyzers & fiber fusion splicers",
-      "Factory acceptance testing (FAT), certification & site delivery"
+      "Industrial three-phase UPS banks, rectifiers & lithium batteries"
     ],
     iconName: "Truck",
-    badge: "OEM Supply",
+    badge: "OEM Sales & Supply",
     image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1200&q=80",
     fallbackImage: "/images/circuit-automation.svg",
     hairlineFigure: "Patch"
@@ -115,6 +137,7 @@ export const serviceCategories = [
   "All Services",
   "Electrical Engineering",
   "ICT & Networking",
+  "CCTV, Walkie-Talkies & Mast Installation",
   "Automation & Smart Systems",
   "Procurement & Technical Supplies",
   "Managed Systems & Maintenance"

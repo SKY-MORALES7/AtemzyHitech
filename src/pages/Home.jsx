@@ -472,10 +472,10 @@ export const Home = () => {
               Capabilities Directory
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Our Five Electrical & ICT Pillars
+              Our Core Electrical, ICT &amp; Security Pillars
             </h2>
             <p className="mt-4 text-slate-400 text-base sm:text-lg">
-              Specialized engineering capabilities designed for financial institutions, telecom operators, industrial plants, and modern commercial campuses.
+              Specialized engineering capabilities covering HV/LV power systems, enterprise ICT networks, CCTV camera sales &amp; installation, walkie-talkie radios, mast installations, and OEM hardware supply.
             </p>
           </ScrollReveal>
 

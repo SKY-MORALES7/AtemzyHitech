@@ -270,15 +270,15 @@ export const Contact = () => {
           {companyInfo.socials.whatsapp && (
             <CorporateCard
               title="Rapid Liaison"
-              badgeLabel="ONLINE"
+              badgeLabel="WHATSAPP"
               badgeValue="24/7"
               theme="theme-blue"
-              description="Immediate engineering consultations, project dispatch, and rapid tenders response via WhatsApp."
+              description="Immediate engineering consultations, CCTV/walkie-talkie orders, and rapid project dispatch via WhatsApp."
               features={[
-                { icon: <MessageSquare className="w-3.5 h-3.5" />, text: "Instant Response" },
+                { icon: <MessageSquare className="w-3.5 h-3.5" />, text: `WhatsApp: ${companyInfo.contact.phone}` },
                 { icon: <ShieldCheck className="w-3.5 h-3.5" />, text: "Certified Engineers" }
               ]}
-              actionText="Open WhatsApp"
+              actionText="Chat on WhatsApp"
               actionHref={companyInfo.socials.whatsapp}
               isExternal={true}
             />
