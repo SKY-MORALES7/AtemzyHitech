@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { ScrollToTop } from './components/layout/ScrollToTop';
+import { WhatsAppFloatingButton } from './components/layout/WhatsAppFloatingButton';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 
 // Pages
@@ -37,6 +38,7 @@ function AppContent() {
         </Routes>
       </main>
       <Footer />
+      <WhatsAppFloatingButton />
     </div>
   );
 }

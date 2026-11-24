@@ -172,19 +172,6 @@ export const Footer = () => {
                 <Clock className="w-4 h-4 text-blue-500 shrink-0 mt-1" />
                 <span>{companyInfo.contact.hours}</span>
               </li>
-              {companyInfo.socials.whatsapp && (
-                <li className="pt-2">
-                  <a
-                    href={companyInfo.socials.whatsapp}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-3d text-[11px] py-2 px-3.5"
-                  >
-                    <span>Direct WhatsApp Chat</span>
-                    <ExternalLink className="w-3 h-3 text-blue-500" />
-                  </a>
-                </li>
-              )}
             </ul>
           </div>
         </div>
