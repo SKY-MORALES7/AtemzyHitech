@@ -153,83 +153,87 @@ export const WalkieTalkie = ({
   };
 
   const handlePointerLeave = () => {
-    setPointer((prev) => ({ ...prev, active: false }));
+    setPointer({ x: 0, y: 0, active: false });
+    if (onRead) onRead('');
   };
 
-  // Isometric camera angles driven smoothly by mouse cursor + idle breathing
-  const idleWave = Math.sin(pulsePhase * 1.4) * 4;
-  const azDeg = -36 + pointer.x * 26 * intensity + (pointer.active ? 0 : idleWave);
-  const k = Math.max(0.36, Math.min(0.72, 0.52 + pointer.y * 0.14 * intensity));
-  const P = createProjector(azDeg, k, 1.85, 120, 126);
+  // Isometric camera angles driven smoothly by mouse cursor on hover (steady when not hovering)
+  const activeX = pointer.active ? pointer.x : 0;
+  const activeY = pointer.active ? pointer.y : 0;
+  const azDeg = -36 + activeX * 26 * intensity;
+  const k = Math.max(0.38, Math.min(0.68, 0.5 + activeY * 0.14 * intensity));
+  const P = createProjector(azDeg, k, 1.56, 120, 102);
 
-  // Base Reference Grid Plate
+  // Compact Base Reference Grid Plate (stays well inside the border with generous margin)
   const basePlate = poly([
-    P(-36, -32, -26),
-    P(36, -32, -26),
-    P(36, 32, -26),
-    P(-36, 32, -26)
+    P(-25, -22, -22),
+    P(25, -22, -22),
+    P(25, 22, -22),
+    P(-25, 22, -22)
   ]);
 
   const gridLines = [];
-  for (let g = -24; g <= 24; g += 12) {
-    gridLines.push(seg(P(g, -32, -26), P(g, 32, -26)));
-    gridLines.push(seg(P(-36, g, -26), P(36, g, -26)));
+  for (let g = -16; g <= 16; g += 8) {
+    gridLines.push(seg(P(g, -22, -22), P(g, 22, -22)));
+    gridLines.push(seg(P(-25, g, -22), P(25, g, -22)));
   }
 
-  // Main Walkie-Talkie Rugged Chassis Body [-14..14, -9..9, -24..14]
-  const bodyFaces = buildIsoBox(P, -14, -9, -24, 14, 9, 14, azDeg);
+  // Main Walkie-Talkie Rugged Chassis Body [-13..13, -8..8, -22..14]
+  const bodyFaces = buildIsoBox(P, -13, -8, -22, 13, 8, 14, azDeg);
 
-  // Side PTT (Push-To-Talk) Ribbed Grip Module [-17..-14, -5..5, -4..10]
-  const pttFaces = buildIsoBox(P, -17, -5, -4, -14, 5, 10, azDeg);
+  // Side PTT (Push-To-Talk) Ribbed Grip Module [-16..-13, -4.5..4.5, -3..10]
+  const pttFaces = buildIsoBox(P, -16, -4.5, -3, -13, 4.5, 10, azDeg);
 
-  // Top Rotary Channel Knob [3..9, -4..4, 14..21]
-  const knobFaces = buildIsoBox(P, 3, -4, 14, 9, 4, 21, azDeg);
+  // Top Rotary Channel Knob [3..8.5, -3.5..3.5, 14..20.5]
+  const knobFaces = buildIsoBox(P, 3, -3.5, 14, 8.5, 3.5, 20.5, azDeg);
 
-  // High-Gain Helical Whip Antenna [-11..-5, -4..4, 14..46]
-  const antBaseFaces = buildIsoBox(P, -11, -4, 14, -5, 4, 22, azDeg);
-  const antMidFaces = buildIsoBox(P, -9.8, -2.8, 22, -6.2, 2.8, 44, azDeg);
-  const antTipPt = P(-8, 0, 46);
+  // High-Gain Helical Whip Antenna [-10.5..-5, -3.5..3.5, 14..43]
+  const antBaseFaces = buildIsoBox(P, -10.5, -3.5, 14, -5, 3.5, 21.5, azDeg);
+  const antMidFaces = buildIsoBox(P, -9.3, -2.4, 21.5, -6.1, 2.4, 41, azDeg);
+  const antTipPt = P(-7.7, 0, 42.5);
 
-  // Front Panel Backlit LCD Frequency Screen [-10..10, 9.2, -2..10]
+  // Front Panel Backlit LCD Frequency Screen [-9.5..9.5, 8.2, -1..10]
   const lcdScreen = poly([
-    P(-10, 9.2, -1),
-    P(10, 9.2, -1),
-    P(10, 9.2, 10),
-    P(-10, 9.2, 10)
+    P(-9.5, 8.2, -1),
+    P(9.5, 8.2, -1),
+    P(9.5, 8.2, 10),
+    P(-9.5, 8.2, 10)
   ]);
 
   // Speaker Grille Horizontal Acoustic Slats on Front Face
   const speakerSlats = [];
-  for (let z = -19; z <= -6; z += 2.6) {
-    speakerSlats.push(seg(P(-9, 9.3, z), P(9, 9.3, z)));
+  for (let z = -17.5; z <= -5.5; z += 2.4) {
+    speakerSlats.push(seg(P(-8.5, 8.3, z), P(8.5, 8.3, z)));
   }
 
-  // Concentric Isometric RF Waves radiating from Antenna Tip (z = 44) shifted toward cursor
-  const rfWaves = [0, 1, 2].map((idx) => {
-    const progress = ((pulsePhase * 0.85 + idx / 3) % 1);
-    const radius = 8 + progress * 34;
-    const pts = [];
-    const steps = 28;
-    const driftX = pointer.x * 12 * progress;
-    const driftY = pointer.y * 12 * progress;
-    for (let i = 0; i <= steps; i++) {
-      const a = (i / steps) * Math.PI * 2;
-      pts.push(
-        P(
-          -8 + driftX + Math.cos(a) * radius,
-          driftY + Math.sin(a) * radius,
-          44 + progress * 4
-        )
-      );
-    }
-    return {
-      d: openPath(pts),
-      isHi: idx === 0
-    };
-  });
+  // Concentric Isometric RF Waves radiating from Antenna Tip ONLY when hovered (pointer.active)
+  const rfWaves = pointer.active
+    ? [0, 1, 2].map((idx) => {
+        const progress = (pulsePhase * 0.85 + idx / 3) % 1;
+        const radius = 6 + progress * 26;
+        const pts = [];
+        const steps = 28;
+        const driftX = pointer.x * 10 * progress;
+        const driftY = pointer.y * 10 * progress;
+        for (let i = 0; i <= steps; i++) {
+          const a = (i / steps) * Math.PI * 2;
+          pts.push(
+            P(
+              -7.7 + driftX + Math.cos(a) * radius,
+              driftY + Math.sin(a) * radius,
+              42.5 + progress * 3
+            )
+          );
+        }
+        return {
+          d: openPath(pts),
+          isHi: idx === 0
+        };
+      })
+    : [];
 
-  // Directional Telemetry Vector Line from Antenna Tip toward Pointer Target
-  const targetPt = P(-8 + pointer.x * 34, pointer.y * 28, 45);
+  // Directional Telemetry Vector Line from Antenna Tip toward Pointer Target (only when hovered)
+  const targetPt = P(-7.7 + activeX * 26, activeY * 22, 43.5);
   const vectorBeam = seg(antTipPt, targetPt);
 
   const plateColor = 'var(--hairline-plate, #0f172a)';
@@ -245,13 +249,13 @@ export const WalkieTalkie = ({
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
       style={{ aspectRatio: '5 / 4', position: 'relative' }}
-      className={`w-full h-full select-none cursor-crosshair ${className}`}
+      className={`w-full h-full select-none cursor-crosshair overflow-hidden ${className}`}
       aria-label={label}
     >
       <svg
         ref={svgRef}
         viewBox="0 0 240 192"
-        className="w-full h-full block overflow-visible"
+        className="w-full h-full block overflow-hidden"
         style={{
           strokeWidth: strokeW,
           strokeLinejoin: 'round',
@@ -288,17 +292,17 @@ export const WalkieTalkie = ({
         <path d={lcdScreen} fill={plateColor} stroke={hiColor} />
         <path
           d={seg(
-            P(-7, 9.4, 4.5),
-            P(7, 9.4, 4.5 + pointer.x * 2.2)
+            P(-6.5, 8.4, 4.5),
+            P(6.5, 8.4, 4.5 + activeX * 2.2)
           )}
           fill="none"
           stroke={hiColor}
         />
         <circle
-          cx={P(7.5, 9.4, 7.5)[0]}
-          cy={P(7.5, 9.4, 7.5)[1]}
-          r="2"
-          fill={hiColor}
+          cx={P(7, 8.4, 7.5)[0]}
+          cy={P(7, 8.4, 7.5)[1]}
+          r="1.8"
+          fill={pointer.active ? hiColor : midColor}
         />
 
         {/* Speaker Grille Acoustic Slats */}
@@ -319,21 +323,25 @@ export const WalkieTalkie = ({
           <path key={`am-${i}`} d={f.d} fill={plateColor} stroke={hiColor} />
         ))}
 
-        {/* Propagating UHF/VHF Radio Waves responding to Cursor */}
-        {rfWaves.map((w, i) => (
-          <path
-            key={`rf-${i}`}
-            d={w.d}
-            fill="none"
-            stroke={w.isHi ? hiColor : midColor}
-            strokeDasharray={w.isHi ? undefined : '2 3'}
-          />
-        ))}
+        {/* Propagating UHF/VHF Radio Waves & Signal Beam — Shown ONLY on Hover */}
+        {pointer.active &&
+          rfWaves.map((w, i) => (
+            <path
+              key={`rf-${i}`}
+              d={w.d}
+              fill="none"
+              stroke={w.isHi ? hiColor : midColor}
+              strokeDasharray={w.isHi ? undefined : '2 3'}
+            />
+          ))}
 
-        {/* Directional RF Beam & Glowing Antenna Tip */}
-        <path d={vectorBeam} fill="none" stroke={hiColor} strokeDasharray="2 3" />
-        <circle cx={antTipPt[0]} cy={antTipPt[1]} r="2.8" fill={hiColor} />
-        <circle cx={targetPt[0]} cy={targetPt[1]} r="2.2" fill={edgeColor} />
+        {pointer.active && (
+          <>
+            <path d={vectorBeam} fill="none" stroke={hiColor} strokeDasharray="2 3" />
+            <circle cx={targetPt[0]} cy={targetPt[1]} r="2.2" fill={edgeColor} />
+          </>
+        )}
+        <circle cx={antTipPt[0]} cy={antTipPt[1]} r="2.4" fill={hiColor} />
       </svg>
     </div>
   );
@@ -392,69 +400,70 @@ export const CctvCamera = ({
   };
 
   const handlePointerLeave = () => {
-    setPointer((prev) => ({ ...prev, active: false }));
+    setPointer({ x: 0, y: 0, active: false });
+    if (onRead) onRead('');
   };
 
   // Smooth autonomous patrol sweep when mouse isn't hovering, or direct mouse lock on hover
-  const autoPan = Math.sin(scanTime * 1.1) * 0.55;
-  const autoTilt = Math.cos(scanTime * 0.8) * 0.3;
+  const autoPan = Math.sin(scanTime * 1.1) * 0.45;
+  const autoTilt = Math.cos(scanTime * 0.8) * 0.22;
   const aimX = pointer.active ? pointer.x : autoPan;
   const aimY = pointer.active ? pointer.y : autoTilt;
 
   const azDeg = -34 + aimX * 18 * intensity;
-  const k = Math.max(0.38, Math.min(0.68, 0.52 + aimY * 0.1 * intensity));
-  const P = createProjector(azDeg, k, 1.75, 120, 110);
+  const k = Math.max(0.38, Math.min(0.68, 0.5 + aimY * 0.1 * intensity));
+  const P = createProjector(azDeg, k, 1.52, 120, 98);
 
-  // Surveillance Floor Detection Zone Grid (z = -28)
+  // Surveillance Floor Detection Zone Grid (z = -22, stays cleanly inside the borders)
   const floorGrid = poly([
-    P(-40, -34, -28),
-    P(40, -34, -28),
-    P(40, 34, -28),
-    P(-40, 34, -28)
+    P(-28, -24, -22),
+    P(28, -24, -22),
+    P(28, 24, -22),
+    P(-28, 24, -22)
   ]);
 
   const floorLines = [];
-  for (let g = -24; g <= 24; g += 16) {
-    floorLines.push(seg(P(g, -34, -28), P(g, 34, -28)));
-    floorLines.push(seg(P(-40, g, -28), P(40, g, -28)));
+  for (let g = -16; g <= 16; g += 16) {
+    floorLines.push(seg(P(g, -24, -22), P(g, 24, -22)));
+    floorLines.push(seg(P(-28, g, -22), P(28, g, -22)));
   }
 
-  // Wall/Mast Mounting Bracket & Gimbal Arm at Rear-Left [-34..-22, -14..2, 6..26]
-  const wallMountFaces = buildIsoBox(P, -34, -14, 6, -28, 2, 26, azDeg);
-  const armBarFaces = buildIsoBox(P, -28, -9, 13, -14, -3, 19, azDeg);
+  // Wall/Mast Mounting Bracket & Gimbal Arm at Rear-Left [-30..-18, -12..2, 6..24]
+  const wallMountFaces = buildIsoBox(P, -30, -12, 6, -24, 2, 24, azDeg);
+  const armBarFaces = buildIsoBox(P, -24, -8, 12, -12, -2, 18, azDeg);
 
   // Camera Housing Pivots dynamically around (-10, -6, 14) based on aimX / aimY!
-  const camOffsetY = aimX * 8;
-  const camTiltZ = -aimY * 7;
+  const camOffsetY = aimX * 7;
+  const camTiltZ = -aimY * 6;
 
   // Armored IP CCTV Camera Main Body & Sunshield Hood
   const camBodyFaces = buildIsoBox(
     P,
-    -14,
-    -13 + camOffsetY * 0.3,
+    -12,
+    -12 + camOffsetY * 0.3,
     6 + camTiltZ * 0.3,
     12,
     5 + camOffsetY * 0.6,
-    22 + camTiltZ * 0.6,
+    21 + camTiltZ * 0.6,
     azDeg
   );
 
   // Upper Sun-Shield Visor Overhang
   const visorFaces = buildIsoBox(
     P,
-    -15,
-    -14 + camOffsetY * 0.3,
-    21 + camTiltZ * 0.5,
-    15,
+    -13,
+    -13 + camOffsetY * 0.3,
+    20 + camTiltZ * 0.5,
+    14.5,
     6 + camOffsetY * 0.6,
-    24.5 + camTiltZ * 0.6,
+    23.5 + camTiltZ * 0.6,
     azDeg
   );
 
-  // Front Optical Lens Barrel & Infrared LED Ring at X = 12..17
-  const lensCenterX = 14.5;
-  const lensCenterY = -4 + camOffsetY * 0.55;
-  const lensCenterZ = 14 + camTiltZ * 0.55;
+  // Front Optical Lens Barrel & Infrared LED Ring at X = 12..16
+  const lensCenterX = 14;
+  const lensCenterY = -3.5 + camOffsetY * 0.55;
+  const lensCenterZ = 13.5 + camTiltZ * 0.55;
 
   const lensOuterPts = [];
   const lensInnerPts = [];
@@ -463,32 +472,32 @@ export const CctvCamera = ({
   for (let i = 0; i <= steps; i++) {
     const a = (i / steps) * Math.PI * 2;
     lensOuterPts.push(
-      P(lensCenterX, lensCenterY + Math.cos(a) * 7.2, lensCenterZ + Math.sin(a) * 7.2)
+      P(lensCenterX, lensCenterY + Math.cos(a) * 6.8, lensCenterZ + Math.sin(a) * 6.8)
     );
     lensInnerPts.push(
-      P(lensCenterX + 1.2, lensCenterY + Math.cos(a) * 3.8, lensCenterZ + Math.sin(a) * 3.8)
+      P(lensCenterX + 1.1, lensCenterY + Math.cos(a) * 3.5, lensCenterZ + Math.sin(a) * 3.5)
     );
   }
   for (let i = 0; i < 8; i++) {
     const a = (i / 8) * Math.PI * 2;
     irDots.push(
-      P(lensCenterX + 0.6, lensCenterY + Math.cos(a) * 5.5, lensCenterZ + Math.sin(a) * 5.5)
+      P(lensCenterX + 0.55, lensCenterY + Math.cos(a) * 5.2, lensCenterZ + Math.sin(a) * 5.2)
     );
   }
 
   // Target Reticle on the Surveillance Floor Plane tracking the Cursor
-  const targetX = 18 + aimX * 16;
-  const targetY = 8 + aimY * 18;
-  const targetZ = -28;
+  const targetX = 12 + aimX * 11;
+  const targetY = 5 + aimY * 12;
+  const targetZ = -22;
 
   const fovCorners = [
-    P(targetX - 11, targetY - 9, targetZ),
-    P(targetX + 11, targetY - 9, targetZ),
-    P(targetX + 11, targetY + 9, targetZ),
-    P(targetX - 11, targetY + 9, targetZ)
+    P(targetX - 8, targetY - 7, targetZ),
+    P(targetX + 8, targetY - 7, targetZ),
+    P(targetX + 8, targetY + 7, targetZ),
+    P(targetX - 8, targetY + 7, targetZ)
   ];
   const fovZone = poly(fovCorners);
-  const lensOrigin = P(lensCenterX + 1.2, lensCenterY, lensCenterZ);
+  const lensOrigin = P(lensCenterX + 1.1, lensCenterY, lensCenterZ);
   const targetCenter = P(targetX, targetY, targetZ);
 
   const plateColor = 'var(--hairline-plate, #0f172a)';
@@ -504,13 +513,13 @@ export const CctvCamera = ({
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
       style={{ aspectRatio: '5 / 4', position: 'relative' }}
-      className={`w-full h-full select-none cursor-crosshair ${className}`}
+      className={`w-full h-full select-none cursor-crosshair overflow-hidden ${className}`}
       aria-label={label}
     >
       <svg
         ref={svgRef}
         viewBox="0 0 240 192"
-        className="w-full h-full block overflow-visible"
+        className="w-full h-full block overflow-hidden"
         style={{
           strokeWidth: strokeW,
           strokeLinejoin: 'round',
